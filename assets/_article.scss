@@ -1,0 +1,170 @@
+@import "type";
+@import "colors";
+@import "layout";
+
+article.article-main {
+  margin-bottom:      1em;
+  section.lead {
+    margin-top:       $text-base * 2;
+    margin-bottom:    $text-base * 2;
+    font-size:        percentage(1 / $second);
+  }
+  header {
+    position:         relative;
+    width:            100%;
+    &.article-header-banner {
+      height:         400px;
+      .info {
+        position:     absolute;
+        right:        0;
+        left:         0;
+        bottom:       15%;
+      }
+    }
+    .image {
+      position:       absolute;
+      top:            0;
+      bottom:         0;
+      left:           0;
+      right:          0;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50%;
+    }
+    .info {
+      margin-top:     1em;
+      &.white-text {
+        color:        $grey-bright;
+      }
+    }
+    h1 {
+      font-size:        percentage($fifth);
+      line-height:      1em;
+      &.article-header-3x {
+        font-size:      percentage($octave * $fifth);
+        @include media($mobile) {
+          font-size: percentage($fifth);
+        }
+      }
+    }
+    h2 {
+      font-size:        percentage($fourth);
+      font-weight:      100;
+      $margin:          $text-base / 4;
+      margin:           $margin 0;
+    }
+    &.article-header-banner {
+      .article-metadata {
+        font-weight:    400;
+      }
+    }
+  }
+  &> header .info,
+  &> section > h2,
+  &> section > p,
+  &> section > blockquote,
+  &> section > ul,
+  &> section > pre,
+  &> footer {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 35 * $text-base;
+    @include media($mobile) {
+      max-width: auto;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  }
+
+  .article-content h2 {
+    margin-top:         $text-base;
+    margin-bottom:      $text-base * -0.5;
+    font-size:          1.125em;
+    font-weight:        900;
+    text-transform:     uppercase;
+  }
+  p {
+    margin-top:         $text-base * 1/$fourth;
+    @include            text-height-normal;
+  }
+  blockquote p {
+    color:              $grey-darker;
+  }
+  blockquote footer {
+    @include            text-size($text-size-small);
+  }
+  ul li {
+    margin-left: 1.5em;
+  }
+
+  a {
+    color:              $red-med;
+    &:visited {
+      color:            darken($red-med, 20%);
+    }
+  }
+  a[rel=footnote], a[rev=footnote] {
+    color:              $grey-darker;
+    text-decoration:    none;
+  }
+  footer.article-footer {
+    h2 {
+      font-weight: 600;
+    }
+    section {
+      @include            text-size($text-size-small);
+      @include            text-height-crowded;
+      padding-top: 1em;
+    }
+
+    p {
+      @include          text-height-crowded;
+      margin-top:       $text-base * 1/$octave;
+    }
+
+    #footnotes {
+      ol {
+        margin-left: 1.5em;
+      }
+    }
+
+    #copyright {
+      @include clearfix;
+      img {
+        margin-top: 5px;
+        float: left;
+      }
+      p {
+        padding-left: 100px;
+        margin-top: 0;
+      }
+    }
+  }
+
+}
+
+#footnoter {
+  position:           fixed;
+  bottom:             0;
+  left:               0;
+  right:              0;
+  background:         $grey-warm;
+  opacity:            0;
+  transition:         opacity, transform;
+  transition-duration: 0.25s;
+  .footnote-liner {
+    margin:           10px auto;
+    max-width:        630px;
+  }
+  .footnote-number {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+    font-size: 2em;
+    opacity: 0.5;
+  }
+  .footnote-content {
+    @include          text-size($text-size-small);
+    @include          text-height-crowded;
+  }
+}

@@ -1,0 +1,214 @@
+@import "reset";
+@import "base";
+@import "type";
+
+@import "colors";
+@import "syntax";
+
+@import "layout";
+
+
+body {
+  font-family:      $main-family;
+  @include          text-size;
+  @include          text-height-normal;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1;
+  background-color: $grey-bright;
+  color:            $blackish;
+  &.background-dark {
+    background-color: #3F3A42;
+    color: $grey-warm;
+  }
+}
+hr {
+  border:           none;
+  border-top:       1px dotted $grey-lukewarm;
+}
+h1 {
+  @include          text-size($octave * $fifth);
+  line-height:      $text-height-double;
+  font-weight:      900;
+}
+h2 {
+  font-weight:      600;
+}
+@mixin spaced-header {
+  text-transform:   uppercase;
+  letter-spacing:   0.2em;
+  font-weight:      100;
+  margin-bottom:    0.5em;
+}
+
+strong {
+  font-weight: bold;
+}
+em {
+  font-style: italic;
+}
+sup {
+  vertical-align:   super;
+  font-size:        $text-base * 1/$second;
+  line-height:      0;
+  @include media($mobile) {
+    font-size:      $text-base-mob * 1/$fourth;
+  }
+}
+attr {
+  cursor:           help;
+  border-bottom:    1px dotted $grey-warm;
+}
+blockquote {
+  padding:          0.5em 2em;
+  margin-bottom:    1em;
+}
+pre {
+  margin:           1em 0;
+  padding:          $text-base * 1 / $fifth;
+  border-radius:    4px;
+  background-color: $grey-superbright;
+  word-break:       break-all;
+  word-wrap:        break-word;
+}
+code {
+  font-family:      $mono-family;
+  font-size:        percentage(1 / $second);
+  color:            hsl(330, 80%, 50%);
+
+  border-radius:    4px;
+  padding:          2px 4px;
+}
+
+ol {
+  display:          block;
+  list-style-type:  decimal;
+}
+ul {
+  display:          block;
+  list-style-type:  disc;
+}
+
+li {
+  display:          list-item;
+}
+
+section.main-content {
+  @include shift(1);
+  @include span-columns(4);
+  @include media($small) {
+    @include shift(0);
+    @include span-columns(6);
+  }
+  padding-bottom: 2em;
+}
+
+.article-metadata {
+  @include            text-size($text-size-smaller);
+  text-transform:     uppercase;
+  letter-spacing:     0.05em;
+  font-weight:        100;
+  color:              $grey-lukewarm;
+  .category {
+    font-weight:      900;
+    &:before {
+      content:        "\2022\00a0";  // &bull;&nbsp;
+    }
+  }
+}
+.archive-list {
+  &> h2 {
+    color:                $grey-warm;
+    @include spaced-header;
+  }
+  article {
+    margin-top:           1em;
+    h1 {
+      font-weight:        700;
+      @include            text-size($third);
+      line-height:        1;
+      a {
+        color:            $yellow-bold;
+        text-decoration:  none;
+      }
+      a:visited {
+        color:            desaturate($yellow-bold, 40%);
+      }
+    }
+    h2 {
+      font-weight:        300;
+      color:              $grey-warm;
+    }
+  }
+}
+
+body > footer {
+  @include page-level;
+  padding-top:        1em;
+  background-color:   #3F3A42;
+  color:              $grey-warm;
+  section {
+    margin-bottom:      1em;
+    @include span-columns(1);
+    @include media($small) {
+      @include span-columns(3);
+    }
+  }
+  section.wide {
+    @include shift(1);
+    @include span-columns(2);
+    @include media($small) {
+      @include span-columns(6);
+      @include shift(0);
+    }
+  }
+  h2 {
+    color:            $grey-bright;
+    @include spaced-header;
+  }
+  p {
+    @include          text-size($text-size-small);
+    @include          text-height-crowded;
+  }
+}
+
+ul.footer-link-list {
+  list-style:           none;
+  clear:                both;
+  &> li {
+    position:           relative;
+    padding-left:       27px;
+    @include media($small){
+      display: block;
+      height: 25px;
+    }
+    @include            text-size($text-size-small);
+    text-transform:     uppercase;
+    letter-spacing:     0.1em;
+    font-weight:        100;
+  }
+  a {
+    color:              $yellow-bold;
+    text-decoration:    none;
+  }
+  .icon {
+    height: 20px;
+    width: 20px;
+    background-size: contain;
+    background-position: center center;
+    position: absolute;
+    margin-left: -27px;
+    top: 2px;
+    @include media($mobile) {
+      top: 0px;
+    }
+    &.icon-linkedin {
+      top: 2px;
+      @include media($mobile) {
+        top: -2px;
+      }
+    }
+  }
+}
+
+@import "home";
+@import "article";

@@ -1,0 +1,66 @@
+{% set bodyclass = "article" %}
+{% extends "layout.html" %}
+
+{% block title %}
+  {{ page.title }} -
+{% endblock %}
+
+{% block content %}
+<article class='article-main'>
+  {% if page.metadata.lead_text %}
+  <section class='lead'>
+    {{ page.lead_text }}
+  </section>
+  {% endif %}
+  <header class='article-header {% if page.metadata.header.banner %}article-header-banner{% endif %}'>
+    {% if page.metadata.header.banner %}
+    <div class='image' style='background-image: url({{ page.url }}{{ page.metadata.header.banner }});'></div>
+    {% endif %}
+    <div class='info {{ page.metadata.header.info }}'>
+      <h1 {% if page.metadata.header.title %}
+        class="article-header-{{ page.metadata.header.title }}"
+        {% endif %}>{{ page.title }}</h1>
+      {% if page.metadata.subtitle %}
+      <h2>{{ page.metadata.subtitle }}</h2>
+      {% endif %}
+      {% include "metadata.html" %}
+    </div>
+  </header>
+  <section class='article-content'>
+    {{ page.html }}
+  </section>
+  <div id='footnoter'>
+    <div class='footnote-liner'>
+      <div class='footnote-number'></div>
+      <div class='footnote-content'></div>
+    </div>
+  </div>
+  <footer class='article-footer'>
+    {% if page.metadata.footnotes %}
+    <section id='footnotes'>
+      <h2>Footnotes</h2>
+      {{ page.metadata.footnotes }}
+    </section>
+    {% endif %}
+    <section id="copyright">
+      <h2>Copyright</h2>
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">
+        <img  alt="Creative Commons License"
+              style="border-width:0"
+              src="http://i.creativecommons.org/l/by-nc-sa/3.0/us/88x31.png" />
+      </a>
+      <p>
+        Words and Images &copy; Matthew Lyon, 2014.
+        This work is licensed under a 
+        <a  rel="license"
+            href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">
+            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 United States License
+        </a>.
+        If you wish to use reproduce any of this context in a commercial
+        context, explicit permission is required.  Please contact me directly.
+      </p>
+    </section>
+  </footer>
+</article>
+{% endblock %}
+

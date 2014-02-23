@@ -1,0 +1,139 @@
+@import "layout";
+@import "colors";
+
+.page-home {
+  @include page-level;
+
+  background-color: $blue-darker;
+  background-image: url(/assets/images/nadir_abajo_sm.jpg);
+  background-position: top right;
+  background-repeat: no-repeat;
+
+  // iphone portrait    = 360 * 2,  820
+  // iphone landscape   = 480 * 2,  960
+  // ipad portrait NR   =           768
+  // ipad landscape NR  =          1024
+  // ipad portrait RET  = 768 * 2, 1536
+  // ipad landscape RET = 1024* 2, 2048
+  // for mobile, we want 960 (480*2, is retina)
+  //   this will work for tablet as well
+  // for tablet retina, landscape width is 2048, which is as good a width as any
+  $img-width:                   600px;
+  $img-height:                  270px;
+  $img-aspect: $img-height / $img-width;
+
+  $header-height-mob:           floor(480px * $img-aspect);
+  $header-height-tab:           floor(768px * $img-aspect);
+  $header-height-med:           floor(1200px * $img-aspect);
+  $header-height-lrg:           floor(2048px * $img-aspect);
+
+  @media  (min-width: 1024px){
+    background-image: url('/assets/images/nadir_abajo_lg.jpg')
+  }
+  @media (min-width: 500px) and (min--moz-device-pixel-ratio: 1.5),
+         (min-width: 500px) and (-o-min-device-pixel-ratio: 3/2),
+         (min-width: 500px) and (-webkit-min-device-pixel-ratio: 1.5),
+         (min-width: 500px) and (min-device-pixel-ratio: 1.5),
+         (min-width: 500px) and (min-resolution: 144dpi),
+         (min-width: 500px) and (min-resolution: 1.5dppx)
+  {
+    background-image: url('/assets/images/nadir_abajo_lg.jpg')
+  }
+  @include media($mobile) {
+    background-size: auto $header-height-mob;
+  }
+  @include media($tablet) {
+    background-size: auto $header-height-tab;
+  }
+  @include media($medium) {
+    background-size: auto $header-height-med;
+  }
+  @include media($large) {
+    background-position-y: -200px;
+    background-size: auto $header-height-lrg;
+  }
+
+  &> header {
+    $name-offset: 1 / 6;
+    $name-offset-mob:           floor($header-height-mob * $name-offset);
+    $name-offset-tab:           floor($header-height-tab * $name-offset);
+    $name-offset-med:           floor($header-height-med * $name-offset);
+    $name-offset-lrg:           floor(($header-height-lrg - 200) * $name-offset);
+
+    @include media($mobile) {
+      padding-top: $name-offset-mob;
+    }
+    @include media($tablet) {
+      padding-top: $name-offset-tab;
+    }
+    @include media($medium) {
+      padding-top: $name-offset-med;
+    }
+    @include media($large) {
+      padding-top: $name-offset-lrg;
+    }
+    hgroup {
+      @include shift(1);
+      @include span-columns(4);
+      @include media($small) {
+        @include shift(0);
+        @include span-columns(6);
+      }
+      color: $yellow-bold;
+
+      p.lead {
+        line-height: 1em;
+        font-weight: 700;
+      }
+      h1 {
+        line-height: 1em;
+        margin-left: -3px;
+      }
+      h1 .first {
+        font-weight: 100;
+      }
+      h1 .last {
+        font-weight: 900;
+      }
+      h1.icon {
+        font-size: 0;
+        line-height: 100px;
+        color: transparent;
+        @include media($mobile) {
+          background-size: 90%;
+        }
+      }
+    }
+    &:after {
+      content: " ";
+      display: block;
+      @include flush;
+
+      $start: rgba($blue-darker, 0);
+      $middle: rgba($blue-darker, 0.9);
+
+      @include media($mobile){
+        margin-top:     $name-offset-mob * -1;
+        height:         $header-height-mob;
+        margin-bottom: -10%;
+      }
+      @include media($tablet){
+        margin-top:     $name-offset-tab * -1;
+        height:         $header-height-tab;
+        margin-bottom: -10%;
+      }
+      @include media($medium){
+        margin-top:     $name-offset-med * -1;
+        height:         $header-height-med;
+        margin-bottom: -5%;
+      }
+      @include media($large){
+        margin-top:     $name-offset-lrg * -1;
+        height:         $header-height-lrg - 200;
+        margin-bottom: -5%;
+      }
+      @include linear-gradient($start 80%, $middle 95%, $blue-darker 99%);
+    }
+  }
+}
+

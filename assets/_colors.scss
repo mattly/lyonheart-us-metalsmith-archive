@@ -1,0 +1,18 @@
+$blue-dark:       #2E3441;
+$blue-darker:     darken($blue-dark, 5%);
+$blue-not-so-dark: lighten($blue-dark, 10%);
+
+$yellow-bold:     #FFC054;
+$yellow-light:    #FFD577;
+
+$red-med:         #cb441f;
+
+$grey-hue:        19;
+$grey-sat:        10%;
+
+$grey-superbright:  hsl($grey-hue, $grey-sat, 96%);
+$grey-bright:     hsl($grey-hue, $grey-sat, 93%);
+$grey-warm:       hsl($grey-hue, $grey-sat, 83%);
+$grey-lukewarm:   hsl($grey-hue, $grey-sat, 73%);
+$grey-darker:     hsl($grey-hue, $grey-sat, 58%);
+$blackish:        hsl($grey-hue, $grey-sat, 20%);

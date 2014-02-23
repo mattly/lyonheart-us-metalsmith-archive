@@ -1,0 +1,34 @@
+$second:  9/8;
+$third:   5/4;
+$fourth:  4/3;
+$fifth:   3/2;
+$sixth:   5/3;
+$octave:  2/1;
+
+$text-base:               18px;
+$text-base-mob:           $text-base / $fourth;
+$text-size-small:         1/$third;
+$text-size-smaller:       1/$fourth;
+$text-size-tiny:          1/$fifth;
+
+$text-height-crowded:     percentage($third);
+$text-height-normal:      percentage($fifth);
+$text-height-spacious:    percentage($sixth);
+$text-height-double:      percentage(2);
+@mixin text-size($scale: 1) {
+  font-size:        $text-base * $scale;
+  @include media($mobile) {
+    font-size:      $text-base-mob * $scale;
+  }
+}
+@mixin text-height-crowded {
+  line-height:      $text-height-crowded;
+}
+@mixin text-height-normal {
+  line-height:      $text-height-normal;
+}
+
+$main-family:       "source-sans-pro", "GillSans", "Roboto", "Helvetica", "Arial", sans-serif;
+$mono-family:       "source-code-pro", "Monaco", "Consolas", "Courier New", monospace;
+
+

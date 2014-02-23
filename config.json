@@ -1,0 +1,30 @@
+{
+  "locals": {
+    "url": "http://lyonheart.us",
+    "name": "Lyonheart.us",
+    "owner": "Matthew Lyon",
+    "description": "writings on engineering and art by Matthew Lyon"
+  },
+  "plugins": [
+    "wintersmith-nunjucks",
+    "wintersmith-showdown",
+    "wintersmith-yaml",
+    "./plugins/paginator.coffee",
+    "./plugins/footnote-extraction.coffee"
+  ],
+  "require": {
+    "moment": "moment",
+    "_": "underscore"
+  },
+  "jade": {
+    "pretty": true
+  },
+  "paginator": {
+    "template": "index.html",
+    "perPage": 10
+  },
+  "nunjucks": {
+    "filterdir": "plugins/filters",
+    "filters": [ "date_format" ]
+  }
+}

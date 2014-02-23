@@ -1,0 +1,35 @@
+{% set body_class = "home" %}
+{% extends "layout.html" %}
+
+{% block content %}
+<div class='page-home'>
+<header>
+  <hgroup id='name'>
+    <p class='lead'>Hi, I'm</p>
+    <h1>
+      <span class='first'>Matthew</span><span class='last'>Lyon</span>
+    </h1>
+  </hgroup>
+</header>
+
+<section class='main-content archive-list'>
+  <h2>Recently</h2>
+
+  {% for page in articles %}
+  <article>
+    <header>
+      {% include "metadata.html" %}
+      <h1>
+        <a href="{{page.url}}">{{ page.title }}</a>
+      </h1>
+      {% if page.metadata.subtitle %}
+      <h2>{{ page.metadata.subtitle }}</h2>
+      {% endif %}
+    </header>
+  </article>
+  {% endfor %}
+</section>
+
+</div>
+{% endblock %}
+
