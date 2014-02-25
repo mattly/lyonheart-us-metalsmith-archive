@@ -81,7 +81,7 @@ article.article-main {
   }
 
   .article-content h2 {
-    margin-top:         $text-base;
+    margin-top:         $text-base * $fifth;
     margin-bottom:      $text-base * -0.5;
     font-size:          1.125em;
     font-weight:        900;
@@ -113,6 +113,7 @@ article.article-main {
     font-weight:        bold;
   }
   footer.article-footer {
+    border-top: 1px dotted $grey-lukewarm;
     h2 {
       font-weight: 600;
     }
@@ -124,7 +125,7 @@ article.article-main {
 
     p {
       @include          text-height-crowded;
-      margin-top:       $text-base * 1/$octave;
+      margin-top:       $text-base * 1/$fifth;
     }
 
     #footnotes {

@@ -382,14 +382,14 @@ section.main-content {
         margin-right: 0; } }
 
 .article-metadata {
-  font-size: 13.5px;
+  font-size: 14.4px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 100;
   color: #c1b8b3; }
   @media screen and (max-width: 480px) {
     .article-metadata {
-      font-size: 10.125px; } }
+      font-size: 10.8px; } }
   .article-metadata .category {
     font-weight: 900; }
     .article-metadata .category:before {
@@ -475,11 +475,11 @@ body > footer {
     font-weight: 100;
     margin-bottom: 0.5em; }
   body > footer p {
-    font-size: 14.4px;
+    font-size: 16px;
     line-height: 125%; }
     @media screen and (max-width: 480px) {
       body > footer p {
-        font-size: 10.8px; } }
+        font-size: 12px; } }
 
 ul.footer-link-list {
   list-style: none;
@@ -487,7 +487,7 @@ ul.footer-link-list {
   ul.footer-link-list > li {
     position: relative;
     padding-left: 27px;
-    font-size: 14.4px;
+    font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-weight: 100; }
@@ -497,7 +497,7 @@ ul.footer-link-list {
         height: 25px; } }
     @media screen and (max-width: 480px) {
       ul.footer-link-list > li {
-        font-size: 10.8px; } }
+        font-size: 12px; } }
   ul.footer-link-list a {
     color: #FFC054;
     text-decoration: none; }
@@ -702,7 +702,7 @@ article.article-main {
   article.article-main > section > pre {
     max-width: 666px; }
   article.article-main .article-content h2 {
-    margin-top: 18px;
+    margin-top: 27px;
     margin-bottom: -9px;
     font-size: 1.125em;
     font-weight: 900;
@@ -713,10 +713,10 @@ article.article-main {
   article.article-main blockquote p {
     color: #9f9089; }
   article.article-main blockquote footer {
-    font-size: 14.4px; }
+    font-size: 16px; }
     @media screen and (max-width: 480px) {
       article.article-main blockquote footer {
-        font-size: 10.8px; } }
+        font-size: 12px; } }
   article.article-main ul li {
     margin-left: 1.5em; }
   article.article-main a {
@@ -727,33 +727,61 @@ article.article-main {
     color: #9f9089;
     text-decoration: none;
     font-weight: bold; }
-  article.article-main footer.article-footer h2 {
-    font-weight: 600; }
-  article.article-main footer.article-footer section {
-    font-size: 14.4px;
-    line-height: 125%;
-    padding-top: 1em; }
-    @media screen and (max-width: 480px) {
-      article.article-main footer.article-footer section {
-        font-size: 10.8px; } }
-  article.article-main footer.article-footer p {
-    line-height: 125%;
-    margin-top: 9px; }
-  article.article-main footer.article-footer #footnotes ol {
-    margin-left: 1.5em; }
-  article.article-main footer.article-footer #copyright {
-    *zoom: 1; }
-    article.article-main footer.article-footer #copyright:before, article.article-main footer.article-footer #copyright:after {
-      content: " ";
-      display: table; }
-    article.article-main footer.article-footer #copyright:after {
-      clear: both; }
-    article.article-main footer.article-footer #copyright img {
-      margin-top: 5px;
-      float: left; }
-    article.article-main footer.article-footer #copyright p {
-      padding-left: 100px;
-      margin-top: 0; }
+  article.article-main footer.article-footer {
+    border-top: 1px dotted #c1b8b3; }
+    article.article-main footer.article-footer h2 {
+      font-weight: 600; }
+    article.article-main footer.article-footer section {
+      font-size: 16px;
+      line-height: 125%;
+      padding-top: 1em; }
+      @media screen and (max-width: 480px) {
+        article.article-main footer.article-footer section {
+          font-size: 12px; } }
+    article.article-main footer.article-footer p {
+      line-height: 125%;
+      margin-top: 12px; }
+    article.article-main footer.article-footer #footnotes ol {
+      margin-left: 1.5em; }
+    article.article-main footer.article-footer #copyright {
+      *zoom: 1; }
+      article.article-main footer.article-footer #copyright:before, article.article-main footer.article-footer #copyright:after {
+        content: " ";
+        display: table; }
+      article.article-main footer.article-footer #copyright:after {
+        clear: both; }
+      article.article-main footer.article-footer #copyright img {
+        margin-top: 5px;
+        float: left; }
+      article.article-main footer.article-footer #copyright p {
+        padding-left: 100px;
+        margin-top: 0;
+        font-size: 14.4px; }
+        @media screen and (max-width: 480px) {
+          article.article-main footer.article-footer #copyright p {
+            font-size: 10.8px; } }
+    article.article-main footer.article-footer.article-footer-wide {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 0 20px; }
+      article.article-main footer.article-footer.article-footer-wide #further-reading, article.article-main footer.article-footer.article-footer-wide #footnotes {
+        column-count: 2;
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-gap: 20px;
+        -webkit-column-gap: 20px;
+        -moz-column-gap: 20px; }
+        article.article-main footer.article-footer.article-footer-wide #further-reading h2, article.article-main footer.article-footer.article-footer-wide #footnotes h2 {
+          column-span: all;
+          -webkit-column-span: all;
+          -moz-column-span: all;
+          margin-bottom: 12px; }
+        article.article-main footer.article-footer.article-footer-wide #further-reading p, article.article-main footer.article-footer.article-footer-wide #footnotes p {
+          margin-top: 0;
+          margin-bottom: 12px; }
+        article.article-main footer.article-footer.article-footer-wide #further-reading li, article.article-main footer.article-footer.article-footer-wide #footnotes li {
+          -webkit-column-break-inside: avoid;
+          break-inside: avoid; }
 
 #footnoter {
   position: fixed;
@@ -774,9 +802,9 @@ article.article-main {
     font-size: 1.5em;
     opacity: 0.25; }
   #footnoter .footnote-content {
-    font-size: 14.4px;
+    font-size: 16px;
     line-height: 125%;
     margin-left: 2em; }
     @media screen and (max-width: 480px) {
       #footnoter .footnote-content {
-        font-size: 10.8px; } }
+        font-size: 12px; } }
