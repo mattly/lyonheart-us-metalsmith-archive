@@ -39,7 +39,18 @@
       <div class='footnote-content'></div>
     </div>
   </div>
-  <footer class='article-footer'>
+
+  {% set freads = page.parent['_further_reading.markdown'] %}
+  <footer class='article-footer{% if freads %} article-footer-wide{% endif %}'>
+    {% if freads %}
+    <section id='further-reading'>
+      <h2>Further Reading</h2>
+      <div class='footer-section-content'>
+        {{ freads._htmlraw }}
+      </div>
+    </section>
+    {% endif %}
+
     {% if page.metadata.footnotes %}
     <section id='footnotes'>
       <h2>Footnotes</h2>
