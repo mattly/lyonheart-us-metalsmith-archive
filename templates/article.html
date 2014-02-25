@@ -12,9 +12,11 @@
     {{ page.lead_text }}
   </section>
   {% endif %}
-  <header class='article-header {% if page.metadata.header.banner %}article-header-banner{% endif %}'>
-    {% if page.metadata.header.banner %}
-    <div class='image' style='background-image: url({{ page.url }}{{ page.metadata.header.banner }});'></div>
+
+  {% set banner = page.parent['_banner.jpg'] %}
+  <header class='article-header {% if banner %}article-header-banner{% endif %}'>
+    {% if banner %}
+    <div class='image' style='background-image: url({{ page.url }}_banner.jpg);'></div>
     {% endif %}
     <div class='info {{ page.metadata.header.info }}'>
       <h1 {% if page.metadata.header.title %}
@@ -26,9 +28,11 @@
       {% include "metadata.html" %}
     </div>
   </header>
+
   <section class='article-content'>
     {{ page.html }}
   </section>
+
   <div id='footnoter'>
     <div class='footnote-liner'>
       <div class='footnote-number'></div>
@@ -39,9 +43,12 @@
     {% if page.metadata.footnotes %}
     <section id='footnotes'>
       <h2>Footnotes</h2>
-      {{ page.metadata.footnotes }}
+      <div class='footer-section-content'>
+        {{ page.metadata.footnotes }}
+      </div>
     </section>
     {% endif %}
+
     <section id="copyright">
       <h2>Copyright</h2>
       <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">
