@@ -7,9 +7,10 @@
 
 {% block content %}
 <article class='article-main'>
-  {% if page.metadata.lead_text %}
+  {% set intro = page.parent['_intro.markdown'] %}
+  {% if intro %}
   <section class='lead'>
-    {{ page.lead_text }}
+    {{ intro._htmlraw }}
   </section>
   {% endif %}
 
@@ -21,9 +22,17 @@
     <div class='info {{ page.metadata.header.info }}'>
       <h1 {% if page.metadata.header.title %}
         class="article-header-{{ page.metadata.header.title }}"
-        {% endif %}>{{ page.title }}</h1>
+        {% endif %}
+        {% if page.metadata.header.title_s %}
+        style="{{ page.metadata.header.title_s }}"
+        {% endif %}
+        >{{ page.title }}</h1>
       {% if page.metadata.subtitle %}
-      <h2>{{ page.metadata.subtitle }}</h2>
+      <h2
+        {% if page.metadata.header.subtitle_s %}
+        style="{{ page.metadata.header.subtitle_s }}"
+        {% endif %}
+        >{{ page.metadata.subtitle }}</h2>
       {% endif %}
       {% include "metadata.html" %}
     </div>
