@@ -17,6 +17,8 @@ problems:
   - custom fix to wintersmith-showdown:
     it's sending the output of item.html() to the highlighter with entities, using item.text() instead
   - vimscript doesn't seem to get any kind of actual highlighting.  Why can't I use pygments instead?
+    highlight.js: https://github.com/isagalaev/highlight.js/
+    maybe I need to use the client-side one in addition to?
 
 - smart quotes
 
