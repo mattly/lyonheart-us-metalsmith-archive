@@ -13,7 +13,7 @@ vim[^vim] which contains location text -- URLs or relative file
 paths -- and I want to forward these to the MacOS X program `open` which
 opens URLs in my browser and files with their designated program.
 
-My terminal emulator lets me click a URL while holding down a modifier key, this doesn't work in [MacVim][] and it works haphazardly in my preferred setup of terminal vim under tmux[^tmux].  Besides, I use the tmux/vim combination to *avoid* using the mouse.
+My terminal emulator lets me click a URL while holding down a modifier key, this doesn't work in [MacVim][] and it works haphazardly in my preferred setup of terminal vim under tmux.[^tmux]  Besides, I use the tmux/vim combination to *avoid* using the mouse.
 
 Figuring this was a solved problem, I came across some rather [convoluted solutions][ugh], which scan the current line for a URL-like pattern.  This doesn't work with relative file paths or with multiple locations on the same line of text.  I want the chunk of characters between chunks of whitespace.
 

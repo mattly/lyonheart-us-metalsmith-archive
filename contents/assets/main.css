@@ -346,7 +346,8 @@ pre {
 code {
   font-family: "source-code-pro", "Monaco", "Consolas", "Courier New", monospace;
   font-size: 88.88889%;
-  color: #e61980;
+  color: #cb441f;
+  background-color: #f6f4f4;
   border-radius: 4px;
   padding: 2px 4px; }
 
@@ -685,8 +686,10 @@ article.article-main {
       font-size: 133.33333%;
       font-weight: 100;
       margin: 4.5px 0; }
-    article.article-main header.article-header-banner .article-metadata {
-      font-weight: 400; }
+    article.article-main header.article-header-banner {
+      margin-bottom: 2em; }
+      article.article-main header.article-header-banner .article-metadata {
+        font-weight: 400; }
   article.article-main > header .info, article.article-main > section > h2, article.article-main > section > p, article.article-main > section > blockquote, article.article-main > section > ul, article.article-main > section > pre, article.article-main > footer {
     margin-left: auto;
     margin-right: auto;
@@ -696,6 +699,8 @@ article.article-main {
         max-width: auto;
         margin-left: 20px;
         margin-right: 20px; } }
+  article.article-main > section > pre {
+    max-width: 666px; }
   article.article-main .article-content h2 {
     margin-top: 18px;
     margin-bottom: -9px;
@@ -720,7 +725,8 @@ article.article-main {
       color: #732511; }
   article.article-main a[rel=footnote], article.article-main a[rev=footnote] {
     color: #9f9089;
-    text-decoration: none; }
+    text-decoration: none;
+    font-weight: bold; }
   article.article-main footer.article-footer h2 {
     font-weight: 600; }
   article.article-main footer.article-footer section {
@@ -759,17 +765,18 @@ article.article-main {
   transition: opacity, transform;
   transition-duration: 0.25s; }
   #footnoter .footnote-liner {
-    margin: 10px auto;
+    margin: 10px auto 20px;
     max-width: 630px; }
   #footnoter .footnote-number {
     float: left;
     margin-right: 10px;
-    margin-top: 5px;
-    font-size: 2em;
-    opacity: 0.5; }
+    margin-top: -5px;
+    font-size: 1.5em;
+    opacity: 0.25; }
   #footnoter .footnote-content {
     font-size: 14.4px;
-    line-height: 125%; }
+    line-height: 125%;
+    margin-left: 2em; }
     @media screen and (max-width: 480px) {
       #footnoter .footnote-content {
         font-size: 10.8px; } }

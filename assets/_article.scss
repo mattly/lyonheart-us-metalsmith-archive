@@ -54,6 +54,7 @@ article.article-main {
       margin:           $margin 0;
     }
     &.article-header-banner {
+      margin-bottom: 2em;
       .article-metadata {
         font-weight:    400;
       }
@@ -74,6 +75,9 @@ article.article-main {
       margin-left: 20px;
       margin-right: 20px;
     }
+  }
+  &> section > pre {
+    max-width: 37 * $text-base;
   }
 
   .article-content h2 {
@@ -106,6 +110,7 @@ article.article-main {
   a[rel=footnote], a[rev=footnote] {
     color:              $grey-darker;
     text-decoration:    none;
+    font-weight:        bold;
   }
   footer.article-footer {
     h2 {
@@ -153,18 +158,19 @@ article.article-main {
   transition:         opacity, transform;
   transition-duration: 0.25s;
   .footnote-liner {
-    margin:           10px auto;
+    margin:           10px auto 20px;
     max-width:        630px;
   }
   .footnote-number {
     float: left;
     margin-right: 10px;
-    margin-top: 5px;
-    font-size: 2em;
-    opacity: 0.5;
+    margin-top: -5px;
+    font-size: 1.5em;
+    opacity: 0.25;
   }
   .footnote-content {
     @include          text-size($text-size-small);
     @include          text-height-crowded;
+    margin-left:      2em;
   }
 }

@@ -73,7 +73,8 @@ pre {
 code {
   font-family:      $mono-family;
   font-size:        percentage(1 / $second);
-  color:            hsl(330, 80%, 50%);
+  color:            $red-med;
+  background-color: $grey-superbright;
 
   border-radius:    4px;
   padding:          2px 4px;

@@ -16,6 +16,9 @@
     "moment": "moment",
     "_": "underscore"
   },
+  "footnoter": {
+    "markdown": "ShowdownPage"
+  },
   "jade": {
     "pretty": true
   },
