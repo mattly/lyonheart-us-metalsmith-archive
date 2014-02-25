@@ -13,15 +13,22 @@ https://github.com/jnordberg/wintersmith
 
 problems:
 
-- [link][text]'s the following apostraphe becomes the wrong smart quote.
-- custom fix to syntax highlighter plugin, it needs to use "item.text()" instead of "item.html()"
+- syntax highlighting
+  - custom fix to wintersmith-showdown:
+    it's sending the output of item.html() to the highlighter with entities, using item.text() instead
+  - vimscript doesn't seem to get any kind of actual highlighting.  Why can't I use pygments instead?
 
-maybe just switch to marked or pandoc
+- smart quotes
 
-- marked lacks footnote support, maybe I can do a PR?
-  oh there already is one: https://github.com/chjj/marked/pull/351
+  [link][text]'s uses an inverted apostrophe
+  problem from the typogr module, filed an issue: https://github.com/ekalinin/typogr.js/issues/15
 
-- maybe check the typogr module? oh, that's what's doing this in the first place :/
+  neither discount nor pandoc do this
+  - node-discount doesn't compile (missing node-waf) 
+  - the wintersmith-pandoc module has issues do to async shelling and templates. LOLMYGOD IT HURTS
+
+  marked doesn't do footnotes yet, but there's a PR: https://github.com/chjj/marked/pull/351
+
 
 ## Nunjucks 
 
