@@ -4,8 +4,8 @@ subtitle:       Include Quality in &#8216;Minimum Viable&#8217;
 summary:    
 date:           2014-02-25 14:30 Z-0200
 author:         mattly
-category:       startup life
-tags:           software, startups
+category:       building software
+tags:           startups, minimum viable product, quality
 location:       Buenos Aires, Argentina; Montevideo, Uruguay; Punta del Diablo, Uruguay
 template:       article.html
 header:
@@ -37,7 +37,7 @@ Before embarking on a new software project, it's worth asking and writing down: 
 
 One half of building software is primarily technical, and is in the realm we call *programming*: Answering **"how can I help people save time and/or money through automation?"**  When you set out to create new software, the answer to this question is how you will sell people on what you're building.
 
-The other half of the building software is more humanitarian, and given lesser importance by many engineers:[^nerds] **"how can I delight people through automation?"**  When building software, how you approach this question is the difference between a product people hate but use because they have to[^user-customers] and a product so great people will recommend to their friends and colleagues about.
+The other half of the building software is more humanitarian, and given lesser importance by many engineers:[^nerds] **"how can I delight people through automation?"**  When building software, how you approach this question is the difference between a product people hate but use because they have to[^user-customers] and a product so great people will recommend to their friends and colleagues.
 
 The latter question is often harder; it's where a lot of the *art* in building software comes into play.  There's a line to be drawn between unacceptably raw and impossibly perfect -- and if you value **minimum** over **viable** you'll end up shipping a prototype.
 
