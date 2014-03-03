@@ -3,24 +3,23 @@
     "url": "http://lyonheart.us",
     "name": "Lyonheart.us",
     "owner": "Matthew Lyon",
-    "description": "writings on engineering and art by Matthew Lyon"
+    "description": "writings on engineering and art by Matthew Lyon",
+    "github_modifications_base": "https://github.com/mattly/lyonheart.us/commits/master/contents"
   },
   "plugins": [
     "wintersmith-nunjucks",
     "wintersmith-showdown",
     "wintersmith-yaml",
+    "wintersmith-nunjucks-content",
     "./plugins/paginator.coffee",
     "./plugins/footnote-extraction.coffee",
-    "./plugins/nunjucks-content.coffee",
     "./plugins/metadata.coffee",
-    "./plugins/fix_old_typogr_bug.coffee"
+    "./plugins/fix_old_typogr_bug.coffee",
+    "./plugins/cson-content.coffee"
   ],
   "require": {
     "moment": "moment",
     "_": "underscore"
-  },
-  "footnoter": {
-    "markdown": "ShowdownPage"
   },
   "jade": {
     "pretty": true
@@ -31,6 +30,6 @@
   },
   "nunjucks": {
     "filterdir": "plugins/filters",
-    "filters": [ "date_format" ]
+    "filters": [ "date_format", "smarty" ]
   }
 }

@@ -69,6 +69,16 @@
     </section>
     {% endif %}
 
+    {% if page.metadata.updated %}
+    <section id="updated">
+      <h2>Changes Since Publication</h2>
+      <p>This piece has been modified since its initial publication.
+        <a href="{{ github_modifications_base }}{{ page.url }}">Browse the changelog</a>
+        if you're so inlcined.
+      </p>
+    </section>
+    {% endif %}
+
     <section id="copyright">
       <h2>Copyright</h2>
       <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">
