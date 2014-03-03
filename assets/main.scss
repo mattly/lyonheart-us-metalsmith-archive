@@ -54,9 +54,10 @@ sup {
     font-size:      $text-base-mob * 1/$fourth;
   }
 }
-attr {
+abbr {
   cursor:           help;
   border-bottom:    1px dotted $grey-warm;
+  letter-spacing:   0.1em;
 }
 blockquote {
   padding:          0.5em 2em;

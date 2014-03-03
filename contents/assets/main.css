@@ -284,7 +284,7 @@ html {
   box-sizing: border-box; }
 
 body {
-  font-family: "source-sans-pro", "GillSans", "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: "source-sans-pro", "Avenir", "Roboto", "Helvetica", "Arial", sans-serif;
   font-size: 18px;
   line-height: 150%;
   text-rendering: optimizeLegibility;
@@ -327,9 +327,10 @@ sup {
     sup {
       font-size: 10.125px; } }
 
-attr {
+abbr {
   cursor: help;
-  border-bottom: 1px dotted #d8d2cf; }
+  border-bottom: 1px dotted #d8d2cf;
+  letter-spacing: 0.1em; }
 
 blockquote {
   padding: 0.5em 2em;
@@ -344,7 +345,7 @@ pre {
   word-wrap: break-word; }
 
 code {
-  font-family: "source-code-pro", "Monaco", "Consolas", "Courier New", monospace;
+  font-family: "source-code-pro", "Menlo", "Consolas", "Courier New", monospace;
   font-size: 88.88889%;
   color: #cb441f;
   background-color: #f6f4f4;
