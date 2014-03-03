@@ -10,7 +10,10 @@
     "wintersmith-showdown",
     "wintersmith-yaml",
     "./plugins/paginator.coffee",
-    "./plugins/footnote-extraction.coffee"
+    "./plugins/footnote-extraction.coffee",
+    "./plugins/nunjucks-content.coffee",
+    "./plugins/metadata.coffee",
+    "./plugins/fix_old_typogr_bug.coffee"
   ],
   "require": {
     "moment": "moment",
