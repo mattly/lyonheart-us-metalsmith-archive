@@ -1,4 +1,3 @@
-
 I once worked with a project manager who loved to throw the famous Steve Jobs quote "Real Artists Ship" at me whenever I voiced objections about the software we were working on not being entirely ready to ship yet.  If what we had worked well enough for a functionality demo, it worked well enough to ship to our customers.  
 
 The project manager worked under a philosophy gaining popularity in our industry, the idea of **Minimum Viable Product**, but due to a lack of focus put more emphasis on minimal than viable.

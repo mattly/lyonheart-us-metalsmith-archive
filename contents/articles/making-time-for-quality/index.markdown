@@ -1,18 +1,3 @@
----
-title:	        Making Time For Quality
-subtitle:       The happy medium between a first draft and perfection
-summary:        The case for taking a bit more time to polish your work
-date:           2014-02-17 12:00 Z-0200
-author:         mattly
-location:       Montevideo, Uruguay; Punta del Diablo, Uruguay
-category:       creative life
-template:       article.html
-header:
-  info:         white-text
-  title:        3x
-
----
-
 If you haven't seen [Andy Warhol][warhol]'s experimental film *[Empire][]*, I can't blame you.  It's a single, 8 hour take of the Empire State Building, about "watching time pass".  I first heard of it during a college discussion on how a creator spends more time on their work than most people will consuming it,[^art-length] and *Empire* reverses this.[^empire-length]
 
 [warhol]: https://en.wikipedia.org/wiki/Andy_Warhol

@@ -1,17 +1,4 @@
----
-title:    "Making Vim Open the Thing Under the Cursor"
-summary:  easily send the '\s(\S+)\s' item under the cursor to 'open'
-category: snippets
-template: article.html
-date:     2014-02-08 12:00
-author:   mattly
-location: Punta del Diablo, Uruguay
----
-
-Lately I find myself working with READMEs or outlines or notes in
-vim[^vim] which contains location text -- URLs or relative file
-paths -- and I want to forward these to the MacOS X program `open` which
-opens URLs in my browser and files with their designated program.
+Lately I find myself working with READMEs or outlines or notes in vim[^vim] which contains location text -- URLs or relative file paths -- and I want to forward these to the MacOS X program `open` which opens URLs in my browser and files with their designated program.
 
 My terminal emulator lets me click a URL while holding down a modifier key, this doesn't work in [MacVim][] and it works haphazardly in my preferred setup of terminal vim under tmux.[^tmux]  Besides, I use the tmux/vim combination to *avoid* using the mouse.
 
@@ -23,7 +10,6 @@ I dug into vim's extensive help, and found `cWORD`, `c` being *current* and `WOR
 > <footer>
 > <strong>Vim</strong> <cite>:help WORD</cite>
 > </footer>
-
 
 Perfect!  It's simple to create a mapping to send the `cWORD` to `open`:
 
