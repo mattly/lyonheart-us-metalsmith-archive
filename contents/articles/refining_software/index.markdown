@@ -1,19 +1,3 @@
----
-title:          Refining Software
-subtitle:       Include Quality in &#8216;Minimum Viable&#8217;
-summary:    
-date:           2014-02-25 14:30 Z-0200
-author:         mattly
-category:       building software
-tags:           startups, minimum viable product, quality
-location:       Buenos Aires, Argentina; Montevideo, Uruguay; Punta del Diablo, Uruguay
-template:       article.html
-header:
-  info:         white-text
-  title_s:      "font-size: 400%;"
-  subtitle_s:   "font-size: 150%;"
-
----
 
 I once worked with a project manager who loved to throw the famous Steve Jobs quote "Real Artists Ship" at me whenever I voiced objections about the software we were working on not being entirely ready to ship yet.  If what we had worked well enough for a functionality demo, it worked well enough to ship to our customers.  
 

@@ -1,0 +1,17 @@
+title:          Refining Software
+subtitle:       Include Quality in 'Minimum Viable'
+summary:    
+date:           2014-02-25 14:30 Z-0200
+author:         mattly
+category:       building software
+tags:           startups, minimum viable product, quality
+locations:
+  - Buenos Aires, Argentina
+  - Montevideo, Uruguay
+  - Punta del Diablo, Uruguay
+template:       article.html
+header:
+  info:         white-text
+  title_s:      "font-size: 400%;"
+  subtitle_s:   "font-size: 150%;"
+updated:        true
