@@ -26,13 +26,13 @@
         {% if page.metadata.header.title_s %}
         style="{{ page.metadata.header.title_s }}"
         {% endif %}
-        >{{ page.title }}</h1>
+        >{{ page.title | smarty }}</h1>
       {% if page.metadata.subtitle %}
       <h2
         {% if page.metadata.header.subtitle_s %}
         style="{{ page.metadata.header.subtitle_s }}"
         {% endif %}
-        >{{ page.metadata.subtitle }}</h2>
+        >{{ page.metadata.subtitle | smarty }}</h2>
       {% endif %}
       {% include "metadata.html" %}
     </div>
