@@ -1,0 +1,54 @@
+style.
+  pre { margin: 0 }
+  td {
+    border-top: 1px solid #aaa;
+    }
+  td.key {
+    font-weight: bold;
+    text-align: right;
+    vertical-align: top;
+    }
+
+- var skips = [/__env\.logger/,/__env.loadedModules/]
+mixin listitem(base, item, depth, maxDepth)
+  - each value, key in item
+    - thisKey = base + "." + key
+    - if (value instanceof Object && depth < maxDepth)
+      +listitem(thisKey, value, depth + 1)
+    - else
+      - var skipping = false
+      - for skip in skips
+        - if (thisKey.match(skip))
+          - skipping = true
+      - if (! skipping)
+        tr
+          td.key= thisKey
+          td.value
+            - if (value instanceof Function)
+              - var args = value.toString().match(/function\s*\((.*)\)/)
+              - if (args)
+                pre= "function(" + args[1] + ")"
+              - else
+                pre= "function[" + value.length +"]"
+            - else if (value instanceof Array)
+              pre= "array: [" + value + "]"
+            - else if (value instanceof Object)
+              pre= "object: {" + Object.keys(value) + "}"
+              - if (thisKey.match(/page\.parent/))
+                +listitem(thisKey+'.metadata', value.metadata, depth)
+                pre= value.markdown
+            - else
+              pre= value
+
+table
+  thead
+    tr
+      td.key Key
+      td.value Value
+  tbody
+    tr
+      td.key page.Date
+      td.value= page.date
+    +listitem('page', page, 0, 3)
+    +listitem('contents', contents, 0, 0)
+

@@ -9,19 +9,28 @@
     {{ locals.name }}
     {% endblock %}
   </title>
+
   <meta name="author" content="Matthew Lyon">
   {% if page.summary %}
   <meta name="description" content="{{ page.summary }}">
   {% endif %}
-  <meta property="og:title" content="{{ page.title }}" />
+
+  <meta property="og:url" content="{{ full_url }}" />
+  <meta property="og:site_name" content="lyonheart.us" />
+  <meta property="og:title"
+  content="{{ page.title }}{%if page.subtitle%} &emdash; {{page.subtitle}}{%endif%}" />
+
   {% if page.summary %}
   <meta property="og:description" content="{{ page.summary }}">
   {% endif %}
+
   <meta property="og:type" content="article" />
   <!-- <meta property="og:image" content="" /> -->
-  <meta property="og:url" content="{{ full_url }}" />
-  <meta property="og:site_name" content="lyonheart.us" />
   <!-- <meta property="fb:admins" content="" /> -->
+
+  <meta name="twitter:card" content="article">
+  <meta name="twitter:site" content="@mattly">
+  <meta name="twitter:creator" content="@mattly">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
