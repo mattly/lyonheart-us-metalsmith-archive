@@ -12,6 +12,6 @@ locations:
 template:       article.html
 header:
   info:         white-text
-  title_s:      "font-size: 400%;"
-  subtitle_s:   "font-size: 150%;"
+  title_style:
+    font-size:  400%
 updated:        true
