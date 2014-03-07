@@ -4,15 +4,17 @@
 
 article.article-main {
   margin-bottom:      1em;
+  @include inset;
   section.lead {
     @include region-margin;
     font-size:        percentage(1 / $second);
   }
   header {
     position:         relative;
-    width:            100%;
     @include region-margin;
     &.article-header-banner {
+      @include flush;
+      @include inset;
       @include region-margin(0);
       height:         400px;
       .info {
@@ -33,6 +35,7 @@ article.article-main {
       background-position: 50%;
     }
     .info {
+      @include inset;
       &.white-text {
         color:        $grey-bright;
       }
@@ -58,11 +61,7 @@ article.article-main {
   &> section > pre,
   &> footer {
     @include inset-center;
-    max-width: 35 * $text-base;
-    @include media($mobile) {
-      @include inset-margin;
-      max-width: auto;
-    }
+    @include width-text(35);
   }
   &> section > pre {
     max-width: 37 * $text-base;
@@ -136,9 +135,7 @@ article.article-main {
       }
     }
     &.article-footer-wide {
-      max-width: 996px;
-      @include inset-center;
-      @include inset;
+      @include page-width;
       .article-footer-sections-narrow {
         @include text-columns(2, 20px);
         section {

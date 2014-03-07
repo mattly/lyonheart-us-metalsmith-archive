@@ -637,17 +637,22 @@ ul.footer-link-list {
   box-sizing: border-box; }
 
 article.article-main {
-  margin-bottom: 1em; }
+  margin-bottom: 1em;
+  padding-left: 20px;
+  padding-right: 20px; }
   article.article-main section.lead {
     margin-top: 2em;
     margin-bottom: 2em;
     font-size: 88.88889%; }
   article.article-main header {
     position: relative;
-    width: 100%;
     margin-top: 2em;
     margin-bottom: 2em; }
     article.article-main header.article-header-banner {
+      margin-left: -20px;
+      margin-right: -20px;
+      padding-left: 20px;
+      padding-right: 20px;
       margin-top: 0em;
       margin-bottom: 0em;
       height: 400px; }
@@ -665,8 +670,11 @@ article.article-main {
       background-size: cover;
       background-repeat: no-repeat;
       background-position: 50%; }
-    article.article-main header .info.white-text {
-      color: #efeceb; }
+    article.article-main header .info {
+      padding-left: 20px;
+      padding-right: 20px; }
+      article.article-main header .info.white-text {
+        color: #efeceb; }
     article.article-main header h1 {
       font-size: 150%;
       line-height: 1em; }
@@ -682,8 +690,6 @@ article.article-main {
     max-width: 630px; }
     @media screen and (max-width: 480px) {
       article.article-main > header .info, article.article-main > section > h2, article.article-main > section > p, article.article-main > section > blockquote, article.article-main > section > ul, article.article-main > section > pre, article.article-main > footer {
-        margin-left: 20px;
-        margin-right: 20px;
         max-width: auto; } }
   article.article-main > section > pre {
     max-width: 666px; }
@@ -754,11 +760,7 @@ article.article-main {
         article.article-main footer.article-footer .article-footer-section-small p {
           font-size: 10.8px; } }
     article.article-main footer.article-footer.article-footer-wide {
-      max-width: 996px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 20px;
-      padding-right: 20px; }
+      max-width: 1000px; }
       article.article-main footer.article-footer.article-footer-wide .article-footer-sections-narrow {
         column-count: 2;
         -moz-column-count: 2;
