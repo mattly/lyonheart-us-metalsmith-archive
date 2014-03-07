@@ -28,6 +28,40 @@ $text-height-double:      percentage(2);
   line-height:      $text-height-normal;
 }
 
+@mixin text-margin-heading {
+  margin-top: $text-base * $fifth;
+  margin-bottom: 0;
+}
+@mixin text-margin-flow {
+  margin-bottom: $text-base * 1/$fourth;
+}
+@mixin text-margin-offset {
+  margin-bottom: $text-base * 1/$octave;
+}
+
+@mixin column-span($value) {
+  column-span: $value;
+  -moz-column-span: $value;
+  -webkit-column-span: $value;
+}
+@mixin text-columns($count: 2, $gap: 0) {
+  column-count: $count;
+  -moz-column-count: $count;
+  -webkit-column-count: $count;
+  column-gap: $gap;
+  -moz-column-gap: $gap;
+  -webkit-column-gap: $gap;
+  @include media($mobile) {
+    column-count: 1;
+    -moz-column-count: 1;
+    -webkit-column-count: 1;
+  }
+}
+@mixin text-avoid-breaks {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+}
+
 $main-family:       "source-sans-pro", "Avenir", "Roboto", "Helvetica", "Arial", sans-serif;
 $mono-family:       "source-code-pro", "Menlo", "Consolas", "Courier New", monospace;
 

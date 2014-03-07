@@ -5,14 +5,15 @@
 article.article-main {
   margin-bottom:      1em;
   section.lead {
-    margin-top:       $text-base * 2;
-    margin-bottom:    $text-base * 2;
+    @include region-margin;
     font-size:        percentage(1 / $second);
   }
   header {
     position:         relative;
     width:            100%;
+    @include region-margin;
     &.article-header-banner {
+      @include region-margin(0);
       height:         400px;
       .info {
         position:     absolute;
@@ -32,7 +33,6 @@ article.article-main {
       background-position: 50%;
     }
     .info {
-      margin-top:     1em;
       &.white-text {
         color:        $grey-bright;
       }
@@ -40,24 +40,14 @@ article.article-main {
     h1 {
       font-size:        percentage($fifth);
       line-height:      1em;
-      &.article-header-3x {
-        font-size:      percentage($octave * $fifth);
-        @include media($mobile) {
-          font-size: percentage($fifth);
-        }
-      }
     }
     h2 {
       font-size:        percentage($fourth);
       font-weight:      100;
-      $margin:          $text-base / 4;
-      margin:           $margin 0;
+      @include text-height-normal;
     }
-    &.article-header-banner {
-      margin-bottom: 2em;
-      .article-metadata {
-        font-weight:    400;
-      }
+    .article-metadata {
+      font-weight:    400;
     }
   }
   &> header .info,
@@ -67,29 +57,29 @@ article.article-main {
   &> section > ul,
   &> section > pre,
   &> footer {
-    margin-left: auto;
-    margin-right: auto;
+    @include inset-center;
     max-width: 35 * $text-base;
     @include media($mobile) {
+      @include inset-margin;
       max-width: auto;
-      margin-left: 20px;
-      margin-right: 20px;
     }
   }
   &> section > pre {
     max-width: 37 * $text-base;
   }
 
+  .article-content {
+    @include region-margin;
+  }
   .article-content h2 {
-    margin-top:         $text-base * $fifth;
-    margin-bottom:      $text-base * -0.5;
-    font-size:          1.125em;
+    @include text-margin-heading;
+    @include text-size($second);
     font-weight:        900;
     text-transform:     uppercase;
   }
   p {
-    margin-top:         $text-base * 1/$fourth;
-    @include            text-height-normal;
+    @include text-margin-flow;
+    @include text-height-normal;
   }
   blockquote p {
     color:              $grey-darker;
@@ -97,7 +87,7 @@ article.article-main {
   blockquote footer {
     @include            text-size($text-size-small);
   }
-  ul li {
+  ul, ol {
     margin-left: 1.5em;
   }
 
@@ -113,63 +103,54 @@ article.article-main {
     font-weight:        bold;
   }
   footer.article-footer {
+    @include region-padding;
     border-top: 1px dotted $grey-lukewarm;
+    section {
+      @include            text-size($text-size-smaller);
+      @include            text-height-crowded;
+      @include section-padding;
+    }
     h2 {
       font-weight: 600;
-    }
-    section {
-      @include            text-size($text-size-small);
-      @include            text-height-crowded;
-      padding-top: 1em;
+      @include text-size($text-size-small);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      @include text-margin-offset;
+      color: $grey-darkish;
     }
 
     p {
-      @include          text-height-crowded;
-      margin-top:       $text-base * 1/$fifth;
+      @include text-height-crowded;
+      @include text-margin-flow;
     }
 
-    #footnotes {
-      ol {
-        margin-left: 1.5em;
-      }
+    img.image-left {
+      margin-top: 5px;
+      margin-right: 10px;
+      margin-bottom: 5px;
+      float: left;
     }
-
-    #copyright {
-      @include clearfix;
-      img {
-        margin-top: 5px;
-        float: left;
-      }
+    .article-footer-section-small {
       p {
-        padding-left: 100px;
-        margin-top: 0;
         @include text-size($text-size-smaller);
       }
     }
     &.article-footer-wide {
-      max-width: 1020px;
-      margin: 0 auto;
-      padding: 0 20px;
-      #further-reading, #footnotes {
-        h2 {
-          column-span: all;
-          -webkit-column-span: all;
-          -moz-column-span: all;
-          margin-bottom: $text-base * 1/$fifth;
+      max-width: 996px;
+      @include inset-center;
+      @include inset;
+      .article-footer-sections-narrow {
+        @include text-columns(2, 20px);
+        section {
+          @include text-avoid-breaks;
         }
-        p {
-          margin-top: 0;
-          margin-bottom: $text-base * 1/$fifth;
+      }
+      section.article-footer-section-wide {
+        .footer-section-content {
+          @include text-columns(2, 20px);
         }
-        column-count: 2;
-        -webkit-column-count: 2;
-        -moz-column-count: 2;
-        column-gap: 20px;
-        -webkit-column-gap: 20px;
-        -moz-column-gap: 20px;
-        li {
-          -webkit-column-break-inside: avoid;
-          break-inside: avoid;
+        p, li {
+          @include text-avoid-breaks;
         }
       }
     }
@@ -187,7 +168,8 @@ article.article-main {
   transition:         opacity, transform;
   transition-duration: 0.25s;
   .footnote-liner {
-    margin:           10px auto 20px;
+    @include inset-center;
+    @include region-margin(0.5);
     max-width:        630px;
   }
   .footnote-number {

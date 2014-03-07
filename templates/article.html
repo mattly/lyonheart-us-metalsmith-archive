@@ -21,18 +21,16 @@
     {% endif %}
     <div class='info {{ page.metadata.header.info }}'>
       <h1 {% if page.metadata.header.title %}
-        class="article-header-{{ page.metadata.header.title }}"
+        class="{{ page.metadata.header.title }}"
         {% endif %}
-        {% if page.metadata.header.title_s %}
-        style="{{ page.metadata.header.title_s }}"
+        {% if page.metadata.header.title_style %}
+          style="{% for key, value in page.metadata.header.title_style %}
+            {{ key }}: {{ value }};
+          {% endfor %}"
         {% endif %}
         >{{ page.title | smarty }}</h1>
       {% if page.metadata.subtitle %}
-      <h2
-        {% if page.metadata.header.subtitle_s %}
-        style="{{ page.metadata.header.subtitle_s }}"
-        {% endif %}
-        >{{ page.metadata.subtitle | smarty }}</h2>
+      <h2>{{ page.metadata.subtitle | smarty }}</h2>
       {% endif %}
       {% include "metadata.html" %}
     </div>
@@ -52,7 +50,7 @@
   {% set freads = page.parent['_further_reading.markdown'] %}
   <footer class='article-footer{% if freads %} article-footer-wide{% endif %}'>
     {% if freads %}
-    <section id='further-reading'>
+    <section id='further-reading' class='article-footer-section-wide'>
       <h2>Further Reading</h2>
       <div class='footer-section-content'>
         {{ freads._htmlraw }}
@@ -61,7 +59,7 @@
     {% endif %}
 
     {% if page.metadata.footnotes %}
-    <section id='footnotes'>
+    <section id='footnotes' class='article-footer-section-wide'>
       <h2>Footnotes</h2>
       <div class='footer-section-content'>
         {{ page.metadata.footnotes }}
@@ -69,34 +67,35 @@
     </section>
     {% endif %}
 
-    {% if page.metadata.updated %}
-    <section id="updated">
-      <h2>Changes Since Publication</h2>
-      <p>This piece has been modified since its initial publication.
-        <a href="{{ github_modifications_base }}{{ page.url }}">Browse the changelog</a>
-        if you're so inlcined.
-      </p>
-    </section>
-    {% endif %}
+    <div class='article-footer-sections-narrow'>
+      {% if page.metadata.updated %}
+      <section id="updated" class='article-footer-section-small'>
+        <h2>Changes Since Publication</h2>
+        <p>This piece has been modified since its initial publication.
+          <a href="{{ github_modifications_base }}{{ page.url }}">Browse the changelog</a>
+          if you're so inclined.
+        </p>
+      </section>
+      {% endif %}
 
-    <section id="copyright">
-      <h2>Copyright</h2>
-      <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">
-        <img  alt="Creative Commons License"
-              style="border-width:0"
-              src="http://i.creativecommons.org/l/by-nc-sa/3.0/us/88x31.png" />
-      </a>
-      <p>
-        Words and Images &copy; Matthew Lyon, 2014.
-        This work is licensed under a 
-        <a  rel="license"
-            href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">
-            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 United States License
-        </a>.
-        If you wish to use reproduce any of this context in a commercial
-        context, explicit permission is required.  Please contact me directly.
-      </p>
-    </section>
+      <section id="copyright" class='article-footer-section-small'>
+        <h2>Copyright</h2>
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">
+          <img  alt="Creative Commons License" class="image-left"
+                src="http://i.creativecommons.org/l/by-nc-sa/3.0/us/88x31.png" />
+        </a>
+        <p>
+          Words and Images &copy; Matthew Lyon, 2014.
+          This work is licensed under a 
+          <a  rel="license"
+              href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">
+              Creative Commons Attribution-NonCommercial-ShareAlike 3.0 United States License
+          </a>.
+          If you wish to use reproduce any of this context in a commercial
+          context, explicit permission is required.  Please contact me directly.
+        </p>
+      </section>
+    </div>
   </footer>
 </article>
 {% endblock %}

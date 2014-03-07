@@ -10,25 +10,43 @@ $large:  new-breakpoint(min-width 1200px);
 
 
 $page-inset:          20px;
-$page-inset-mob:      10px;
 @mixin inset() {
   padding-left:       $page-inset;
   padding-right:      $page-inset;
-  @include media($small) {
-    padding-left:     $page-inset-mob;
-    padding-right:    $page-inset-mob;
-  }
+}
+@mixin inset-margin {
+  margin-left: $page-inset;
+  margin-right: $page-inset;
+}
+@mixin inset-center {
+  margin-left: auto;
+  margin-right: auto;
 }
 @mixin flush() {
   margin-left:        $page-inset * -1;
   margin-right:       $page-inset * -1;
-  @include media($small) {
-    margin-left:      $page-inset-mob * -1;
-    margin-right:     $page-inset-mob * -1;
-  }
 }
 
 @mixin page-level() {
   @include inset;
   @include clearfix;
+}
+
+@mixin region-padding($scale: 1) {
+  padding-top: 2em * $scale;
+  padding-bottom: 2em * $scale;
+}
+@mixin region-margin($scale: 1) {
+  margin-top: 2em * $scale;
+  margin-bottom: 2em * $scale;
+}
+@mixin section-margin($scale: 1) {
+  margin-bottom: 1em * $scale;
+}
+@mixin section-padding($scale: 1) {
+  padding-top: 1em * $scale;
+}
+
+@mixin list-margin($scale: 1) {
+  margin-bottom: 1em * $scale;
 }

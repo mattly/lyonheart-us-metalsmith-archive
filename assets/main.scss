@@ -48,11 +48,8 @@ em {
 }
 sup {
   vertical-align:   super;
-  font-size:        $text-base * 1/$second;
+  @include text-size($text-size-small);
   line-height:      0;
-  @include media($mobile) {
-    font-size:      $text-base-mob * 1/$fourth;
-  }
 }
 abbr {
   cursor:           help;
@@ -101,7 +98,7 @@ section.main-content {
     @include shift(0);
     @include span-columns(6);
   }
-  padding-bottom: 2em;
+  @include region-padding;
 }
 
 .article-metadata {
@@ -123,7 +120,7 @@ section.main-content {
     @include spaced-header;
   }
   article {
-    margin-top:           1em;
+    @include list-margin;
     h1 {
       font-weight:        700;
       @include            text-size($third);
@@ -143,13 +140,13 @@ section.main-content {
   }
 }
 
-body > footer {
+footer.main-footer {
   @include page-level;
-  padding-top:        1em;
+  @include region-padding;
   background-color:   #3F3A42;
   color:              $grey-warm;
   section {
-    margin-bottom:      1em;
+    @include section-margin;
     @include span-columns(1);
     @include media($small) {
       @include span-columns(3);
