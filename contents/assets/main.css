@@ -364,24 +364,15 @@ li {
   display: list-item; }
 
 section.main-content {
-  margin-left: 17.47153%;
-  float: left;
-  display: block;
-  margin-right: 4.82916%;
-  width: 65.05695%;
-  padding-top: 2em;
+  max-width: 630px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
   padding-bottom: 2em; }
-  section.main-content:last-child {
-    margin-right: 0; }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 480px) {
     section.main-content {
-      margin-left: 0%;
-      float: left;
-      display: block;
-      margin-right: 4.82916%;
-      width: 100%; }
-      section.main-content:last-child {
-        margin-right: 0; } }
+      max-width: auto; } }
 
 .article-metadata {
   font-size: 16px;
@@ -496,6 +487,8 @@ footer.main-footer {
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-top: 0.5em;
     padding-bottom: 0.5em; }
   #copyright p {
@@ -545,113 +538,60 @@ ul.footer-link-list {
   box-sizing: border-box; }
 
 .page-home {
-  padding-left: 20px;
-  padding-right: 20px;
-  *zoom: 1;
-  background-color: #171a21;
-  background-image: url(/assets/images/nadir_abajo_sm.jpg);
-  background-position: top right;
-  background-repeat: no-repeat; }
-  .page-home:before, .page-home:after {
-    content: " ";
-    display: table; }
-  .page-home:after {
-    clear: both; }
-  @media (min-width: 1024px) {
-    .page-home {
-      background-image: url('/assets/images/nadir_abajo_lg.jpg'); } }
-  @media (min-width: 500px) and (min--moz-device-pixel-ratio: 1.5), (min-width: 500px) and (-o-min-device-pixel-ratio: 3/2), (min-width: 500px) and (-webkit-min-device-pixel-ratio: 1.5), (min-width: 500px) and (min-device-pixel-ratio: 1.5), (min-width: 500px) and (min-resolution: 144dpi), (min-width: 500px) and (min-resolution: 1.5dppx) {
-    .page-home {
-      background-image: url('/assets/images/nadir_abajo_lg.jpg'); } }
-  @media screen and (max-width: 480px) {
-    .page-home {
-      background-size: auto 216px; } }
-  @media screen and (min-width: 481px) and (max-width: 768px) {
-    .page-home {
-      background-size: auto 345px; } }
-  @media screen and (min-width: 769px) and (max-width: 1199px) {
-    .page-home {
-      background-size: auto 540px; } }
-  @media screen and (min-width: 1200px) {
-    .page-home {
-      background-position-y: -200px;
-      background-size: auto 921px; } }
-  @media screen and (max-width: 480px) {
-    .page-home > header {
-      padding-top: 36px; } }
-  @media screen and (min-width: 481px) and (max-width: 768px) {
-    .page-home > header {
-      padding-top: 57px; } }
-  @media screen and (min-width: 769px) and (max-width: 1199px) {
-    .page-home > header {
-      padding-top: 90px; } }
-  @media screen and (min-width: 1200px) {
-    .page-home > header {
-      padding-top: 120px; } }
-  .page-home > header hgroup {
-    margin-left: 17.47153%;
-    float: left;
-    display: block;
-    margin-right: 4.82916%;
-    width: 65.05695%;
-    color: #ffbd52; }
-    .page-home > header hgroup:last-child {
-      margin-right: 0; }
-    @media screen and (max-width: 768px) {
-      .page-home > header hgroup {
-        margin-left: 0%;
-        float: left;
-        display: block;
-        margin-right: 4.82916%;
-        width: 100%; }
-        .page-home > header hgroup:last-child {
-          margin-right: 0; } }
-    .page-home > header hgroup p.lead {
-      line-height: 1em;
-      font-weight: 700; }
-    .page-home > header hgroup h1 {
-      line-height: 1em;
-      margin-left: -3px; }
-    .page-home > header hgroup h1 .first {
-      font-weight: 100; }
-    .page-home > header hgroup h1 .last {
-      font-weight: 900; }
-    .page-home > header hgroup h1.icon {
-      font-size: 0;
-      line-height: 100px;
-      color: transparent; }
+  background-color: #171a21; }
+  .page-home header.main-header {
+    padding-left: 20px;
+    padding-right: 20px;
+    *zoom: 1;
+    height: 500px;
+    background-image: url(/assets/images/nadir_abajo_sm.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%; }
+    .page-home header.main-header:before, .page-home header.main-header:after {
+      content: " ";
+      display: table; }
+    .page-home header.main-header:after {
+      clear: both; }
+    @media (min-width: 1024px) {
+      .page-home header.main-header {
+        background-image: url('/assets/images/nadir_abajo_lg.jpg'); } }
+    @media (min-width: 500px) and (min--moz-device-pixel-ratio: 1.5), (min-width: 500px) and (-o-min-device-pixel-ratio: 3/2), (min-width: 500px) and (-webkit-min-device-pixel-ratio: 1.5), (min-width: 500px) and (min-device-pixel-ratio: 1.5), (min-width: 500px) and (min-resolution: 144dpi), (min-width: 500px) and (min-resolution: 1.5dppx) {
+      .page-home header.main-header {
+        background-image: url('/assets/images/nadir_abajo_lg.jpg'); } }
+    .page-home header.main-header hgroup {
+      padding-top: 90px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 630px;
+      color: #ffbd52; }
       @media screen and (max-width: 480px) {
-        .page-home > header hgroup h1.icon {
-          background-size: 90%; } }
-  .page-home > header:after {
-    content: " ";
-    display: block;
-    margin-left: -20px;
-    margin-right: -20px;
-    background-color: rgba(23, 26, 33, 0);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(80%, rgba(23, 26, 33, 0)), color-stop(95%, rgba(23, 26, 33, 0.9)), color-stop(99%, #171a21));
-    background-image: -webkit-linear-gradient(rgba(23, 26, 33, 0) 80%, rgba(23, 26, 33, 0.9) 95%, #171a21 99%);
-    background-image: linear-gradient(rgba(23, 26, 33, 0) 80%, rgba(23, 26, 33, 0.9) 95%, #171a21 99%); }
-    @media screen and (max-width: 480px) {
-      .page-home > header:after {
-        margin-top: -36px;
-        height: 216px;
-        margin-bottom: -10%; } }
-    @media screen and (min-width: 481px) and (max-width: 768px) {
-      .page-home > header:after {
-        margin-top: -57px;
-        height: 345px;
-        margin-bottom: -10%; } }
-    @media screen and (min-width: 769px) and (max-width: 1199px) {
-      .page-home > header:after {
-        margin-top: -90px;
-        height: 540px;
-        margin-bottom: -5%; } }
-    @media screen and (min-width: 1200px) {
-      .page-home > header:after {
-        margin-top: -120px;
-        height: 721px;
-        margin-bottom: -5%; } }
+        .page-home header.main-header hgroup {
+          max-width: auto; } }
+      .page-home header.main-header hgroup p.lead {
+        line-height: 1em;
+        font-weight: 700; }
+      .page-home header.main-header hgroup h1 {
+        line-height: 1em;
+        margin-left: -3px; }
+      .page-home header.main-header hgroup h1 .first {
+        font-weight: 100; }
+      .page-home header.main-header hgroup h1 .last {
+        font-weight: 900; }
+    .page-home header.main-header:after {
+      content: " ";
+      display: block;
+      margin-top: -162px;
+      height: 500px;
+      margin-left: -20px;
+      margin-right: -20px;
+      background-color: rgba(23, 26, 33, 0);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(80%, rgba(23, 26, 33, 0)), color-stop(95%, rgba(23, 26, 33, 0.9)), color-stop(99%, #171a21));
+      background-image: -webkit-linear-gradient(rgba(23, 26, 33, 0) 80%, rgba(23, 26, 33, 0.9) 95%, #171a21 99%);
+      background-image: linear-gradient(rgba(23, 26, 33, 0) 80%, rgba(23, 26, 33, 0.9) 95%, #171a21 99%); }
+      @media screen and (max-width: 480px) {
+        .page-home header.main-header:after {
+          margin-top: -143px; } }
 
 * {
   -webkit-box-sizing: border-box;
@@ -675,7 +615,10 @@ article.article-main {
       margin-right: -20px;
       margin-top: 0em;
       margin-bottom: 0em;
-      height: 400px; }
+      height: 400px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50%; }
       article.article-main header.article-header-banner .info {
         padding: 0;
         position: absolute;
@@ -686,15 +629,6 @@ article.article-main {
           article.article-main header.article-header-banner .info {
             padding-left: 20px;
             padding-right: 20px; } }
-    article.article-main header .image {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: 50%; }
     article.article-main header .info {
       padding-left: 20px;
       padding-right: 20px; }

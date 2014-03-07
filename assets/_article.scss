@@ -16,6 +16,9 @@ article.article-main {
       @include flush;
       @include region-margin(0);
       height:         400px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50%;
       .info {
         padding: 0;
         @include media($mobile) {
@@ -26,16 +29,6 @@ article.article-main {
         left:         0;
         bottom:       15%;
       }
-    }
-    .image {
-      position:       absolute;
-      top:            0;
-      bottom:         0;
-      left:           0;
-      right:          0;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: 50%;
     }
     .info {
       @include inset;

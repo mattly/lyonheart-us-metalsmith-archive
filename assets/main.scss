@@ -92,13 +92,10 @@ li {
 }
 
 section.main-content {
-  @include shift(1);
-  @include span-columns(4);
-  @include media($small) {
-    @include shift(0);
-    @include span-columns(6);
-  }
-  @include region-padding;
+  @include width-text;
+  @include inset-center;
+  @include inset;
+  padding-bottom: 2em;
 }
 
 .article-metadata {
@@ -181,6 +178,7 @@ footer.main-footer {
   &> div {
     @include page-width;
     @include inset-center;
+    @include inset;
     @include region-padding(0.25);
   }
   p {

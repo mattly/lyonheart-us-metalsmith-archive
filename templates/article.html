@@ -1,4 +1,4 @@
-{% set bodyclass = "article" %}
+{% set body_class = "article" %}
 {% extends "layout.html" %}
 
 {% block title %}
@@ -15,10 +15,10 @@
   {% endif %}
 
   {% set banner = page.parent['_banner.jpg'] %}
-  <header class='article-header {% if banner %}article-header-banner{% endif %}'>
+  <header class='article-header {% if banner %}article-header-banner{% endif %}'
     {% if banner %}
-    <div class='image' style='background-image: url({{ page.url }}_banner.jpg);'></div>
-    {% endif %}
+    style='background-image: url({{page.url}}_banner.jpg);'
+    {% endif %}>
     <div class='info {{ page.metadata.header.info }}'>
       <h1 {% if page.metadata.header.title %}
         class="{{ page.metadata.header.title }}"
