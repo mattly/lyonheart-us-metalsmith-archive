@@ -102,7 +102,7 @@ section.main-content {
 }
 
 .article-metadata {
-  @include            text-size($text-size-smaller);
+  @include            text-size($text-size-small);
   text-transform:     uppercase;
   letter-spacing:     0.05em;
   font-weight:        100;
@@ -115,12 +115,11 @@ section.main-content {
   }
 }
 .archive-list {
-  &> h2 {
-    color:                $grey-warm;
-    @include spaced-header;
-  }
   article {
     @include list-margin;
+    .article-metadata {
+      @include text-size($text-size-tiny);
+    }
     h1 {
       font-weight:        700;
       @include            text-size($third);
@@ -142,70 +141,91 @@ section.main-content {
 
 footer.main-footer {
   @include page-level;
-  @include region-padding;
-  background-color:   #3F3A42;
+  @include section-padding;
+  background-color:   $blue-dark-mute;
   color:              $grey-warm;
-  section {
+  h2 {
+    display: none;
+    color: $grey-bright;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+  }
+  p {
+    @include text-size($text-size-small);
+    @include text-height-crowded;
+  }
+}
+#about-links {
+  @include page-width;
+  @include inset-center;
+  @include clearfix;
+  .wide {
+    @include span-columns(4);
+    @include media($small) {
+      @include span-columns(6);
+    }
+  }
+  nav {
     @include section-margin;
     @include span-columns(1);
-    @include media($small) {
+    @include media($mobile) {
       @include span-columns(3);
     }
   }
-  section.wide {
-    @include shift(1);
-    @include span-columns(2);
-    @include media($small) {
-      @include span-columns(6);
-      @include shift(0);
-    }
-  }
-  h2 {
-    color:            $grey-bright;
-    @include spaced-header;
+}
+#copyright {
+  @include flush;
+  background-color: $blacker;
+  color: $grey-darker;
+  &> div {
+    @include page-width;
+    @include inset-center;
+    @include region-padding(0.25);
   }
   p {
-    @include          text-size($text-size-small);
-    @include          text-height-crowded;
+    @include text-size($text-size-tiny);
+  }
+  a {
+    color: $grey-lukewarm;
+    text-decoration: none;
+    font-weight: bold;
   }
 }
 
 ul.footer-link-list {
   list-style:           none;
   clear:                both;
+  $icon-size: 16px;
+  $icon-offset: 21px;
   &> li {
-    position:           relative;
-    padding-left:       27px;
+    position: relative;
+    padding-left: $icon-offset;
     @include media($small){
       display: block;
       height: 25px;
     }
-    @include            text-size($text-size-small);
-    text-transform:     uppercase;
-    letter-spacing:     0.1em;
-    font-weight:        100;
+    @include text-size($text-size-smaller);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 100;
   }
   a {
-    color:              $yellow-bold;
-    text-decoration:    none;
+    color: $yellow-bold;
+    text-decoration: none;
   }
+  $icon-top: 4px;
   .icon {
-    height: 20px;
-    width: 20px;
+    height: $icon-size;
+    width: $icon-size;
     background-size: contain;
     background-position: center center;
     position: absolute;
-    margin-left: -27px;
-    top: 2px;
-    @include media($mobile) {
-      top: 0px;
-    }
-    &.icon-linkedin {
-      top: 2px;
-      @include media($mobile) {
-        top: -2px;
-      }
-    }
+    margin-left: -1 * $icon-offset;
+    top: $icon-top;
+  }
+  .icon-linkin {
+    top: $icon-top - 2;
   }
 }
 

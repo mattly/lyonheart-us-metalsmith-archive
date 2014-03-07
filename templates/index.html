@@ -13,12 +13,10 @@
 </header>
 
 <section class='main-content archive-list'>
-  <h2>Recently</h2>
-
   {% for page in articles %}
   <article>
     <header>
-      {% include "metadata.html" %}
+      {% include "_metadata.html" %}
       <h1>
         <a href="{{page.url}}">{{ page.title }}</a>
       </h1>

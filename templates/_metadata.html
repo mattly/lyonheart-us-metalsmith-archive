@@ -1,0 +1,14 @@
+{% set time = page.date %}
+{% set pubdate = true %}
+<div class='article-metadata'>
+  <time
+    datetime='{{ time | date_format("YYYY-MM-DDTHH:mm:SSZ") }}'
+    pubdate>
+    {{ time | date_format("Do MMMM YYYY") }}
+  </time>
+
+  {% if page.metadata.category %}
+    <span class='category'>{{ page.metadata.category }}</span>
+  {% endif %}
+</div>
+

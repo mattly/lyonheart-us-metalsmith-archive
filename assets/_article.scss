@@ -14,10 +14,13 @@ article.article-main {
     @include region-margin;
     &.article-header-banner {
       @include flush;
-      @include inset;
       @include region-margin(0);
       height:         400px;
       .info {
+        padding: 0;
+        @include media($mobile) {
+          @include inset;
+        }
         position:     absolute;
         right:        0;
         left:         0;
@@ -43,6 +46,10 @@ article.article-main {
     h1 {
       font-size:        percentage($fifth);
       line-height:      1em;
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
     }
     h2 {
       font-size:        percentage($fourth);
@@ -64,7 +71,7 @@ article.article-main {
     @include width-text(35);
   }
   &> section > pre {
-    max-width: 37 * $text-base;
+    @include width-text(37);
   }
 
   .article-content {
@@ -90,7 +97,7 @@ article.article-main {
     margin-left: 1.5em;
   }
 
-  a {
+  section a {
     color:              $red-med;
     &:visited {
       color:            darken($red-med, 20%);
@@ -136,12 +143,6 @@ article.article-main {
     }
     &.article-footer-wide {
       @include page-width;
-      .article-footer-sections-narrow {
-        @include text-columns(2, 20px);
-        section {
-          @include text-avoid-breaks;
-        }
-      }
       section.article-footer-section-wide {
         .footer-section-content {
           @include text-columns(2, 20px);

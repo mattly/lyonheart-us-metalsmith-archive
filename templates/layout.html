@@ -67,66 +67,54 @@
 <body class='{{ body_class }}'>
 {% block content %}{% endblock %}
 <footer class='main-footer'>
-  <section id="about" class='wide'>
-    <h2>About Me</h2>
-    <h3>I'm Matthew Lyon</h3>
-    <p>
-    I live with my wife in Portland, Ore. where I build software, mostly web
-    apps. I enjoy photography, making encaustic paintings, building and playing
-    with synthesizers, and brewing beer.
-    </p>
-  </section>
+  <div id="about-links">
+    <div id="about" class='wide'>
+      <h2>About Me</h2>
+      <p>
+      I'm Matthew Lyon.
+      I live with my wife in Portland, Ore. where I build software, mostly web
+      apps. I enjoy photography, making encaustic paintings, building and playing
+      with synthesizers, and brewing beer.
+      </p>
+    </div>
 
-  <section id="contact" class="footer-section">
-    <h2>Contact</h2>
-    <ul class='footer-link-list'>
-      <li>
-        <a href="mailto:matthew@lyonheart.us">
-          <div class="icon-envelope icon"></div>
-          email
-        </a>
-        <!--
-        <span>&amp;</span>
-        <a href="/matthew_lyon_gpg.txt">gpg</a>
-        -->
-      </li>
-      <li>
-        <a href="https://twitter.com/mattly">
-          <div class="icon-tweeter icon"></div>
-          twitter
-        </a>
-      </li>
-      <li>
-        <a href="http://www.linkedin.com/pub/matthew-lyon/62/55b/200/">
-          <div class="icon icon-linkin"></div>
-          linkedin
-        </a>
-      </li>
-    </ul>
-  </section>
-  <section id="streams" class="footer-section">
-    <h2>Streams</h2>
-    <ul class='footer-link-list'>
-      <li>
-        <a href="https://github.com/mattly">
-          <div class="icon icon-github"></div>
-          github
-        </a>
-      </li>
-      <li>
-        <a href="http://www.flickr.com/photos/matthew-lyonheart/">
-          <div class="icon icon-flickr"></div>
-          flickr
-        </a>
-      </li>
-      <li>
-        <a href="http://soundcloud.com/matthewlyonheart">
-          <div class="icon icon-soundcloud"></div>
-          soundcloud
-        </a>
-      </li>
-    </ul>
-  </section>
+    {% set links = contents['links.yaml'].data %}
+    <nav id="contact">
+      <h2>Contact</h2>
+      <ul class='footer-link-list'>
+        {% for name, thing in links.contact %}
+        <li>
+          <a href="{{ thing.href }}">
+            <div class="icon icon-{{thing.icon}}"></div>
+            {{name}}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <nav id="streams">
+      <h2>Streams</h2>
+      <ul class='footer-link-list'>
+        {% for name, stream in links.streams %}
+        <li>
+          <a href="{{ stream.href }}">
+            <div class="icon icon-{{name}}"></div>
+            {{name}}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+  <div id="copyright">
+    <div>
+      <p>
+        <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">
+          Copyright &copy; 2014
+        </a> &#x2022; Matthew Lyon
+      </p>
+    </div>
+  </div>
 </footer>
 </body>
 </html>
