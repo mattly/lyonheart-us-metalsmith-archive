@@ -720,8 +720,8 @@ article.article-main {
     text-decoration: none;
     font-weight: bold; }
   article.article-main footer.article-footer {
-    padding-top: 2em;
-    padding-bottom: 2em;
+    padding-top: 1em;
+    padding-bottom: 1em;
     border-top: 1px dotted #c1b8b3; }
     article.article-main footer.article-footer section {
       font-size: 14.4px;

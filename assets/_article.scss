@@ -103,7 +103,7 @@ article.article-main {
     font-weight:        bold;
   }
   footer.article-footer {
-    @include region-padding;
+    @include region-padding(0.5);
     border-top: 1px dotted $grey-lukewarm;
     section {
       @include            text-size($text-size-smaller);
