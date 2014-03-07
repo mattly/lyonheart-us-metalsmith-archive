@@ -35,8 +35,5 @@ module.exports = (grunt) ->
         files: ['assets/**/*.svg']
         tasks: ['grunticon:compile']
 
-  grunt.loadNpmTasks('grunt-sass')
-  grunt.loadNpmTasks('grunt-grunticon')
-  grunt.loadNpmTasks('grunt-contrib-coffee')
-  grunt.loadNpmTasks('grunt-contrib-watch')
-  grunt.loadNpmTasks('grunt-wintersmith')
+  for task in 'sass grunticon contrib-coffee contrib-watch wintersmith'.split(' ')
+    grunt.loadNpmTasks("grunt-#{task}")

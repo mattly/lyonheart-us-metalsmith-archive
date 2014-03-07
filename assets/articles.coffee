@@ -12,5 +12,20 @@ footnote = (event) ->
 closeFootnote = (event) ->
   $('#footnoter').css('opacity', 0)
 
+bannerScroller = (ele) ->
+  top = ele.position().top
+  height = ele.height()
+  bottom = top + height
+
+  (event) ->
+    offset = $(window).scrollTop()
+    pos = (offset - top) / height * 50 + 50
+    pos = Math.max(pos, 0)
+    pos = Math.min(pos, 100)
+    $('.image', ele).css({ 'background-position-y': pos + '%' })
+
 $ ->
   $('article').on('click', 'a[rel="footnote"]', footnote)
+  scroller = bannerScroller($('.article-header-banner'))
+  scroller()
+  $(window).scroll(scroller)

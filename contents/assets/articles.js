@@ -1,5 +1,5 @@
 (function() {
-  var closeFootnote, footnote;
+  var bannerScroller, closeFootnote, footnote;
 
   footnote = function(event) {
     var content, ident;
@@ -18,8 +18,29 @@
     return $('#footnoter').css('opacity', 0);
   };
 
+  bannerScroller = function(ele) {
+    var bottom, height, top;
+    top = ele.position().top;
+    height = ele.height();
+    bottom = top + height;
+    return function(event) {
+      var offset, pos;
+      offset = $(window).scrollTop();
+      pos = (offset - top) / height * 50 + 50;
+      pos = Math.max(pos, 0);
+      pos = Math.min(pos, 100);
+      return $('.image', ele).css({
+        'background-position-y': pos + '%'
+      });
+    };
+  };
+
   $(function() {
-    return $('article').on('click', 'a[rel="footnote"]', footnote);
+    var scroller;
+    $('article').on('click', 'a[rel="footnote"]', footnote);
+    scroller = bannerScroller($('.article-header-banner'));
+    scroller();
+    return $(window).scroll(scroller);
   });
 
 }).call(this);
