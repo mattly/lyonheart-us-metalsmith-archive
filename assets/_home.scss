@@ -27,6 +27,7 @@
 
     hgroup {
       padding-top: 90px;
+      @include inset;
       @include inset-center;
       @include width-text;
 

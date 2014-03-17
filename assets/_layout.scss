@@ -32,8 +32,8 @@ $page-width: 1000px;
   @include inset;
   @include clearfix;
 }
-@mixin page-width {
-  max-width: $page-width;
+@mixin page-width($offset: 0) {
+  max-width: $page-width + $offset;
 }
 
 @mixin width-text($wid: 35) {

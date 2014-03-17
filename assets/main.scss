@@ -176,7 +176,7 @@ footer.main-footer {
   background-color: $blacker;
   color: $grey-darker;
   &> div {
-    @include page-width;
+    @include page-width(2 * $page-inset);
     @include inset-center;
     @include inset;
     @include region-padding(0.25);

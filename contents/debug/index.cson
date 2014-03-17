@@ -1,0 +1,4 @@
+template: "debug.jade"
+title: "hello CSON"
+date: "2014-03-02 22:21 Z-0800"
+other: 3

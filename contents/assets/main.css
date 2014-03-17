@@ -484,7 +484,7 @@ footer.main-footer {
   background-color: #221d1c;
   color: #9f9089; }
   #copyright > div {
-    max-width: 1000px;
+    max-width: 1040px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 20px;
@@ -561,6 +561,8 @@ ul.footer-link-list {
         background-image: url('/assets/images/nadir_abajo_lg.jpg'); } }
     .page-home header.main-header hgroup {
       padding-top: 90px;
+      padding-left: 20px;
+      padding-right: 20px;
       margin-left: auto;
       margin-right: auto;
       max-width: 630px;
