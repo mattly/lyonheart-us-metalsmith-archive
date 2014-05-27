@@ -8,7 +8,7 @@ info =
     metalsmith: '0.8.x'
 
     marked: "git://github.com/chjj/marked#feature-footnotes"
-
+    'js-yaml': '3.0.x'
 
 
     # for the default templates

@@ -1,5 +1,18 @@
+fs = require('fs')
 path = require('path')
 marked = require('marked')
+
+yaml = require('js-yaml')
+
+metadataSidecar = (files, ms, done) ->
+  for own fileName, data of files when fileName.match(/\/metadata\.yaml$/)
+    metadata = yaml.safeLoad(data.contents.toString())
+    filePath = path.dirname(fileName)
+    for own name, record of files when name.match(///^#{filePath}\/index\.///)
+      for own key, value of metadata
+        record[key] = value
+    delete files[fileName]
+  done()
 
 markdown = (options={}) ->
   (files, metalsmith, done) ->
@@ -29,10 +42,16 @@ extractFootnotes = (files, metalsmith, done) ->
     data.contents = doc.html()
   done()
 
+log = (files, ms, done) ->
+  console.log(name, Object.keys(file)) for name, file of files
+  done()
+
 require('metalsmith')(__dirname)
   .source('source')
+  .use(metadataSidecar)
   .use(markdown({ gfm: true, tables: true, footnotes: true }))
   .use(extractFootnotes)
+  .use(log)
   .destination('build')
   .build((err) -> if err then throw err)
 
