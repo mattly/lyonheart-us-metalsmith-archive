@@ -6,7 +6,7 @@ x metadata sidecar
 - ws -> typogr
 - ws -> port templates from nunjucks -> ?
 - grunt -> sass
-- grunt -> coffeescript
+x grunt -> coffeescript
 - grunt -> grunticon
 
 

@@ -6,6 +6,7 @@ info =
   dependencies: {
     # --- metalsmith migration ----
     metalsmith: '0.8.x'
+    'metalsmith-coffee': '*'
 
     marked: "git://github.com/chjj/marked#feature-footnotes"
     'js-yaml': '3.0.x'
