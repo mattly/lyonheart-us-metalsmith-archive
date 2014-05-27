@@ -4,6 +4,13 @@ info =
   author: { name: "Matthew Lyon" }
   private: true
   dependencies: {
+    # --- metalsmith migration ----
+    metalsmith: '0.8.x'
+
+    marked: "git://github.com/chjj/marked#feature-footnotes"
+
+
+
     # for the default templates
     moment: '2.3.x'
     underscore: '1.4.x'

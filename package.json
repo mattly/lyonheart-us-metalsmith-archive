@@ -6,6 +6,8 @@
   },
   "private": true,
   "dependencies": {
+    "metalsmith": "0.8.x",
+    "marked": "git://github.com/chjj/marked#feature-footnotes",
     "moment": "2.3.x",
     "underscore": "1.4.x",
     "wintersmith": "mattly/wintersmith#post-content-plugin",
