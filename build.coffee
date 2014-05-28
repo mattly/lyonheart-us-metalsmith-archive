@@ -81,6 +81,25 @@ site =
   owner: "Matthew Lyon"
   description: "writings on engineering and art by Matthew Lyon"
   github_modifications_base: "https://github.com/mattly/lyonheart.us/commits/master/contents"
+  links:
+    contact:
+      email:
+        href: 'mailto:matthew@lyonheart.us'
+        icon: 'envelope'
+      twitter:
+        href: 'https://twitter.com/mattly'
+        icon: 'tweeter'
+      linkedin:
+        href: 'http://www.linkedin.com/pub/matthew-lyon/62/55b/200/'
+        icon: 'linkin'
+    streams:
+      github:
+        href: 'https://github.com/mattly'
+      flickr:
+        href: 'http://www.flickr.com/photos/matthew-lyonheart/'
+      soundcloud:
+        href: 'http://soundcloud.com/matthewlyonheart'
+
 
 require('metalsmith')(__dirname)
   .source('contents')

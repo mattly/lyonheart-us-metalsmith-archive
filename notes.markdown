@@ -6,8 +6,14 @@ x ws -> index sibling pages
 x ws -> typogr
 x ws -> port templates from nunjucks -> ?
 - ws -> port yaml/cson content types, data imports?
+  x links
+  - index
+  - feeds
+- smartypants - use typogr not marked's option
 - grunt -> sass
+- move sass to contents/
 x grunt -> coffeescript
+- move coffeescript to contents/
 - grunt -> grunticon
 
 

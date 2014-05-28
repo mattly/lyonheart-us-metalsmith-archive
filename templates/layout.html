@@ -80,11 +80,10 @@
       </p>
     </div>
 
-    {% set links = contents['links.yaml'].data %}
     <nav id="contact">
       <h2>Contact</h2>
       <ul class='footer-link-list'>
-        {% for name, thing in links.contact %}
+        {% for name, thing in site.links.contact %}
         <li>
           <a href="{{ thing.href }}">
             <div class="icon icon-{{thing.icon}}"></div>
@@ -97,7 +96,7 @@
     <nav id="streams">
       <h2>Streams</h2>
       <ul class='footer-link-list'>
-        {% for name, stream in links.streams %}
+        {% for name, stream in site.links.streams %}
         <li>
           <a href="{{ stream.href }}">
             <div class="icon icon-{{name}}"></div>
