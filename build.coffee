@@ -32,7 +32,7 @@ extractFootnotes = (files, metalsmith, done) ->
   done()
 
 log = (files, ms, done) ->
-  console.log(name, file.contents.length) for name, file of files
+  console.log(name, Object.keys(file), file.contents.length) for name, file of files
   done()
 
 nunjucks = require('nunjucks')
@@ -76,9 +76,11 @@ smart = (files, ms, done) ->
 
 renderNunjucksTemplates = (files, ms, done) ->
   for own filePath, page of files when page.template?.match(/\.html$/)
-    page.contents = page.contents.toString()
+    # page.contents = page.contents.toString()
+    page.url = filePath
     full_url = "#{site.url}/#{filePath}"
-    page.contents = new Buffer(nunjucks.render(page.template, { page, site, full_url }))
+    {collections} = ms.metadata()
+    page.contents = new Buffer(nunjucks.render(page.template, { page, site, collections, full_url }))
   done()
 
 siblings = (files, ms, done) ->
@@ -87,6 +89,20 @@ siblings = (files, ms, done) ->
     page.siblings = {}
     for sibling in Object.keys(files) when sibling.match(///^#{dir}\/[^\/]+$///)
       page.siblings[path.basename(sibling)] = files[sibling]
+  done()
+
+cson = require('cson')
+dataLoader = (files, ms, done) ->
+  for own filePath, fileData of files when path.extname(filePath) is '.cson'
+    for own key, value of cson.parseSync(fileData.contents.toString())
+      fileData[key] = value
+  done()
+
+fileRenamer = (files, ms, done) ->
+  for own filePath, fileData of files when fileData.filename
+    dir = path.dirname(filePath)
+    files["#{dir}/#{fileData.filename}"] = fileData
+    delete files[filePath]
   done()
 
 site =
@@ -117,15 +133,24 @@ site =
 
 require('metalsmith')(__dirname)
   .source('contents')
+  .use(dataLoader)
   .use(metadataSidecar)
+  .use(fileRenamer)
   .use(siblings)
   .use(pandoc)
   .use(smart)
   .use(extractFootnotes)
+  .use(require('metalsmith-collections')({
+    articles: {
+      pattern: 'articles/*/index.html'
+      sortBy: 'date'
+      reverse: true
+    }
+  }))
   .use(renderNunjucksTemplates)
   .use(require('metalsmith-coffee')())
   # .use(require('metalsmith-sass')())
-  .use(log)
+  # .use(log)
   .destination('build')
   .build((err) -> if err then throw err)
 
