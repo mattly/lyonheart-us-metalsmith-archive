@@ -39,20 +39,50 @@ extractFootnotes = (files, metalsmith, done) ->
       data.footnotes = footnotes.html()
       footnotes.remove()
     doc('sup a.footnoteRef a').attr('rel','footnote')
-    data.contents = doc.html()
+    data.contents = new Buffer(doc.html())
   done()
 
 log = (files, ms, done) ->
   console.log(name, Object.keys(file)) for name, file of files
   done()
 
+nunjucks = require('nunjucks')
+env = nunjucks.configure('templates')
+
+moment = require('moment')
+env.addFilter 'date_format', (date, format) ->
+  moment(date).format(format)
+
+typogr = require('typogr')
+env.addFilter 'smarty', (text) ->
+  text or= ''
+  t = typogr(text).chain().amp()
+  if text.split(' ').length > 3 then t = t.widont()
+  t.smartypants().initQuotes().caps().ord().value()
+
+renderNunjucksTemplates = (files, ms, done) ->
+  for own filePath, page of files when page.template?.match(/\.html$/)
+    page.contents = page.contents.toString()
+    full_url = "#{site.url}/#{filePath}"
+    page.contents = new Buffer(nunjucks.render(page.template, { page, site, full_url }))
+  done()
+
+site =
+  url: 'http://lyonheart.us'
+  name: "lyonheart.us"
+  owner: "Matthew Lyon"
+  description: "writings on engineering and art by Matthew Lyon"
+  github_modifications_base: "https://github.com/mattly/lyonheart.us/commits/master/contents"
+
 require('metalsmith')(__dirname)
   .source('source')
   .use(metadataSidecar)
   .use(markdown({ gfm: true, tables: true, footnotes: true }))
   .use(extractFootnotes)
+  .use(renderNunjucksTemplates)
   .use(require('metalsmith-coffee')())
-  .use(log)
+  # .use(require('metalsmith-sass')())
+  # .use(log)
   .destination('build')
   .build((err) -> if err then throw err)
 

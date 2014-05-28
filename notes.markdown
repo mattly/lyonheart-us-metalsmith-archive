@@ -3,8 +3,9 @@ x markdown with footnotes
 x footnote extraction
 x metadata sidecar
 - ws -> index sibling pages
-- ws -> typogr
-- ws -> port templates from nunjucks -> ?
+x ws -> typogr
+x ws -> port templates from nunjucks -> ?
+- ws -> port yaml/cson content types, data imports?
 - grunt -> sass
 x grunt -> coffeescript
 - grunt -> grunticon

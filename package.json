@@ -8,8 +8,11 @@
   "dependencies": {
     "metalsmith": "0.8.x",
     "metalsmith-coffee": "*",
+    "metalsmith-templates": "0.5.x",
     "marked": "git://github.com/chjj/marked#feature-footnotes",
+    "cheerio": "0.13.x",
     "js-yaml": "3.0.x",
+    "nunjucks": "1.0.x",
     "moment": "2.3.x",
     "underscore": "1.4.x",
     "wintersmith": "mattly/wintersmith#post-content-plugin",
@@ -17,13 +20,10 @@
     "wintersmith-showdown": "0.1.0",
     "wintersmith-nunjucks-content": "0.1.0",
     "wintersmith-yaml": "1.0.1",
-    "cheerio": "0.13.x",
     "cson": "~1.4.5",
     "typogr": "~0.6.3",
     "grunt-contrib-watch": "0.5.x",
-    "grunt-contrib-coffee": "0.10.x",
     "grunt-grunticon": "1.0.x",
-    "grunt-sass": "0.11.x",
-    "grunt-wintersmith": "0.0.2"
+    "grunt-sass": "0.11.x"
   }
 }
