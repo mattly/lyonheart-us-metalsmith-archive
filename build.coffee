@@ -67,6 +67,14 @@ renderNunjucksTemplates = (files, ms, done) ->
     page.contents = new Buffer(nunjucks.render(page.template, { page, site, full_url }))
   done()
 
+siblings = (files, ms, done) ->
+  for own filePath, page of files
+    dir = path.dirname(filePath)
+    page.siblings = {}
+    for sibling in Object.keys(files) when sibling.match(///^#{dir}\/[^\/]+$///)
+      page.siblings[path.basename(sibling)] = files[sibling]
+  done()
+
 site =
   url: 'http://lyonheart.us'
   name: "lyonheart.us"
@@ -75,14 +83,15 @@ site =
   github_modifications_base: "https://github.com/mattly/lyonheart.us/commits/master/contents"
 
 require('metalsmith')(__dirname)
-  .source('source')
+  .source('contents')
   .use(metadataSidecar)
+  .use(siblings)
   .use(markdown({ gfm: true, tables: true, footnotes: true }))
   .use(extractFootnotes)
   .use(renderNunjucksTemplates)
   .use(require('metalsmith-coffee')())
   # .use(require('metalsmith-sass')())
-  # .use(log)
+  .use(log)
   .destination('build')
   .build((err) -> if err then throw err)
 
