@@ -14,36 +14,25 @@ metadataSidecar = (files, ms, done) ->
     delete files[fileName]
   done()
 
-markdown = (options={}) ->
-  (files, metalsmith, done) ->
-    for own file, data of files when path.extname(file).match(/^\.md|\.markdown$/)
-      if not /^\.md|\.markdown$/.test(path.extname(file)) then return
-      data = files[file]
-      data.contents = new Buffer(marked(data.contents.toString(), options))
-      htmlName = file.replace(/\.md|\.markdown$/, '.html')
-      files[htmlName] = data
-      delete files[file]
-    done()
-
 cheerio = require('cheerio')
 
 extractFootnotes = (files, metalsmith, done) ->
   for own file, data of files when path.extname(file).match(/^\.html$/)
     doc = cheerio.load(data.contents)
-    footnotes = doc("ol.footnotes")
+    footnotes = doc("div.footnotes")
     if footnotes.length > 0
       theFootnote = footnotes.find('li').first()
       while theFootnote.length > 0
         theFootnote.find('a').last().attr('rev','footnote')
         theFootnote = theFootnote.next()
-      data.footnotes = footnotes.html()
+      data.footnotes = footnotes.find('ol').html()
       footnotes.remove()
     doc('sup a.footnoteRef a').attr('rel','footnote')
     data.contents = new Buffer(doc.html())
   done()
 
 log = (files, ms, done) ->
-  console.log(name, Object.keys(file)) for name, file of files
+  console.log(name, file.contents.length) for name, file of files
   done()
 
 nunjucks = require('nunjucks')
@@ -54,11 +43,36 @@ env.addFilter 'date_format', (date, format) ->
   moment(date).format(format)
 
 typogr = require('typogr')
+
 env.addFilter 'smarty', (text) ->
-  text or= ''
-  t = typogr(text).chain().amp()
-  if text.split(' ').length > 3 then t = t.widont()
-  t.smartypants().initQuotes().caps().ord().value()
+  text
+  # typogr.typogriphy(text or '')
+  # t = typogr(text).chain().amp()
+  # if text.split(' ').length > 3 then t = t.widont()
+  # t.smartypants().initQuotes().caps().ord().value()
+
+{exec} = require('child_process')
+pandoc = (files, ms, done) ->
+  converts = (f for own f, p of files when path.extname(f).match(/^\.(md|markdown)$/))
+  convert = (filePath, cb) ->
+    htmlPath = filePath.replace(/\.(md|markdown)$/, '.html')
+    console.log "converting #{filePath} -> #{htmlPath}"
+    exec "pandoc -t html contents/#{filePath}", (err, stdout, stderr) ->
+      if err then throw err
+      files[htmlPath] = files[filePath]
+      files[htmlPath].contents = new Buffer(stdout)
+      delete files[filePath]
+      cb()
+  next = ->
+    if converts.length then convert(converts.shift(), next)
+    else done()
+  next()
+
+smart = (files, ms, done) ->
+  for own filePath, page of files when path.extname(filePath) is '.html'
+    console.log("smarting #{filePath}")
+    page.contents = new Buffer(typogr.typogrify(page.contents.toString()))
+  done()
 
 renderNunjucksTemplates = (files, ms, done) ->
   for own filePath, page of files when page.template?.match(/\.html$/)
@@ -105,7 +119,8 @@ require('metalsmith')(__dirname)
   .source('contents')
   .use(metadataSidecar)
   .use(siblings)
-  .use(markdown({ gfm: true, tables: true, footnotes: true }))
+  .use(pandoc)
+  .use(smart)
   .use(extractFootnotes)
   .use(renderNunjucksTemplates)
   .use(require('metalsmith-coffee')())

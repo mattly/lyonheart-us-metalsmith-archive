@@ -9,7 +9,7 @@ x ws -> port templates from nunjucks -> ?
   x links
   - index
   - feeds
-- smartypants - use typogr not marked's option
+x smartypants - use typogr not marked's option
 - grunt -> sass
 - move sass to contents/
 x grunt -> coffeescript
@@ -17,19 +17,12 @@ x grunt -> coffeescript
 - grunt -> grunticon
 
 
-problems:
 
-- ? relevant to marked? syntax highlighting 
-  - custom fix to wintersmith-showdown:
-    it's sending the output of item.html() to the highlighter with entities, using item.text() instead
+## syntax highlighting
+### highlight.js ?
   - vimscript doesn't seem to get any kind of actual highlighting.  Why can't I use pygments instead?
     highlight.js: https://github.com/isagalaev/highlight.js/
     maybe I need to use the client-side one in addition to?
-
-- smart quotes
-
-  [link][text]'s uses an inverted apostrophe
-  problem from the typogr module, filed an issue: https://github.com/ekalinin/typogr.js/issues/15
 
 
 
