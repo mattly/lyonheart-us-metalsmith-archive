@@ -5,10 +5,11 @@ x metadata sidecar
 x ws -> index sibling pages
 x ws -> typogr
 x ws -> port templates from nunjucks -> ?
-- ws -> port yaml/cson content types, data imports?
+x ws -> port yaml/cson content types, data imports?
+  x data loading
   x links
-  - index
-  - feeds
+  x index
+  x feeds
 x smartypants - use typogr not marked's option
 - grunt -> sass
 - move sass to contents/
@@ -24,6 +25,8 @@ x grunt -> coffeescript
     highlight.js: https://github.com/isagalaev/highlight.js/
     maybe I need to use the client-side one in addition to?
 
+## Pandoc
+- Pandoc's Markdown: http://johnmacfarlane.net/pandoc/README.html#pandocs-markdown
 
 
 ## Nunjucks 

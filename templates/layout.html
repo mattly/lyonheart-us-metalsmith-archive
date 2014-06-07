@@ -15,7 +15,7 @@
   <meta name="description" content="{{ page.summary }}">
   {%- endif %}
 
-  <meta property="og:url" content="{{ full_url }}" />
+  <meta property="og:url" content="{{ page.full_url }}" />
   <meta property="og:site_name" content="lyonheart.us" />
   <meta property="og:title"
   content="{{ page.title }}{% if page.subtitle %} &emdash; {{ page.subtitle }}{%endif%}" />
@@ -46,7 +46,7 @@
     grunticon( [ "/assets/icon/icons.data.svg.css", "/assets/icon/icons.data.png.css", "/assets/icon/icons.fallback.css" ] );
   </script>
 
-  <link rel="canonical" href="{{ full_url }}">
+  <link rel="canonical" href="{{ page.full_url }}">
   <link rel="alternate" 
         type="application/rss+xml" 
         title="RSS - All Posts"

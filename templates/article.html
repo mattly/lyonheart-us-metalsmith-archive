@@ -17,7 +17,7 @@
   {% set banner = page.siblings['_banner.jpg'] %}
   <header class='article-header {% if banner %}article-header-banner{% endif %}'
     {% if banner %}
-    style='background-image: url({{page.url}}_banner.jpg);'
+    style='background-image: url(/{{ banner.url }});'
     {% endif %}>
     <div class='info {{ page.header.info }}'>
       <h1 {% if page.header.title %}

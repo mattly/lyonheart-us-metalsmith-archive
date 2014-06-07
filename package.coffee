@@ -6,6 +6,7 @@ info =
   dependencies: {
     # --- metalsmith
     metalsmith: '0.8.x'
+    'metalsmith-collections': '0.4.1'
     'metalsmith-coffee': '*'
 
     # --- custom metalsmith, to extract
@@ -25,10 +26,11 @@ info =
     # - smarty:
     typogr: "git://github.com/mattly/typogr.js#widont-short-headlines"
 
-    underscore: '1.4.x'
-
     # for my "cson-content" plugin
     cson: '~1.4.5'
+
+    # --- needed?
+    underscore: '1.4.x'
 
     # grunting
     'grunt-grunticon': '1.0.x'

@@ -41,6 +41,7 @@ env = nunjucks.configure('templates')
 moment = require('moment')
 env.addFilter 'date_format', (date, format) ->
   moment(date).format(format)
+env.addFilter 'date_rfc822', (date) -> moment(date).format("ddd, DD MMM YYYY HH:mm:ss ZZ")
 
 typogr = require('typogr')
 
@@ -56,8 +57,7 @@ pandoc = (files, ms, done) ->
   converts = (f for own f, p of files when path.extname(f).match(/^\.(md|markdown)$/))
   convert = (filePath, cb) ->
     htmlPath = filePath.replace(/\.(md|markdown)$/, '.html')
-    console.log "converting #{filePath} -> #{htmlPath}"
-    exec "pandoc -t html contents/#{filePath}", (err, stdout, stderr) ->
+    exec "pandoc -t html5 --smart --ascii contents/#{filePath}", (err, stdout, stderr) ->
       if err then throw err
       files[htmlPath] = files[filePath]
       files[htmlPath].contents = new Buffer(stdout)
@@ -70,17 +70,24 @@ pandoc = (files, ms, done) ->
 
 smart = (files, ms, done) ->
   for own filePath, page of files when path.extname(filePath) is '.html'
-    console.log("smarting #{filePath}")
     page.contents = new Buffer(typogr.typogrify(page.contents.toString()))
   done()
 
+setUrl = (files, ms, done) ->
+  for filePath, page of files
+    page.url = filePath.replace(/^\.\//,'').replace(/\/index\.html$/,'')
+    page.full_url = "#{site.url}/#{page.url}"
+  done()
+
 renderNunjucksTemplates = (files, ms, done) ->
-  for own filePath, page of files when page.template?.match(/\.html$/)
-    # page.contents = page.contents.toString()
-    page.url = filePath
-    full_url = "#{site.url}/#{filePath}"
-    {collections} = ms.metadata()
-    page.contents = new Buffer(nunjucks.render(page.template, { page, site, collections, full_url }))
+  page.body = page.contents.toString() for filePath, page of files
+  for own filePath, page of files when page.template?.match(/\.(html|xml)$/)
+    { collections } = ms.metadata()
+    vars = { page, site, collections }
+    if page.use_collection
+      vars.collection = collections[page.use_collection]
+    page.contents = new Buffer(nunjucks.render(page.template, vars))
+  delete page.body for filePath, page of files
   done()
 
 siblings = (files, ms, done) ->
@@ -130,7 +137,6 @@ site =
       soundcloud:
         href: 'http://soundcloud.com/matthewlyonheart'
 
-
 require('metalsmith')(__dirname)
   .source('contents')
   .use(dataLoader)
@@ -140,6 +146,7 @@ require('metalsmith')(__dirname)
   .use(pandoc)
   .use(smart)
   .use(extractFootnotes)
+  .use(setUrl)
   .use(require('metalsmith-collections')({
     articles: {
       pattern: 'articles/*/index.html'
