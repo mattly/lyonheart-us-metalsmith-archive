@@ -11,6 +11,7 @@ x ws -> port yaml/cson content types, data imports?
   x index
   x feeds
 x smartypants - use typogr not marked's option
+x fix pubdate in index
 - grunt -> sass
 - move sass to contents/
 x grunt -> coffeescript
