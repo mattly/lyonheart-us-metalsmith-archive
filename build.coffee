@@ -19,15 +19,15 @@ cheerio = require('cheerio')
 extractFootnotes = (files, metalsmith, done) ->
   for own file, data of files when path.extname(file).match(/^\.html$/)
     doc = cheerio.load(data.contents)
-    footnotes = doc("div.footnotes")
+    footnotes = doc(".footnotes")
     if footnotes.length > 0
       theFootnote = footnotes.find('li').first()
       while theFootnote.length > 0
         theFootnote.find('a').last().attr('rev','footnote')
         theFootnote = theFootnote.next()
-      data.footnotes = footnotes.find('ol').html()
+      data.footnotes = "<ol>#{footnotes.find('ol').html()}</ol>"
       footnotes.remove()
-    doc('sup a.footnoteRef a').attr('rel','footnote')
+    doc('sup a.footnoteRef').attr('rel','footnote')
     data.contents = new Buffer(doc.html())
   done()
 
