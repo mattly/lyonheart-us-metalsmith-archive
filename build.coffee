@@ -1,4 +1,5 @@
 fs = require('fs')
+fs.mkdirSync('tmp')
 path = require('path')
 marked = require('marked')
 
@@ -32,7 +33,7 @@ extractFootnotes = (files, metalsmith, done) ->
   done()
 
 log = (files, ms, done) ->
-  console.log(name, Object.keys(file), file.contents.length) for name, file of files
+  console.log(name, Object.keys(file), file.mode, file.contents.length) for name, file of files
   done()
 
 nunjucks = require('nunjucks')
@@ -117,6 +118,17 @@ ignoreIncludedCss = (files, ms, done) ->
     delete files[filePath]
   done()
 
+base64Icons = (files, ms, done) ->
+  icons = []
+  for own filePath, data of files when filePath.match(/\/icons\/[^/]+\.svg/)
+    name = path.basename(filePath, '.svg')
+                .replace(/\W+/g,'_').replace(/_+/g,'-')
+                .replace(/^-/,'').replace(/-$/,'')
+    icons.push(".icon-#{name} { background-image: url(data:image/svg+xml;base64,#{escape data.contents.toString('base64')}); background-repeat: no-repeat; }")
+    delete files[filePath]
+  fs.writeFileSync('tmp/_icons.scss', icons.join("\n"))
+  done()
+
 site =
   url: 'http://lyonheart.us'
   name: "lyonheart.us"
@@ -138,6 +150,7 @@ site =
       github:
         href: 'https://github.com/mattly'
       flickr:
+        icon: 'flihkr'
         href: 'http://www.flickr.com/photos/matthew-lyonheart/'
       soundcloud:
         href: 'http://soundcloud.com/matthewlyonheart'
@@ -161,15 +174,20 @@ require('metalsmith')(__dirname)
   }))
   .use(renderNunjucksTemplates)
   .use(require('metalsmith-coffee')())
+  .use(base64Icons)
   .use(require('metalsmith-sass')({
     includePaths: [
-      'bower_components/bourbon/dist',
+      'bower_components/bourbon/dist'
       'bower_components/neat/app/assets/stylesheets'
+      'tmp'
     ],
     outputStyle: 'expanded'
   }))
   .use(ignoreIncludedCss)
   # .use(log)
   .destination('build')
-  .build((err) -> if err then throw err)
+  .build (err) ->
+    fs.unlinkSync(path.join('tmp',f)) for f in fs.readdirSync('tmp')
+    fs.rmdirSync('tmp')
+    if err then throw err
 

@@ -16,7 +16,7 @@ x grunt -> sass
 x move sass to contents/
 x grunt -> coffeescript
 x move coffeescript to contents/
-- grunt -> grunticon
+x grunt -> grunticon
 
 
 
