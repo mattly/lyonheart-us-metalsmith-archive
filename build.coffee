@@ -112,6 +112,11 @@ fileRenamer = (files, ms, done) ->
     delete files[filePath]
   done()
 
+ignoreIncludedCss = (files, ms, done) ->
+  for filePath, data of files when path.basename(filePath).match(/^_.+\.css$/)
+    delete files[filePath]
+  done()
+
 site =
   url: 'http://lyonheart.us'
   name: "lyonheart.us"
@@ -156,7 +161,14 @@ require('metalsmith')(__dirname)
   }))
   .use(renderNunjucksTemplates)
   .use(require('metalsmith-coffee')())
-  # .use(require('metalsmith-sass')())
+  .use(require('metalsmith-sass')({
+    includePaths: [
+      'bower_components/bourbon/dist',
+      'bower_components/neat/app/assets/stylesheets'
+    ],
+    outputStyle: 'expanded'
+  }))
+  .use(ignoreIncludedCss)
   # .use(log)
   .destination('build')
   .build((err) -> if err then throw err)

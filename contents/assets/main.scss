@@ -1,0 +1,231 @@
+@import "reset";
+@import "base";
+@import "type";
+
+@import "colors";
+@import "syntax";
+
+@import "layout";
+
+
+body {
+  font-family:      $main-family;
+  @include          text-size;
+  @include          text-height-normal;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1;
+  background-color: $grey-bright;
+  color:            $blackish;
+  &.background-dark {
+    background-color: #3F3A42;
+    color: $grey-warm;
+  }
+}
+hr {
+  border:           none;
+  border-top:       1px dotted $grey-lukewarm;
+}
+h1 {
+  @include          text-size($octave * $fifth);
+  line-height:      $text-height-double;
+  font-weight:      900;
+}
+h2 {
+  font-weight:      600;
+}
+@mixin spaced-header {
+  text-transform:   uppercase;
+  letter-spacing:   0.2em;
+  font-weight:      100;
+  margin-bottom:    0.5em;
+}
+
+strong {
+  font-weight: bold;
+}
+em {
+  font-style: italic;
+}
+sup {
+  vertical-align:   super;
+  @include text-size($text-size-small);
+  line-height:      0;
+}
+abbr {
+  cursor:           help;
+  border-bottom:    1px dotted $grey-warm;
+  letter-spacing:   0.1em;
+}
+blockquote {
+  padding:          0.5em 2em;
+  margin-bottom:    1em;
+}
+pre {
+  margin:           1em 0;
+  padding:          $text-base * 1 / $fifth;
+  border-radius:    4px;
+  background-color: $grey-superbright;
+  word-break:       break-all;
+  word-wrap:        break-word;
+}
+code {
+  font-family:      $mono-family;
+  font-size:        percentage(1 / $second);
+  color:            $red-med;
+  background-color: $grey-superbright;
+
+  border-radius:    4px;
+  padding:          2px 4px;
+}
+
+ol {
+  display:          block;
+  list-style-type:  decimal;
+}
+ul {
+  display:          block;
+  list-style-type:  disc;
+}
+
+li {
+  display:          list-item;
+}
+
+section.main-content {
+  @include width-text;
+  @include inset-center;
+  @include inset;
+  padding-bottom: 2em;
+}
+
+.article-metadata {
+  @include            text-size($text-size-small);
+  text-transform:     uppercase;
+  letter-spacing:     0.05em;
+  font-weight:        100;
+  color:              $grey-lukewarm;
+  .category {
+    font-weight:      900;
+    &:before {
+      content:        "\2022\00a0";  // &bull;&nbsp;
+    }
+  }
+}
+.archive-list {
+  article {
+    @include list-margin;
+    .article-metadata {
+      @include text-size($text-size-tiny);
+    }
+    h1 {
+      font-weight:        700;
+      @include            text-size($third);
+      line-height:        1;
+      a {
+        color:            $yellow-bold;
+        text-decoration:  none;
+      }
+      a:visited {
+        color:            desaturate($yellow-bold, 40%);
+      }
+    }
+    h2 {
+      font-weight:        300;
+      color:              $grey-warm;
+    }
+  }
+}
+
+footer.main-footer {
+  @include page-level;
+  @include section-padding;
+  background-color:   $blue-dark-mute;
+  color:              $grey-warm;
+  h2 {
+    display: none;
+    color: $grey-bright;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+  }
+  p {
+    @include text-size($text-size-small);
+    @include text-height-crowded;
+  }
+}
+#about-links {
+  @include page-width;
+  @include inset-center;
+  @include clearfix;
+  .wide {
+    @include span-columns(4);
+    @include media($small) {
+      @include span-columns(6);
+    }
+  }
+  nav {
+    @include section-margin;
+    @include span-columns(1);
+    @include media($mobile) {
+      @include span-columns(3);
+    }
+  }
+}
+#copyright {
+  @include flush;
+  background-color: $blacker;
+  color: $grey-darker;
+  &> div {
+    @include page-width(2 * $page-inset);
+    @include inset-center;
+    @include inset;
+    @include region-padding(0.25);
+  }
+  p {
+    @include text-size($text-size-tiny);
+  }
+  a {
+    color: $grey-lukewarm;
+    text-decoration: none;
+    font-weight: bold;
+  }
+}
+
+ul.footer-link-list {
+  list-style:           none;
+  clear:                both;
+  $icon-size: 16px;
+  $icon-offset: 21px;
+  &> li {
+    position: relative;
+    padding-left: $icon-offset;
+    @include media($small){
+      display: block;
+      height: 25px;
+    }
+    @include text-size($text-size-smaller);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 100;
+  }
+  a {
+    color: $yellow-bold;
+    text-decoration: none;
+  }
+  $icon-top: 4px;
+  .icon {
+    height: $icon-size;
+    width: $icon-size;
+    background-size: contain;
+    background-position: center center;
+    position: absolute;
+    margin-left: -1 * $icon-offset;
+    top: $icon-top;
+  }
+  .icon-linkin {
+    top: $icon-top - 2;
+  }
+}
+
+@import "home";
+@import "article";
