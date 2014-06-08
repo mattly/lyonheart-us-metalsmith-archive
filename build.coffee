@@ -1,7 +1,6 @@
 fs = require('fs')
 fs.mkdirSync('tmp')
 path = require('path')
-marked = require('marked')
 
 yaml = require('js-yaml')
 
