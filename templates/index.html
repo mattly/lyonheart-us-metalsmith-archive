@@ -13,15 +13,15 @@
 </header>
 
 <section class='main-content archive-list'>
-  {% for page in articles %}
+  {% for page in collections.articles %}
   <article>
     <header>
       {% include "_metadata.html" %}
       <h1>
-        <a href="{{page.url}}">{{ page.title }}</a>
+        <a href="{{ page.url }}">{{ page.title }}</a>
       </h1>
-      {% if page.metadata.subtitle %}
-      <h2>{{ page.metadata.subtitle }}</h2>
+      {% if page.subtitle %}
+      <h2>{{ page.subtitle }}</h2>
       {% endif %}
     </header>
   </article>

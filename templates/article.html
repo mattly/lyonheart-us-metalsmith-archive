@@ -2,42 +2,42 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  {{ page.title }} -
+{{ page.title }} - {{ site.name }}
 {% endblock %}
 
 {% block content %}
 <article class='article-main'>
-  {% set intro = page.parent['_intro.markdown'] %}
+  {% set intro = page.siblings['_intro.markdown'] %}
   {% if intro %}
   <section class='lead'>
-    {{ intro._htmlraw }}
+    {{ intro.contents }}
   </section>
   {% endif %}
 
-  {% set banner = page.parent['_banner.jpg'] %}
+  {% set banner = page.siblings['_banner.jpg'] %}
   <header class='article-header {% if banner %}article-header-banner{% endif %}'
     {% if banner %}
-    style='background-image: url({{page.url}}_banner.jpg);'
+    style='background-image: url(/{{ banner.url }});'
     {% endif %}>
-    <div class='info {{ page.metadata.header.info }}'>
-      <h1 {% if page.metadata.header.title %}
-        class="{{ page.metadata.header.title }}"
+    <div class='info {{ page.header.info }}'>
+      <h1 {% if page.header.title %}
+        class="{{ page.header.title }}"
         {% endif %}
-        {% if page.metadata.header.title_style %}
-          style="{% for key, value in page.metadata.header.title_style %}
+        {% if page.header.title_style %}
+          style="{% for key, value in page.header.title_style %}
             {{ key }}: {{ value }};
           {% endfor %}"
         {% endif %}
         ><a href="{{ page.url }}">{{ page.title | smarty }}</a></h1>
-      {% if page.metadata.subtitle %}
-      <h2>{{ page.metadata.subtitle | smarty }}</h2>
+      {% if page.subtitle %}
+      <h2>{{ page.subtitle | smarty }}</h2>
       {% endif %}
       {% include "_metadata.html" %}
     </div>
   </header>
 
   <section class='article-content'>
-    {{ page.html }}
+    {{ page.contents }}
   </section>
 
   <div id='footnoter'>
@@ -47,28 +47,28 @@
     </div>
   </div>
 
-  {% set freads = page.parent['_further_reading.markdown'] %}
+  {% set freads = page.siblings['_further_reading.markdown'] %}
   <footer class='article-footer{% if freads %} article-footer-wide{% endif %}'>
     {% if freads %}
     <section id='further-reading' class='article-footer-section-wide'>
       <h2>Further Reading</h2>
       <div class='footer-section-content'>
-        {{ freads._htmlraw }}
+        {{ freads.contents }}
       </div>
     </section>
     {% endif %}
 
-    {% if page.metadata.footnotes %}
+    {% if page.footnotes %}
     <section id='footnotes' class='article-footer-section-wide'>
       <h2>Footnotes</h2>
       <div class='footer-section-content'>
-        {{ page.metadata.footnotes }}
+        {{ page.footnotes }}
       </div>
     </section>
     {% endif %}
 
     <div class='article-footer-sections-narrow'>
-      {% if page.metadata.updated %}
+      {% if page.updated %}
       <section id="updated" class='article-footer-section-small'>
         <p>This piece has been modified since its initial publication.
           <a href="{{ github_modifications_base }}{{ page.url }}">Browse the changelog</a>
