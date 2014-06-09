@@ -13,11 +13,11 @@ deps = {
     'metalsmith-collections': '0.4.1'
 
     'metalsmith-coffee': '*'
-    'metalsmaith-sass': '*'
+    'metalsmith-sass': '*'
+    'metalsmith-ignore': '*'
+    'metalsmith-fingerprint': '*'
 
     # --- custom metalsmith, to extract
-    # for footnotes on custom markdown
-    marked: "git://github.com/chjj/marked#feature-footnotes"
     # for footnote extractor
     cheerio: '0.13.x'
 
@@ -34,9 +34,6 @@ deps = {
 
     # for my "cson-content" plugin
     cson: '~1.4.5'
-
-    # grunting
-    'grunt-grunticon': '1.0.x'
   }
   bower: {
     bourbon: '3.2.x'

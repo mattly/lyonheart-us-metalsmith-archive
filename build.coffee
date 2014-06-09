@@ -112,11 +112,6 @@ fileRenamer = (files, ms, done) ->
     delete files[filePath]
   done()
 
-ignoreIncludedCss = (files, ms, done) ->
-  for filePath, data of files when path.basename(filePath).match(/^_.+\.css$/)
-    delete files[filePath]
-  done()
-
 base64Icons = (files, ms, done) ->
   icons = []
   for own filePath, data of files when filePath.match(/\/icons\/[^/]+\.svg/)
@@ -124,7 +119,6 @@ base64Icons = (files, ms, done) ->
                 .replace(/\W+/g,'_').replace(/_+/g,'-')
                 .replace(/^-/,'').replace(/-$/,'')
     icons.push(".icon-#{name} { background-image: url(data:image/svg+xml;base64,#{escape data.contents.toString('base64')}); background-repeat: no-repeat; }")
-    delete files[filePath]
   fs.writeFileSync('tmp/_icons.scss', icons.join("\n"))
   done()
 
@@ -181,9 +175,12 @@ require('metalsmith')(__dirname)
     ],
     outputStyle: 'expanded'
   }))
-  .use(ignoreIncludedCss)
   .use(require('metalsmith-fingerprint')({pattern:'assets/*'}))
   .use(renderNunjucksTemplates)
+  .use(require('metalsmith-ignore')([
+    'assets/_*.css'
+    'assets/icons/*.svg'
+  ]))
   # .use(log)
   .destination('build')
   .build (err) ->
