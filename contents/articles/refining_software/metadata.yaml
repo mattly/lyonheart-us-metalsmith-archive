@@ -9,7 +9,6 @@ locations:
   - Buenos Aires, Argentina
   - Montevideo, Uruguay
   - Punta del Diablo, Uruguay
-template:       article.html
 header:
   info:         white-text
   title_style:

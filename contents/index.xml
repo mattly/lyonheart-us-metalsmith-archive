@@ -9,6 +9,7 @@
     <atom:link href="{{ page.full_url }}" rel="self" type="application/rss+xml"></atom:link>
     <link>{{ site.url }}</link>
     <description>{{ site.description }}</description>
+    {% set collection = collections.articles %}
     <pubDate>{{ collection[0].date | date_rfc822 }}</pubDate>
     <language>en</language>
     {% for item in collection -%}
@@ -18,8 +19,9 @@
       <pubDate>{{ item.date | date_rfc822 }}</pubDate>
       <guid isPermaLink="true">{{ item.full_url }}</guid>
       <author>{{ item.author }}</author>
-      <description>{{ item.body | escape }}</description>
+      <description>{{ item.summary }}</description>
     </item>
     {%- endfor %}
   </channel>
 </rss>
+
