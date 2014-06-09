@@ -10,6 +10,7 @@ If you haven't seen [Andy Warhol][warhol]'s experimental film *[Empire][]*, I ca
 Creating things used to be a lot harder, and sharing them harder still.  Until recently, if you wanted to see *Empire* you had to attend one of MOMA's infrequent showings.  Nine minutes of it [are now on Youtube][empire-youtube], and I shudder to think of what Warhol would do with today's tools -- we can shoot such a video on our phones and have it on YouTube within minutes,[^internet] but no one would watch it.  You could get through most of the new season of *House of Cards* instead.
 
 [empire-youtube]: https://www.youtube.com/watch?v=-sSsWj2HWk0
+
 [^internet]: Making a bad assumption of good internet.
 
 What's a creative person to do?  If you're not posting frequently, it's hard to stand out among the spew of ever-new things vying for attention.  Besides, no one is looking closely -- do it quickly, it's so easy these days.  The feedback is immediate: likes, favorites, shares, and retweets give instant gratification, and create a craving for such.
