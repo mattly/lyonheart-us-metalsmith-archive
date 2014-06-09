@@ -11,7 +11,7 @@
 
 [behind-iphone]: http://www.nytimes.com/2013/10/06/magazine/and-then-steve-said-let-there-be-an-iphone.html?pagewanted=all
 
-**[Why it took A year to make and then break down an amazing puzzle game][behind-threes]: Behind [threes][]**.  A cute puzzle game my wife and I both have a hard time putting down.
+**[Why It Took a Year to Make and Then Break Down an Amazing Puzzle Game][behind-threes]: Behind [threes][]**.  A cute puzzle game my wife and I both have a hard time putting down.
 
 [behind-threes]: http://www.polygon.com/2014/2/6/5386200/why-it-took-a-year-to-make-and-then-break-down-an-amazing-puzzle-game
 [threes]: http://asherv.com/threes/
