@@ -81,9 +81,9 @@ setUrl = (files, ms, done) ->
 
 renderNunjucksTemplates = (files, ms, done) ->
   page.body = page.contents.toString() for filePath, page of files
+  { collections, fingerprint } = ms.metadata()
   for own filePath, page of files when page.template?.match(/\.(html|xml)$/)
-    { collections } = ms.metadata()
-    vars = { page, site, collections }
+    vars = { page, site, collections, fingerprint }
     if page.use_collection
       vars.collection = collections[page.use_collection]
     page.contents = new Buffer(nunjucks.render(page.template, vars))
@@ -171,7 +171,6 @@ require('metalsmith')(__dirname)
       reverse: true
     }
   }))
-  .use(renderNunjucksTemplates)
   .use(require('metalsmith-coffee')())
   .use(base64Icons)
   .use(require('metalsmith-sass')({
@@ -183,6 +182,8 @@ require('metalsmith')(__dirname)
     outputStyle: 'expanded'
   }))
   .use(ignoreIncludedCss)
+  .use(require('metalsmith-fingerprint')({pattern:'assets/*'}))
+  .use(renderNunjucksTemplates)
   # .use(log)
   .destination('build')
   .build (err) ->
