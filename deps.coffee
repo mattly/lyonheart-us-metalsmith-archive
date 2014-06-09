@@ -31,9 +31,6 @@ deps = {
     moment: '2.x.x'
     # - smarty:
     typogr: '0.6.x'
-
-    # for my "cson-content" plugin
-    cson: '~1.4.5'
   }
   bower: {
     bourbon: '3.2.x'

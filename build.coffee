@@ -4,6 +4,7 @@ path = require('path')
 
 yaml = require('js-yaml')
 
+# loads from "metadata.yml" onto "index.*"
 metadataSidecar = (files, ms, done) ->
   for own fileName, data of files when path.basename(fileName).match(/^metadata\.yaml$/)
     metadata = yaml.safeLoad(data.contents.toString())
@@ -14,8 +15,9 @@ metadataSidecar = (files, ms, done) ->
     delete files[fileName]
   done()
 
+# takes <ol> from .footnotes, makes it page.footnotes, removes ol
+# also cleans up rel/rev attributes for links
 cheerio = require('cheerio')
-
 extractFootnotes = (files, metalsmith, done) ->
   for own file, data of files when path.extname(file).match(/^\.html$/)
     doc = cheerio.load(data.contents)
@@ -42,8 +44,7 @@ moment = require('moment')
 env.addFilter 'date_format', (date, format) -> moment(date).format(format)
 env.addFilter 'date_rfc822', (date) -> moment(date).format("ddd, DD MMM YYYY HH:mm:ss ZZ")
 
-typogr = require('typogr')
-
+# converts .(md|markdown) to html via pandoc
 {exec} = require('child_process')
 pandoc = (files, ms, done) ->
   converts = (f for own f, p of files when path.extname(f).match(/^\.(md|markdown)$/))
@@ -60,6 +61,7 @@ pandoc = (files, ms, done) ->
     else done()
   next()
 
+typogr = require('typogr')
 smart = (files, ms, done) ->
   for own filePath, page of files when path.extname(filePath) is '.html'
     page.contents = new Buffer(typogr.typogrify(page.contents.toString()))
@@ -89,12 +91,6 @@ renderNunjucksTemplates = (files, ms, done) ->
     page.contents = new Buffer(output)
   done()
 
-renderNunjucksLayouts = (files, ms, done) ->
-  { fingerprint } = ms.metadata()
-  for own filePath, page of files when page.layout
-    page.contents = new Buffer(nunjucks.render(page.layout, { page, site, fingerprint }))
-  done()
-
 siblings = (files, ms, done) ->
   for own filePath, page of files
     dir = path.dirname(filePath)
@@ -112,20 +108,6 @@ includeSiblings = (files, ms, done) ->
         page[key] = data.contents.toString()
         if key is 'body' then page.footnotes = data.footnotes
         delete files[otherFile]
-  done()
-
-cson = require('cson')
-dataLoader = (files, ms, done) ->
-  for own filePath, fileData of files when path.extname(filePath) is '.cson'
-    for own key, value of cson.parseSync(fileData.contents.toString())
-      fileData[key] = value
-  done()
-
-fileRenamer = (files, ms, done) ->
-  for own filePath, fileData of files when fileData.filename
-    dir = path.dirname(filePath)
-    files["#{dir}/#{fileData.filename}"] = fileData
-    delete files[filePath]
   done()
 
 base64Icons = (files, ms, done) ->
@@ -166,9 +148,7 @@ site =
 
 require('metalsmith')(__dirname)
   .source('contents')
-  .use(dataLoader)
   .use(metadataSidecar)
-  .use(fileRenamer)
   .use(pandoc)
   .use(extractFootnotes)
   .use(includeSiblings)
