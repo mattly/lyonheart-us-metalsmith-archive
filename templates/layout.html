@@ -5,9 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
   <title>
-    {% block title -%}
-    {{ site.name }}
-    {%- endblock %}
+    {% block title %}{% endblock %} {{ site.name }}
   </title>
 
   <meta name="author" content="Matthew Lyon">
@@ -61,7 +59,7 @@
 </head>
 <body class='{{ body_class }}'>
 
-{% block content %}{% endblock %}
+  {% block content %}{% endblock %}
 
 <footer class='main-footer'>
   <div id="about-links">

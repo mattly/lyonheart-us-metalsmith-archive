@@ -2,42 +2,19 @@
 {% extends "layout.html" %}
 
 {% block title %}
-{{ page.title }} - {{ site.name }}
+{{ page.title }} -
 {% endblock %}
 
 {% block content %}
 <article class='article-main'>
-  {% set intro = page.siblings['_intro.markdown'] %}
-  {% if intro %}
-  <section class='lead'>
-    {{ intro.contents }}
-  </section>
-  {% endif %}
-
-  {% set banner = page.siblings['_banner.jpg'] %}
-  <header class='article-header {% if banner %}article-header-banner{% endif %}'
-    {% if banner %}
-    style='background-image: url(/{{ banner.url }});'
-    {% endif %}>
-    <div class='info {{ page.header.info }}'>
-      <h1 {% if page.header.title %}
-        class="{{ page.header.title }}"
-        {% endif %}
-        {% if page.header.title_style %}
-          style="{% for key, value in page.header.title_style %}
-            {{ key }}: {{ value }};
-          {% endfor %}"
-        {% endif %}
-        ><a href="{{ page.url }}">{{ page.title | smarty }}</a></h1>
-      {% if page.subtitle %}
-      <h2>{{ page.subtitle | smarty }}</h2>
-      {% endif %}
-      {% include "_metadata.html" %}
-    </div>
-  </header>
+  {% block heading %}
+  {% include "partials/heading.html" %}
+  {% endblock %}
 
   <section class='article-content'>
+    {% block body %}
     {{ page.contents }}
+    {% endblock %}
   </section>
 
   <div id='footnoter'>
@@ -47,19 +24,14 @@
     </div>
   </div>
 
-  {% set freads = page.siblings['_further_reading.markdown'] %}
-  <footer class='article-footer{% if freads %} article-footer-wide{% endif %}'>
-    {% if freads %}
-    <section id='further-reading' class='article-footer-section-wide'>
-      <h2>Further Reading</h2>
-      <div class='footer-section-content'>
-        {{ freads.contents }}
-      </div>
-    </section>
-    {% endif %}
+  <footer class='article-footer{% if footer_wide %} article-footer-wide{% endif %}'>
+    {% block footer %}
+    {% endblock %}
 
     {% if page.footnotes %}
-    <section id='footnotes' class='article-footer-section-wide'>
+    <section id='footnotes'
+      {% if footer_wide %}class='article-footer-section-wide'{% endif %}
+      >
       <h2>Footnotes</h2>
       <div class='footer-section-content'>
         {{ page.footnotes }}
@@ -81,3 +53,11 @@
 </article>
 {% endblock %}
 
+{% macro footer_section(name, contents) %}
+<section id=''>
+  <h2>{{ name }}</h2>
+  <div class='footer-section-content'>
+    {{ contents }}
+  </div>
+</section>
+{% endmacro %}

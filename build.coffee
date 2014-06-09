@@ -5,10 +5,10 @@ path = require('path')
 yaml = require('js-yaml')
 
 metadataSidecar = (files, ms, done) ->
-  for own fileName, data of files when fileName.match(/\/metadata\.yaml$/)
+  for own fileName, data of files when path.basename(fileName).match(/^metadata\.yaml$/)
     metadata = yaml.safeLoad(data.contents.toString())
-    filePath = path.dirname(fileName)
-    for own name, record of files when name.match(///^#{filePath}\/index\.///)
+    dir = path.dirname(fileName)
+    for own name, record of files when path.dirname(name) is dir and path.basename(name).match(/^index\./)
       for own key, value of metadata
         record[key] = value
     delete files[fileName]
@@ -27,8 +27,8 @@ extractFootnotes = (files, metalsmith, done) ->
         theFootnote = theFootnote.next()
       data.footnotes = "<ol>#{footnotes.find('ol').html()}</ol>"
       footnotes.remove()
-    doc('sup a.footnoteRef').attr('rel','footnote')
-    data.contents = new Buffer(doc.html())
+      doc('sup a.footnoteRef').attr('rel','footnote')
+      data.contents = new Buffer(doc.html())
   done()
 
 log = (files, ms, done) ->
@@ -39,18 +39,10 @@ nunjucks = require('nunjucks')
 env = nunjucks.configure('templates')
 
 moment = require('moment')
-env.addFilter 'date_format', (date, format) ->
-  moment(date).format(format)
+env.addFilter 'date_format', (date, format) -> moment(date).format(format)
 env.addFilter 'date_rfc822', (date) -> moment(date).format("ddd, DD MMM YYYY HH:mm:ss ZZ")
 
 typogr = require('typogr')
-
-env.addFilter 'smarty', (text) ->
-  text
-  # typogr.typogriphy(text or '')
-  # t = typogr(text).chain().amp()
-  # if text.split(' ').length > 3 then t = t.widont()
-  # t.smartypants().initQuotes().caps().ord().value()
 
 {exec} = require('child_process')
 pandoc = (files, ms, done) ->
@@ -80,14 +72,27 @@ setUrl = (files, ms, done) ->
   done()
 
 renderNunjucksTemplates = (files, ms, done) ->
-  page.body = page.contents.toString() for filePath, page of files
   { collections, fingerprint } = ms.metadata()
-  for own filePath, page of files when page.template?.match(/\.(html|xml)$/)
+  toRender = (f for f, p of files when f.match(/\.(html|xml)$/))
+  segmentComparator = (one, two) ->
+    oneLength = one.split('/').length
+    twoLength = two.split('/').length
+    if oneLength > twoLength then return -1
+    if oneLength is twoLength then return 0
+    return 1
+  toRender.sort(segmentComparator)
+  for filePath in toRender
+    page = files[filePath]
     vars = { page, site, collections, fingerprint }
-    if page.use_collection
-      vars.collection = collections[page.use_collection]
-    page.contents = new Buffer(nunjucks.render(page.template, vars))
-  delete page.body for filePath, page of files
+    output = if page.template then nunjucks.render(page.template, vars)
+    else nunjucks.renderString(page.contents.toString(), vars)
+    page.contents = new Buffer(output)
+  done()
+
+renderNunjucksLayouts = (files, ms, done) ->
+  { fingerprint } = ms.metadata()
+  for own filePath, page of files when page.layout
+    page.contents = new Buffer(nunjucks.render(page.layout, { page, site, fingerprint }))
   done()
 
 siblings = (files, ms, done) ->
@@ -96,6 +101,17 @@ siblings = (files, ms, done) ->
     page.siblings = {}
     for sibling in Object.keys(files) when sibling.match(///^#{dir}\/[^\/]+$///)
       page.siblings[path.basename(sibling)] = files[sibling]
+  done()
+
+includeSiblings = (files, ms, done) ->
+  for own filePath, page of files
+    dir = path.dirname(filePath)
+    if dir.match(/^articles\//) and path.basename(filePath).match(/^index\.html/)
+      for own otherFile, data of files when path.dirname(otherFile) is dir and otherFile isnt filePath and path.extname(otherFile) is '.html'
+        key = path.basename(otherFile, path.extname(otherFile))
+        page[key] = data.contents.toString()
+        if key is 'body' then page.footnotes = data.footnotes
+        delete files[otherFile]
   done()
 
 cson = require('cson')
@@ -153,10 +169,10 @@ require('metalsmith')(__dirname)
   .use(dataLoader)
   .use(metadataSidecar)
   .use(fileRenamer)
-  .use(siblings)
   .use(pandoc)
-  .use(smart)
   .use(extractFootnotes)
+  .use(includeSiblings)
+  .use(siblings)
   .use(setUrl)
   .use(require('metalsmith-collections')({
     articles: {
@@ -176,11 +192,12 @@ require('metalsmith')(__dirname)
     outputStyle: 'expanded'
   }))
   .use(require('metalsmith-fingerprint')({pattern:'assets/*'}))
-  .use(renderNunjucksTemplates)
   .use(require('metalsmith-ignore')([
     'assets/_*.css'
     'assets/icons/*.svg'
   ]))
+  .use(renderNunjucksTemplates)
+  .use(smart)
   # .use(log)
   .destination('build')
   .build (err) ->
