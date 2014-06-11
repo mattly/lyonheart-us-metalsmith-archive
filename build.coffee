@@ -173,7 +173,6 @@ require('metalsmith')(__dirname)
   }))
   .use(require('metalsmith-fingerprint')({pattern:'assets/*'}))
   .use(require('metalsmith-ignore')([
-    'assets/_*.css'
     'assets/icons/*.svg'
   ]))
   .use(renderNunjucksTemplates)

@@ -13,7 +13,7 @@ deps = {
     'metalsmith-collections': '0.4.1'
 
     'metalsmith-coffee': '*'
-    'metalsmith-sass': '*'
+    'metalsmith-sass': '>=0.2.0'
     'metalsmith-ignore': '*'
     'metalsmith-fingerprint': '*'
 
