@@ -140,9 +140,6 @@ site =
     streams:
       github:
         href: 'https://github.com/mattly'
-      flickr:
-        icon: 'flihkr'
-        href: 'http://www.flickr.com/photos/matthew-lyonheart/'
       soundcloud:
         href: 'http://soundcloud.com/matthewlyonheart'
 
