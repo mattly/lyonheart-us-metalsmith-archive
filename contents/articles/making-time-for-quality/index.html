@@ -1,3 +1,4 @@
+{% import "article.html" as article %}
 {% extends "article.html" %}
 
 {% block heading %}
@@ -6,4 +7,8 @@
 
 {% block body %}
 {{ page.body }}
+{% endblock %}
+
+{% block footer %}
+{{ article.footer_section('Further Reading', page.further_reading) }}
 {% endblock %}
