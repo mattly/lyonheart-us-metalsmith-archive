@@ -3,3 +3,4 @@ node_modules
 bower_components
 package.json
 bower.json
+s3_website.yml
