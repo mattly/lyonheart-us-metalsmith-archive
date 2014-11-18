@@ -61,10 +61,10 @@ article.article-main {
   &> section > pre,
   &> footer {
     @include inset-center;
-    @include width-text(35);
+    @include width-text(37);
   }
   &> section > pre {
-    @include width-text(37);
+    @include width-text(40);
   }
 
   .article-content {
@@ -73,8 +73,9 @@ article.article-main {
   .article-content h2 {
     @include text-margin-heading;
     @include text-size($second);
-    font-weight:        900;
+    font-weight:        700;
     text-transform:     uppercase;
+    color: $grey-darkish;
   }
   p {
     @include text-margin-flow;

@@ -28,10 +28,12 @@ hr {
 h1 {
   @include          text-size($octave * $fifth);
   line-height:      $text-height-double;
-  font-weight:      900;
+  @include display-type;
+  font-weight:      700;
 }
 h2 {
-  font-weight:      600;
+  @include display-type;
+  font-weight:      300;
 }
 @mixin spaced-header {
   text-transform:   uppercase;
@@ -102,10 +104,11 @@ section.main-content {
   @include            text-size($text-size-small);
   text-transform:     uppercase;
   letter-spacing:     0.05em;
+  @include display-type;
   font-weight:        100;
   color:              $grey-lukewarm;
   .category {
-    font-weight:      900;
+    font-weight:      700;
     &:before {
       content:        "\2022\00a0";  // &bull;&nbsp;
     }
@@ -118,6 +121,7 @@ section.main-content {
       @include text-size($text-size-tiny);
     }
     h1 {
+      @include display-type;
       font-weight:        700;
       @include            text-size($third);
       line-height:        1;
@@ -174,6 +178,7 @@ footer.main-footer {
     display: none;
     color: $grey-bright;
     text-transform: uppercase;
+    @include display-type;
     font-weight: 600;
     letter-spacing: 0.2em;
   }
@@ -235,6 +240,7 @@ ul.footer-link-list {
     @include text-size($text-size-smaller);
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    @include display-type;
     font-weight: 100;
   }
   a {

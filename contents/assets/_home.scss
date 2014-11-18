@@ -38,16 +38,18 @@ body.home {
       p.lead {
         line-height: 1em;
         font-weight: 700;
+        @include display-type;
       }
       h1 {
         line-height: 1em;
         margin-left: -3px;
+        @include display-type;
       }
       h1 .first {
         font-weight: 100;
       }
       h1 .last {
-        font-weight: 900;
+        font-weight: 700;
       }
     }
     &:after {
