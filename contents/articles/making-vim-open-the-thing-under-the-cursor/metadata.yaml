@@ -1,8 +1,0 @@
-title:    "Making Vim Open the Thing Under the Cursor"
-summary:  easily send the '\s(\S+)\s' item under the cursor to 'open'
-category: snippets
-template: article.html
-date:     2014-02-08 12:00
-author:   mattly
-location: Punta del Diablo, Uruguay
-
