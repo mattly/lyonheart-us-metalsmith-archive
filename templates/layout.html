@@ -58,57 +58,58 @@
 
 </head>
 <body class='{{ body_class }}'>
-
-  {% block content %}{% endblock %}
-
-<footer class='main-footer'>
-  <div id="about-links">
-    <div id="about" class='wide'>
-      <h2>About Me</h2>
-      <p>
-      I'm Matthew Lyon.
-      I live with my wife in Portland, Ore. where I build software, mostly web
-      apps. I enjoy photography, making encaustic paintings, building and playing
-      with synthesizers, and brewing beer.
-      </p>
-    </div>
-
-    <nav id="contact">
-      <h2>Contact</h2>
-      <ul class='footer-link-list'>
-        {% for name, thing in site.links.contact %}
-        <li>
-          <a href="{{ thing.href }}">
-            <div class="icon icon-{{thing.icon}}"></div>
-            {{name}}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
-    </nav>
-    <nav id="streams">
-      <h2>Streams</h2>
-      <ul class='footer-link-list'>
-        {% for name, stream in site.links.streams %}
-        <li>
-          <a href="{{ stream.href }}">
-            <div class="icon icon-{{stream.icon if stream.icon else name}}"></div>
-            {{name}}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
-    </nav>
+  <div id="not-footer">
+    {% block content %}{% endblock %}
+    <div id="push"></div>
   </div>
-  <div id="copyright">
-    <div>
-      <p>
-        <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">
-          Copyright &copy; 2014
-        </a> &#x2022; Matthew Lyon
-      </p>
+  <footer id="footer" class='main-footer'>
+    <div id="about-links">
+      <div id="about" class='wide'>
+        <h2>About Me</h2>
+        <p>
+        I'm Matthew Lyon.
+        I live with my wife in Portland, Ore. where I build software, mostly web
+        apps. I enjoy photography, making encaustic paintings, building and playing
+        with synthesizers, and brewing beer.
+        </p>
+      </div>
+
+      <nav id="contact">
+        <h2>Contact</h2>
+        <ul class='footer-link-list'>
+          {% for name, thing in site.links.contact %}
+          <li>
+            <a href="{{ thing.href }}">
+              <div class="icon icon-{{thing.icon}}"></div>
+              {{name}}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+      <nav id="streams">
+        <h2>Streams</h2>
+        <ul class='footer-link-list'>
+          {% for name, stream in site.links.streams %}
+          <li>
+            <a href="{{ stream.href }}">
+              <div class="icon icon-{{stream.icon if stream.icon else name}}"></div>
+              {{name}}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
     </div>
-  </div>
-</footer>
+    <div id="copyright">
+      <div>
+        <p>
+          <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">
+            Copyright &copy; 2014
+          </a> &#x2022; Matthew Lyon
+        </p>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

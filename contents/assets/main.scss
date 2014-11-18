@@ -136,6 +136,35 @@ section.main-content {
   }
 }
 
+$footer-height-mob: 174px;
+$footer-height-tab: 133px;
+
+html,body {
+  height: 100%;
+}
+#not-footer {
+  min-height: 100%;
+  height: auto !important;
+  margin: 0 auto;
+
+  margin-bottom: -1 * ($footer-height-tab + $text-base);
+  @include media($mobile) {
+    margin-bottom: -1 * ($footer-height-mob + $text-base);
+  }
+  #push {
+    height: $footer-height-tab;
+    @include media($mobile) {
+      height: $footer-height-mob;
+    }
+  }
+}
+#footer {
+  min-height: $footer-height-tab;
+  @include media($mobile) {
+    min-height: $footer-height-mob;
+  }
+}
+
 footer.main-footer {
   @include page-level;
   @include section-padding;

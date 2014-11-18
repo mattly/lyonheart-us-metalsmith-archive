@@ -1,8 +1,10 @@
 @import "layout";
 @import "colors";
 
-.page-home {
+body.home {
   background-color: $blue-darker;
+}
+.page-home {
   header.main-header {
     @include page-level;
     height: 500px;
