@@ -260,6 +260,16 @@ ul.footer-link-list {
   .icon-linkin {
     top: $icon-top - 2;
   }
+  .icon-rss {
+    height: $icon-size - 1;
+    width: $icon-size - 1;
+  }
+  .icon-soundcloud {
+    height: $icon-size * 1.25;
+    width: $icon-size * 1.25;
+    top: $icon-top - 2;
+    margin-left: -1.25 * $icon-offset;
+  }
 }
 
 @import "icons";
