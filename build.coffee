@@ -1,5 +1,10 @@
 fs = require('fs')
-fs.mkdirSync('tmp')
+try
+  fs.mkdirSync('tmp')
+catch e
+  fs.rmdirSync('tmp')
+  fs.mkdirSync('tmp')
+
 path = require('path')
 
 yaml = require('js-yaml')
