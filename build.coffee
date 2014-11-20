@@ -152,6 +152,8 @@ site =
         href: 'https://github.com/mattly'
       soundcloud:
         href: 'http://soundcloud.com/matthewlyonheart'
+      rss:
+        href: '/index.xml'
 
 require('metalsmith')(__dirname)
   .source('contents')
