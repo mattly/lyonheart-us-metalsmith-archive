@@ -31,6 +31,8 @@ deps = {
     moment: '2.x.x'
     # - smarty:
     typogr: '0.6.x'
+
+    imagemin: '3.0.x'
   }
   bower: {
     bourbon: '3.2.x'

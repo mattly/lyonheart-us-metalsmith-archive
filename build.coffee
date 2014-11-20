@@ -110,15 +110,25 @@ includeSiblings = (files, ms, done) ->
         delete files[otherFile]
   done()
 
+Imagemin = require('imagemin')
 base64Icons = (files, ms, done) ->
   icons = []
+  iconFiles = []
+  parsedIcons = 0
   for own filePath, data of files when filePath.match(/\/icons\/[^/]+\.svg/)
-    name = path.basename(filePath, '.svg')
-                .replace(/\W+/g,'_').replace(/_+/g,'-')
-                .replace(/^-/,'').replace(/-$/,'')
-    icons.push(".icon-#{name} { background-image: url(data:image/svg+xml;base64,#{escape data.contents.toString('base64')}); background-repeat: no-repeat; }")
-  fs.writeFileSync('tmp/_icons.scss', icons.join("\n"))
-  done()
+    iconFiles.push({filePath, data})
+  for icon in iconFiles
+    do (icon) ->
+      name = path.basename(icon.filePath, '.svg')
+        .replace(/\W+/g,'_').replace(/_+/g,'-')
+        .replace(/^-/,'').replace(/-$/,'')
+      new Imagemin().src(icon.data.contents).run (e, files) ->
+        data = files[0].contents.toString('base64')
+        icons.push(".icon-#{name} { background-image: url(data:image/svg+xml;base64,#{escape data}); background-repeat: no-repeat; }")
+        parsedIcons += 1
+        if parsedIcons == iconFiles.length
+          fs.writeFileSync('tmp/_icons.scss', icons.join("\n"))
+          done()
 
 site =
   url: 'http://lyonheart.us'
