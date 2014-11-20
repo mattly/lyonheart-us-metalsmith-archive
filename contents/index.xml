@@ -20,6 +20,9 @@
       <guid isPermaLink="true">{{ item.full_url }}</guid>
       <author>{{ item.author }}</author>
       <description>{{ item.summary }}</description>
+	  <content type="html" xml:base="http://daringfireball.net/linked/" xml:lang="en"><![CDATA[
+        {{ item.contents }}
+      ]]></content>
     </item>
     {%- endfor %}
   </channel>
