@@ -4,35 +4,34 @@ email addresses with a single account.
 
 **Disclosure Notice** When I became aware of this attack vector,
 I inventoried all services I use for vulnerability, with a 95%
-hit rate.  I submitted vulnerability reports to each, and receiving
-responses ranging from lukewarm to "who cares?". 
-
-After deciding to write this article, I asked each service if they would
-mind publication of a "How to Own Your Employees' $service Accounts", and
-none were.
+hit rate.  I sent vulnerability reports to each, and received
+responses ranging from lukewarm to "who cares?" 
 
 # Mistrusting Email Addresses
 
-## Stop Conflating the Role of Email Addresses in Communication, Identification, and Authentication
+## Stop Confusing the Role of Email Addresses in Communication, Identification, and Authentication
 
-As part of some projects I have worked on, I've had to follow certain
-security procedures that include ensuring that all email communication for
-the project happen through an email account I am given on the domain
-specific to the project.  Considering the sensitive nature of these
-projects, that's a reasonable requirement.
+Some projects I have worked on demand observing security procedures
+ensuring that all email communication for the project happen through
+a project-specific email account assigned to me on the domain specific
+to the project, under control of the project's operations.  Considering
+the sensitive nature of these projects, that's reasonable.
 
-While many online services use patterns that make following these
-procedures much more difficult than necessary, most of the ones that make
-it easier also make a bad assumption about the role trust relationships
-with email addresses, that would open my account on their service to
-a very specific attacker.
+A problem arises when you work in many of these contexts and want to
+switch between them easily.  Many online services demand that you set up
+entirely separate accounts for each email address, and for those,
+switching between them ranges from inconvenience to outright frustration.
+Some allow adding several accounts to the same account, but most of these
+make a bad assumption about the trust level their users have with
+individual email addresses, that opens their users' accounts to a 
+specific kind of attack.
 
-This is more of an architectural flaw than any problem with a technical
-product or protocol.  There's no CVE.
+This attack is the result of an architectural flaw than any problem with
+a technical product or protocol.  There's no CVE.
 
-I'm going to cover three ways in which email addresses are used in modern
-networked applications: Identification, Communication, and Authentication,
-and how conflating them can risk users' security.
+I'm going to cover three ways in which networked services use email
+addresses: Identification, Communication, and Authentication, and how
+conflating them can risk users' security.
 
 ### All Messages Have an Audience
 
