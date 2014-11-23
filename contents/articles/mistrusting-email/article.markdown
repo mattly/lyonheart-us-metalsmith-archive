@@ -58,7 +58,7 @@ account, an obvious use of it is to uniquely identify that
 account for login purposes[^amazon].
 
 [^amazon]: I'm pretty sure Amazon is the only well-known service that
-allows [multiple accounts for the same email
+allows [more than one account for the same email
 address](http://www.experimentgarden.com/2009/11/why-does-amazoncom-allows-multiple.html)
 
 For some services, the domain name of the email address plays
@@ -70,9 +70,9 @@ given those email addresses out only to trusted people.
 
 [slack]: https://slack.com
 
-[^slack-email]: Slack is the only service I use that has sufficient
-controls in place to prevent this type of attack, and they don't even
-support multi-factor authentication.
+[^slack-email]: Slack is the only service I use that has controls to
+prevent this type of attack, though they don't yet support multi-factor
+authentication.
 
 Identity verification is typically done by sending a secret token to the
 email address, and asking the user to prove they received it by clicking
@@ -153,10 +153,10 @@ but this doesn't reflect an economy where people work across several
 contexts.  If a service wanted to disingenuously bolster its user count,
 it could do this, which might explain why I have had six Google+ accounts.
 
-[^email-table]: Generally due to laziness or poor planning.  It is really
-easy to just make a `users` table with an `email` column, and slap
-a unique index on that column.  Transitioning to a seperate `emails` table
-joined to users is more of a headache than it seems like it should be.
+[^email-table]: Generally due to laziness or poor planning.  It's easy to
+just make a `users` table with an `email` column, and slap a unique index
+on that column.  Transitioning to a separate `emails` table joined to
+users is a headache, but often a necessary one.
 
 For web-apps, this is often dismissed by service companies as a mere
 nuisance -- changing contexts means logging out from one account and
@@ -178,7 +178,13 @@ anyway[^ssh-user].
 
 [^ssh-key]: Debian's ssh-keygen had a [flawed random number generator that led to identical key pairs](https://lists.debian.org/debian-security-announce/2008/msg00152.html), and having a large [database of SSH public keys](https://github.com/blog/63-ssh-keys-generated-on-debian-ubuntu-compromised) helps in finding such problems.
 
-[^ssh-user]: For example, most Git-hosting services use `git+ssh://git@hostname.com:reponame.git` as the pattern for end-users accessing repositories.  The service managing access to the repositories runs as the `git` system user.  If the service created a separate system user for each end-user, ssh keys could be shared across accounts, however the overhead involved in maintaining such a setup (both in programming and documentation effort) isn't worth the paltry number of use-cases that require such a setup.
+[^ssh-user]: For example, most Git-hosting services use
+`git+ssh://git@hostname.com:reponame.git` as the pattern for end-users
+accessing repositories.  The service managing access to the repositories
+runs as the `git` system user.  If the service created a separate system
+user for each end-user, accounts could share ssh keys, but the overhead
+involved in maintaining such a setup (both in programming and
+documentation effort) isn't worth the paltry number of use-cases for this.
 
 If I wanted to have more than one GitHub account, for example, I'd need an
 SSH key for each, and that means a careful configuration of
@@ -191,7 +197,11 @@ project-specific email addresses with your primary account[^ssh-config].
 
 [ssh-config-man]: https://support.google.com/accounts/answer/180744?hl=en
 
-[^ssh-config]: One could make the argument that if a project has such a tight security controls that this poses a problem, perhaps the project should be using private source hosting, and it's a valid argument that lost against real-world constraints for each of the projects I've been involved with.  Besides, in this piece I'm interested in helping protect users from their project managers.
+[^ssh-config]: One could make the argument that if a project has such
+a tight security controls that this poses a problem, perhaps the project
+should be using privately-hosted source control, and it's a valid argument
+that I've seen repeatedly lose against real-world constraints.  Besides,
+in this piece I'm more interested in helping protect users from their project managers.
 
 Cloud storage services that sync files between computers are mostly worse
 -- there is simply no way to associate more than one account with the same
@@ -214,7 +224,13 @@ owns the personal account[^lastpass].
 
 [box-acct-link]: http://www.itworld.com/article/2833267/it-management/how-box-com-allowed-a-complete-stranger-to-delete-all-my-files.html
 
-[^lastpass]: Lastpass is the only service I have entirely abandonned as a result of researching this problem.  Multiple friends and acquaintances have reported that through the end of 2013, their personal LastPass accounts were compromised as a result of associating them with an organization's LastPass Enterprise account.  Perhaps LastPass's policies have changed since, but I've abandonned cloud-synced password managers entirely at this point.
+[^lastpass]: Lastpass is the only service I have abandonned entirely.
+Many friends and acquaintances reported the compromise of their personal
+LastPass account as a result of associating them with an organization's
+LastPass Enterprise account, as recently as mid-2013, despite LastPass's
+[stated policy on account ownership][lp-acct-link].  Perhaps LastPass's
+policies have changed since, but I no longer trust cloud-synced password
+managers at this point anyway.
 
 ## A Straightforward Solution
 
