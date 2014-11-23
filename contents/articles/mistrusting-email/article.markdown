@@ -35,22 +35,19 @@ conflating them can risk users' security.
 
 ### All Messages Have an Audience
 
-Perhaps the most obvious thing to do with an email address is to send it messages.
-
-As the longest-persisting form of direct communication on the internet,
-email isn't going away anytime soon, no matter how much some of us wish it
-might.  Despite all its flaws for use the contemporary internet, email is
-still the most convenient way to communicate with any other person on the
-internet.
+The most obvious thing to do with an email address is to send it messages.
+Email isn't going away anytime soon, no matter how much some of us wish it
+might.  Despite all its flaws, email is still the most convenient channel
+to send messages to any other person on the internet.
 
 This especially holds true for automated communication.  Anyone can setup
-`sendmail` and at least have a go at sending email[^email-delivery], and the
-instructions for doing so are as old as most of the internet.  The same can't
-be said for IMs, Text Messages, Push Notifications, or whatever else might
-spring up to take advantage of the increasingly mobile nature of computing --
-the new channels require more specialized infrastructure to make use of.
+`sendmail` and at least have a go at email delivery[^email-delivery], and the
+instructions for doing so are as old as most of the internet.  Push
+Notifications may be the new hip darling, but the overhead is much
+greater, it generally only works with the end-users' mobile
+devices, and even then isn't reliable.
 
-If anything your application does involves sending a message, you're probably collecting an email address.
+If anything a service does involves sending a message, it's probably collecting an email address.
 
 [^email-delivery]: Yes, I know this isn't advisable, and that email deliverability is its own specialization.  That's not the point.
 
