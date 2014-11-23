@@ -216,14 +216,24 @@ owns the personal account[^lastpass].
 
 [^lastpass]: Lastpass is the only service I have entirely abandonned as a result of researching this problem.  Multiple friends and acquaintances have reported that through the end of 2013, their personal LastPass accounts were compromised as a result of associating them with an organization's LastPass Enterprise account.  Perhaps LastPass's policies have changed since, but I've abandonned cloud-synced password managers entirely at this point.
 
-## A Simple Solution
+## A Straightforward Solution
 
-If your service allows multiple email addresses to be associated with an account, allow users to specify an email should be a "login email" or not.  Default to true for the email address the account was created with, and false for subsequent ones, and let them change those at any time, provided there is at least one "login email" at any time.
+If your service allows a user to associate more than one email address
+with an account, allow users to specify an email should be a *login email*
+or not.  The email address given at account creation should be a *login
+email*, additional email addresses should not be by default, and users
+should be able to change the *login email* status of any of their
+addresses at any time, so long as they always have at least one.
 
-Don't allow login attempts from, or send password-reset emails to email addresses that aren't login emails.
+Don't allow logins with, or send password-reset emails to, email addresses that aren't login emails.
 
 It's a boolean column on your email table and a checkbox in your email address management interface, and you can educate people about the role of login emails and security while they're waiting for your verification email.
 
-Alternately, require multi-factor authentication before allowing a user to associate multiple email addresses with their account.
+Alternately, insist on multi-factor authentication before allowing a user
+to associate another email addresses with their account.
 
-As contemporary work becomes more decentralized from intranets, company-managed services and single-person, single-project patterns, good information security is crucial.  I believe it is the responsibility of the cloud services that are taking over the role of intranets to pro-actively protect their users from situations like this.
+As contemporary work becomes more decentralized from intranets,
+company-managed services and single-person, single-project patterns, good
+information security is crucial.  I believe it is the responsibility of
+the cloud services to pro-actively protect their users from all attackers,
+even ones they have a trust relationship with.
