@@ -1,57 +1,54 @@
 This article describes a type of account takeover attack against
-many online services that allow a user to associate several
+many online services which allow a user to associate more than one
 email addresses with a single account.  
 
 **Disclosure Notice** When I became aware of this attack vector,
 I inventoried all services I use for vulnerability, with a 95%
 hit rate.  I sent vulnerability reports to each, and received
-responses ranging from lukewarm to "who cares?" 
+responses ranging from lukewarm concern to "who cares?"  None objected to
+an article on the topic.
 
 # Mistrusting Email Addresses
 
 ## Stop Confusing the Role of Email Addresses in Communication, Identification, and Authentication
 
-Some projects I have worked on demand observing security procedures
-ensuring that all email communication for the project happen through
-a project-specific email account assigned to me on the domain specific
-to the project, under control of the project's operations.  Considering
-the sensitive nature of these projects, that's reasonable.
+### or, How to Take Over Your Employees' $service Accounts
 
-A problem arises when you work in many of these contexts and want to
-switch between them easily.  Many online services demand that you set up
-entirely separate accounts for each email address, and for those,
-switching between them ranges from inconvenience to outright frustration.
-Some allow adding several accounts to the same account, but most of these
-make a bad assumption about the trust level their users have with
-individual email addresses, that opens their users' accounts to a 
-specific kind of attack.
+Some projects I've worked on demand observing security procedures
+ensuring all email communication for the project happen through
+a project-specific email account belonging to the company's
+operations.  It's a reasonable requirement.
+
+Problems arise when working across more than one of these projects with
+the same online services, and most of the services which try to make
+things easier on their users by allowing them to associate more than one
+email address with a single account open up their users to a specific type
+of attack.
 
 This attack is the result of an architectural flaw than any problem with
 a technical product or protocol.  There's no CVE.
 
-I'm going to cover three ways in which networked services use email
-addresses: Identification, Communication, and Authentication, and how
-conflating them can risk users' security.
+I'll cover three ways in which networked services use email
+addresses: Communication, Identification, and Authentication, and how
+conflating them risks users' security.
 
-## All Messages Have an Audience
+## Communication, Identification, and Authentication
 
-The most obvious thing to do with an email address is to send it messages.
+The obvious thing to use an email address for is to send it messages.
 Email isn't going away anytime soon, no matter how much some of us wish it
-might.  Despite all its flaws, email is still the most convenient channel
+would.  Despite all its flaws, email is still the most convenient channel
 to send messages to any other person on the internet.
 
 This especially holds true for automated communication.  Anyone can setup
-`sendmail` and at least have a go at email delivery[^email-delivery], and the
+`sendmail` and try their hand at email delivery[^email-delivery] -- the
 instructions for doing so are as old as most of the internet.  Push
 Notifications may be the new hip darling, but the overhead is much
-greater, it generally only works with the end-users' mobile
-devices, and even then isn't reliable.
+greater, it generally only works with the end-users' mobile devices, and
+even then isn't reliable.
 
 If anything a service does involves sending a message, it's probably collecting an email address.
 
 [^email-delivery]: Yes, I know this isn't advisable, and that email deliverability is its own specialization.  That's not the point.
-
-## For Identification Purposes Also
 
 Once a service collects an email address and associates it with an
 account, an obvious use of it is to uniquely identify that
@@ -59,32 +56,20 @@ account for login purposes[^amazon].
 
 [^amazon]: I'm pretty sure Amazon is the only well-known service that
 allows [more than one account for the same email
-address](http://www.experimentgarden.com/2009/11/why-does-amazoncom-allows-multiple.html)
+address](http://www.experimentgarden.com/2009/11/why-does-amazoncom-allows-multiple.html).
 
-For some services, the domain name of the email address plays
-a significant part in identifying the entity as belonging to a group -- If
-for example I wanted to create a [Slack Team][slack][^slack-email] for my
-family, I could specify anyone with a `@lyonheart.us` email address could
-automatically join the team -- as the administrator of that domain, I have
-given those email addresses out only to trusted people.
-
-[slack]: https://slack.com
-
-[^slack-email]: Slack is the only service I use that has controls to
-prevent this type of attack, though they don't yet support multi-factor
-authentication.
-
-Identity verification is typically done by sending a secret token to the
-email address, and asking the user to prove they received it by clicking
-a link.  The assumption is that if you have access to the email account,
-you are the account owner.  This is a flawed assumption. 
+To prevent abuse, a service will want to verify ownership of the email
+address, so they'll send it a secret token and ask the user to prove they
+received the email by clicking a link.  Password resets use a similar
+pattern.  The assumption: Only the account owner can read email sent to
+the address.  It's a flawed assumption.
 
 ## In SysOps We Trust
 
 Technical people generally understand that protecting access to their
-email is highly important -- it is the gateway to resetting passwords and
+email is crucial -- it is the gateway to resetting passwords and
 taking over accounts on every service associated with that email address,
-which is why the most important thing to protect with [Multi-Factor
+so the most important thing to protect with [Multi-Factor
 Authentication][mfa] is [your email account][2fa-google], though you
 should [use it everywhere][2fa-everywhere].
 
@@ -98,16 +83,16 @@ middle can read them.  Even ignoring that possibility, there's still
 another problem: A rogue administrator can still read their users' email
 and gain access to those tokens.
 
-Perhaps the [Bastard Operator From Hell][bofh] is just a collection
-of stories based on stereotypes and myths.  While I have been personally
-comfortable trusting my email to Google, whenever I gain a new address for
-work reasons, I'm also trusting the people who administrate that email
-address not to read the mail that goes there.
+Maybe the [Bastard Operator From Hell][bofh] is just a collection
+of stories based on stereotypes and myths.  I'm personally comfortable
+trusting my email to Google, but when I'm assigned a new address for work
+reasons I'm also trusting the people who administrate that email address
+not to read my email.
 
 [bofh]: http://www.bofh.net/
 
 I've worked at companies in the past where I wouldn't put it past the
-Google domain administrator to read my email, but who cares?  It's all company business, right?
+domain administrator to read my email, but who cares?  It's all company business, right?
 
 Right?
 
@@ -117,39 +102,39 @@ Finally, the flaw: nearly any service that uses email addresses as an
 identification mechanism is *also* using them as an authentication
 mechanism.  
 
-If I associate several email addresses with an account, I could use any
+If I associate more than one email addresses with an account, I could use any
 of those email addresses to reset the password for that account -- and
 typically the service only sends the password reset email to the supplied
 email address.  A rogue administrator could send a password reset to my
 project-specific email address, get the necessary link, change my password
 on the service, delete the email, and I'd never know.
 
-If the service offers multi-factor authentication and I'm using it, the
+Given the availability and use of multi-factor authentication, the
 rogue administrator is at least denied login access, but the password
 change is still allowed and the service disables any open sessions.
 
 For the services that don't offer multi-factor authentication, a rogue
 administrator could then take over my account, remove other email
 addresses from it, and gain access to information from and about other
-contexts in which I work.  I'm fairly certain that the company behind
-Project A wouldn't like the administrator for the company from Project
-B gaining access to their private content.
+projects on which I work.  I'm certain that the company behind Project
+A wouldn't like the administrator for the company from Project B gaining
+access to their private content.
 
 In theory, protecting yourself is easy: just don't add email addresses to
-your accounts unless you can trust the mail administrator.  Unless of
-course, your project's security policies dictate that all project-related
-email go to the project-specific address.
+your accounts unless you can trust the mail administrator.  Unless your
+project's security policies dictate that all project-related email go to
+the project-specific address.
 
 ## Convenience Trade-offs and Self-Protection
 
 This is where many technically-proficient security-minded readers will
 suggest I simply setup per-project accounts for each service.  I believe
 that response is user-hostile, and for some services it would mean jumping
-through a series of complex hoops that any good user experience person
+through a series of complex hoops that any good User Experience person
 would recoil from in horror.
 
-Many services only allow a single email address per person[^email-table],
-but this doesn't reflect an economy where people work across several
+Some services only allow a single email address per person[^email-table],
+but this doesn't reflect an economy where people work across many
 contexts.  If a service wanted to disingenuously bolster its user count,
 it could do this, which might explain why I have had six Google+ accounts.
 
@@ -162,8 +147,8 @@ For web-apps, this is often dismissed by service companies as a mere
 nuisance -- changing contexts means logging out from one account and
 re-logging in from another.  Password managers certainly speed up the
 process, but keeping track of which account you're logged into adds
-mental overhead and disrupts workflow.  The growing adoption of
-multi-factor authentication disrupts it even more.
+mental overhead and disrupts workflow.  Unfortunately, the overhead of
+multi-factor authentication makes this problem even worse.
 
 Many services are moving beyond mere web interfaces.  A growing number
 have native apps, where changing account contexts by logging-out and
@@ -171,10 +156,9 @@ logging-back in is not only much more of a hassle, but can also break
 integration with things like push notifications or background refresh.  
 
 Source Control services often have an ssh interface, allowing
-authentication by ssh key, which must be unique per-user[^ssh-key] unless
-the service involves another distinguishing element that allows accounts
-to share an ssh key, but no mainstream SCM tool does that
-anyway[^ssh-user].  
+authentication by ssh key, which must be unique[^ssh-key] unless the
+service involves another distinguishing part that allows accounts to share
+an ssh key, but no mainstream SCM tool does that anyway[^ssh-user].  
 
 [^ssh-key]: Debian's ssh-keygen had a [flawed random number generator that led to identical key pairs](https://lists.debian.org/debian-security-announce/2008/msg00152.html), and having a large [database of SSH public keys](https://github.com/blog/63-ssh-keys-generated-on-debian-ubuntu-compromised) helps in finding such problems.
 
@@ -186,14 +170,14 @@ user for each end-user, accounts could share ssh keys, but the overhead
 involved in maintaining such a setup (both in programming and
 documentation effort) isn't worth the paltry number of use-cases for this.
 
-If I wanted to have more than one GitHub account, for example, I'd need an
-SSH key for each, and that means a careful configuration of
+For example, If I wanted more than one GitHub account, I'd need an SSH key
+for each, and that means a careful configuration of
 [ssh_config][ssh-config-man] to specify custom-hostnames with the keys to
 use for each, and then mentally re-writing all my `@github.com` urls to
 the hostname that matches the key I want to use.  This breaks assumptions
 made by many tools aside from the actual `git` binary.  In the case of
 GitHub, The path of least-resistance is simply associate your
-project-specific email addresses with your primary account[^ssh-config].
+project-specific email addresses with your personal account[^ssh-config].
 
 [ssh-config-man]: https://support.google.com/accounts/answer/180744?hl=en
 
@@ -203,8 +187,8 @@ should be using privately-hosted source control, and it's a valid argument
 that I've seen repeatedly lose against real-world constraints.  Besides,
 in this piece I'm more interested in helping protect users from their project managers.
 
-Cloud storage services that sync files between computers are mostly worse
--- there is simply no way to associate more than one account with the same
+Worse, popular cloud storage services that sync files between computers
+simply don't allow you to associate more than one account with the same
 computer, and often no way to associate more than one email address with
 the same account. So, if I need files synced to my computer from
 a project's Google Drive, I have to setup [separate user accounts on my
@@ -241,15 +225,16 @@ email*, additional email addresses should not be by default, and users
 should be able to change the *login email* status of any of their
 addresses at any time, so long as they always have at least one.
 
-Don't allow logins with, or send password-reset emails to, email addresses that aren't login emails.
+Don't allow logins with, or send password-reset emails to, email addresses
+not used as login emails.
 
-It's a boolean column on your email table and a checkbox in your email address management interface, and you can educate people about the role of login emails and security while they're waiting for your verification email.
+It's a boolean column on your email table and a checkbox in your email address management interface, and you can educate people about the role of login emails and security while waiting for your verification email.
 
 Alternately, insist on multi-factor authentication before allowing a user
 to associate another email addresses with their account.
 
 As contemporary work becomes more decentralized from intranets,
 company-managed services and single-person, single-project patterns, good
-information security is crucial.  I believe it is the responsibility of
-the cloud services to pro-actively protect their users from all attackers,
-even ones they have a trust relationship with.
+information security is crucial.  I believe that cloud services bear
+responsibility to pro-actively protect their users from all attackers,
+even ones they may have a trust relationship with.
