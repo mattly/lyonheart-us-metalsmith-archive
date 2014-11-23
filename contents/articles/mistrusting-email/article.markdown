@@ -33,7 +33,7 @@ I'm going to cover three ways in which networked services use email
 addresses: Identification, Communication, and Authentication, and how
 conflating them can risk users' security.
 
-### All Messages Have an Audience
+## All Messages Have an Audience
 
 The most obvious thing to do with an email address is to send it messages.
 Email isn't going away anytime soon, no matter how much some of us wish it
@@ -51,41 +51,46 @@ If anything a service does involves sending a message, it's probably collecting 
 
 [^email-delivery]: Yes, I know this isn't advisable, and that email deliverability is its own specialization.  That's not the point.
 
-## I Need Two Forms of ID, and an Email Addresses
+## For Identification Purposes Also
 
-Since an email address is needed for use as a communication channel, it's
-really easy to give it double-duty as a way to uniquely identify someone.  I'm pretty sure [Amazon is the only service that allows multiple accounts for the same email address][amazon].
+Once a service collects an email address and associates it with an
+account, an obvious use of it is to uniquely identify that
+account for login purposes[^amazon].
 
-[amazon]: http://www.experimentgarden.com/2009/11/why-does-amazoncom-allows-multiple.html
+[^amazon]: I'm pretty sure Amazon is the only well-known service that
+allows [multiple accounts for the same email
+address](http://www.experimentgarden.com/2009/11/why-does-amazoncom-allows-multiple.html)
 
-Any service that uses an email address to identify you instead of
-a username uses this pattern.  Source control tools use email addresses to
-identify the author or signer of work records.
-
-In many cases, the domain name of the email address plays a significant
-part in identifying the entity as belonging to a group -- If I for example
-wanted to create a [Slack Team][slack] for my family, I could specify
-anyone with a `@lyonheart.us` email address could automatically join the
-team -- since as the administrator of that domain, I have given those
-email addresses out only to family members.
+For some services, the domain name of the email address plays
+a significant part in identifying the entity as belonging to a group -- If
+for example I wanted to create a [Slack Team][slack][^slack-email] for my
+family, I could specify anyone with a `@lyonheart.us` email address could
+automatically join the team -- as the administrator of that domain, I have
+given those email addresses out only to trusted people.
 
 [slack]: https://slack.com
 
-Verifying this identity is most often done by sending a secret token to
-the email address, and asking the user to click a link, or copy and paste
-it into the website.  The assumption is that if you have access to the email
-account, you must be the person in question.  This is a flawed assumption
-that will become important later.
+[^slack-email]: Slack is the only service I use that has sufficient
+controls in place to prevent this type of attack, and they don't even
+support multi-factor authentication.
 
-## One User, One Address
+Identity verification is typically done by sending a secret token to the
+email address, and asking the user to prove they received it by clicking
+a link.  The assumption is that if you have access to the email account,
+you are the account owner.  This is a flawed assumption. 
+
+## One User, One Email
 
 Many services only allow a single email address per person[^email-table],
 however this doesn't reflect an economy where people operate in multiple
 contexts.  If a service wanted to disingenuously bolster its user count, it
-could leverage this patten, which might explain why I have four Google+
+could leverage this patten, which might explain why I have had six Google+
 accounts.
 
-[^email-table]: Probably due of laziness.  It is really easy to just make a `users` table with an `email` column with a unique index on it, and transitioning to a seperate `emails` table joined to users is more of a headache than it seems like it should be.
+[^email-table]: Generally due to laziness or poor planning.  It is really
+easy to just make a `users` table with an `email` column, and slap
+a unique index on that column.  Transitioning to a seperate `emails` table
+joined to users is more of a headache than it seems like it should be.
 
 I've been on the internet since 1993, have about a dozen email addresses across
 ten domains, and five of those are distinctly necessary based on different
