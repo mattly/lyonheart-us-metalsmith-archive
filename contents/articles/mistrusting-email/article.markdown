@@ -79,6 +79,64 @@ email address, and asking the user to prove they received it by clicking
 a link.  The assumption is that if you have access to the email account,
 you are the account owner.  This is a flawed assumption. 
 
+## In SysOps We Trust
+
+Technical people generally understand that protecting access to their
+email is highly important -- it is the gateway to resetting passwords and
+taking over accounts on every service associated with that email address,
+which is why the most important thing to protect with [Multi-Factor
+Authentication][mfa] is [your email account][2fa-google], though you
+should [use it everywhere][2fa-everywhere].
+
+[mfa]: https://en.wikipedia.org/wiki/Multi-factor_authentication
+[2fa-google]: https://support.google.com/accounts/answer/180744?hl=en
+[2fa-everywhere]: https://twofactorauth.org/
+
+It's bad enough that we send sensitive information such as account verification
+tokens in plain-text over the open internet where anyone in the
+middle can read them.  Even ignoring that possibility, there's still
+another problem: A rogue administrator can still read their users' email
+and gain access to those tokens.
+
+Perhaps the [Bastard Operator From Hell][bofh] is just a collection
+of stories based on stereotypes and myths.  While I have been personally
+comfortable trusting my email to Google, whenever I gain a new address for
+work reasons, I'm also trusting the people who administrate that email
+address not to read the mail that goes there.
+
+[bofh]: http://www.bofh.net/
+
+I've worked at companies in the past where I wouldn't put it past the
+Google domain administrator to read my email, but who cares?  It's all company business, right?
+
+Right?
+
+## Unauthorized Authentication
+
+Finally, I'll get to the flaw: nearly any service that uses email addresses
+as identification and communication mechanisms is *also* using them as an
+authentication mechanism.  Knowing the correct password, I can log into
+these services using any associated email address as an identifier.  Not
+knowing the correct password, I can send a password reset token to any
+associated email address, where anyone who can read the email (and
+presumably delete it) can then change my password.  
+
+Every service that offers multi-factor authentication, at least, prevents
+the attacker/rogue administrator from at least logging in, but every
+service will authorize the password change and then disable all other open
+sessions for the account.
+
+It would be easy to again assume that, who cares, the rogue administrator
+is only getting access to company resources, even if they are
+impersonating me.  Except that for all of these services that I do have
+multiple email addresses listed on, I also have things related to other
+contexts in which I work.  I'm fairly certain the administrator for Project A wouldn't like the administrator for Project B getting access to their private information through my account.
+
+In theory, protecting yourself is easy: just don't add email addresses to
+your accounts unless you can trust the mail administrator.  Unless of
+course, your project's security requirements dictate that all
+project-related email go to the project-specific address.
+
 ## One User, One Email
 
 Many services only allow a single email address per person[^email-table],
@@ -138,62 +196,6 @@ In some cases, despite [stated policies][lp-acct-link] or just as a [matter or p
 [box-acct-link]: http://www.itworld.com/article/2833267/it-management/how-box-com-allowed-a-complete-stranger-to-delete-all-my-files.html
 
 [^lastpass]: Lastpass is the only service I have entirely abandonned as a result of researching this problem.  Multiple friends and acquaintances have reported that, through the end of 2013, their personal LastPass accounts were compromised as a result of associating them with an organization's LastPass Enterprise account.  Perhaps LastPass's policies have changed since, but I've abandonned cloud-synced password managers entirely at this point.
-
-## In SysOps We Trust
-
-Unfortunately a bad assumption is made, calling back to the
-earlier description of verifying identity by email address -- the
-assumption that if you can read an email sent to an address, you are the
-person for whom the email is intended.  Technical people generally
-understand that protecting access to their email is highly important -- it
-is the gateway to resetting passwords and taking over accounts on just
-about every other service associated with that email address, but many
-non-technical people don't grasp the implications of a rogue entity
-gaining access to their email.
-
-It's bad enough that most email is plain-text and few services bother to
-encrypt, let alone sign, their outgoing email containing sensitive
-material -- though this shoves most of the eavesdropping risk onto the
-network between the sender's server and the receiver's server.  But even
-an email account with a strong password and multi-factor authentication is
-still vulnerable to a rogue administrator.
-
-Perhaps the [Bastard Operator From Hell][bofh] is just a collection
-of stories based on stereotypes and myths.  While I have been personally
-comfortable trusting my email to google, whenever I gain a new address for
-work reasons -- I'm also trusting the people who administrate that email
-address not to read the mail that goes there.  I've worked at companies in
-the past where I wouldn't put it past the admin to read my email, but who
-cares?  It's all company business, right?  Right?
-
-[bofh]: http://www.bofh.net/
-
-## Unauthorized Authentication
-
-Finally, I'll get to the flaw: nearly any service that uses email addresses
-as identification and communication mechanisms is *also* using them as an
-authentication mechanism.  Knowing the correct password, I can log into
-these services using any associated email address as an identifier.  Not
-knowing the correct password, I can send a password reset token to any
-associated email address, where anyone who can read the email (and
-presumably delete it) can then change my password.  
-
-Every service that offers multi-factor authentication, at least, prevents
-the attacker/rogue administrator from at least logging in, but every
-service will authorize the password change and then disable all other open
-sessions for the account.
-
-It would be easy to again assume that, who cares, the rogue administrator
-is only getting access to company resources, even if they are
-impersonating me.  Except that for all of these services that I do have
-multiple email addresses listed on, I also have things related to other
-contexts in which I work.  I'm fairly certain the administrator for Project A wouldn't like the administrator for Project B getting access to their private information through my account.
-
-In theory, protecting yourself is easy: just don't add email addresses to
-your accounts unless you can trust the mail administrator.  Unless of
-course, your project's security requirements dictate that all
-project-related email go to the project-specific address.
-
 ## A Simple Solution
 
 If your service allows multiple email addresses to be associated with an account, allow users to specify an email should be a "login email" or not.  Default to true for the email address the account was created with, and false for subsequent ones, and let them change those at any time, provided there is at least one "login email" at any time.
