@@ -113,31 +113,34 @@ Right?
 
 ## Unauthorized Authentication
 
-Finally, I'll get to the flaw: nearly any service that uses email addresses
-as identification and communication mechanisms is *also* using them as an
-authentication mechanism.  Knowing the correct password, I can log into
-these services using any associated email address as an identifier.  Not
-knowing the correct password, I can send a password reset token to any
-associated email address, where anyone who can read the email (and
-presumably delete it) can then change my password.  
+Finally, the flaw: nearly any service that uses email addresses as an
+identification mechanism is *also* using them as an authentication
+mechanism.  
 
-Every service that offers multi-factor authentication, at least, prevents
-the attacker/rogue administrator from at least logging in, but every
-service will authorize the password change and then disable all other open
-sessions for the account.
+If I associate several email addresses with an account, I could use any
+of those email addresses to reset the password for that account -- and
+typically the service only sends the password reset email to the supplied
+email address.  A rogue administrator could send a password reset to my
+project-specific email address, get the necessary link, change my password
+on the service, delete the email, and I'd never know.
 
-It would be easy to again assume that, who cares, the rogue administrator
-is only getting access to company resources, even if they are
-impersonating me.  Except that for all of these services that I do have
-multiple email addresses listed on, I also have things related to other
-contexts in which I work.  I'm fairly certain the administrator for Project A wouldn't like the administrator for Project B getting access to their private information through my account.
+If the service offers multi-factor authentication and I'm using it, the
+rogue administrator is at least denied login access, but the password
+change is still allowed and the service disables any open sessions.
+
+For the services that don't offer multi-factor authentication, a rogue
+administrator could then take over my account, remove other email
+addresses from it, and gain access to information from and about other
+contexts in which I work.  I'm fairly certain that the company behind
+Project A wouldn't like the administrator for the company from Project
+B gaining access to their private content.
 
 In theory, protecting yourself is easy: just don't add email addresses to
 your accounts unless you can trust the mail administrator.  Unless of
-course, your project's security requirements dictate that all
-project-related email go to the project-specific address.
+course, your project's security policies dictate that all project-related
+email go to the project-specific address.
 
-## One User, One Email
+## Convenience Trade-offs and Self-Protection
 
 Many services only allow a single email address per person[^email-table],
 however this doesn't reflect an economy where people operate in multiple
