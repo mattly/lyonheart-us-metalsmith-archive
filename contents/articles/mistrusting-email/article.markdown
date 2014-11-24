@@ -1,6 +1,6 @@
 This article describes a type of account takeover attack against many online services which allow a user to associate more than one email addresses with a single account.  
 
-**Disclosure Notice** When I became aware of this attack vector, I inventoried all services I use for vulnerability, with a 95% hit rate.  I sent vulnerability reports to each, and received responses ranging from lukewarm concern to "who cares?"  None objected to an article on the topic.
+**Disclosure Notice** When I became aware of this attack vector, I inventoried all services I use for vulnerability, with a 95% hit rate.  I sent vulnerability reports to each, and received responses ranging from "who cares?" to lukewarm concern.  None objected to an article on the topic.
 
 # Mistrusting Email Addresses
 
@@ -20,9 +20,7 @@ I'll cover three ways in which networked services use email addresses: Communica
 
 The obvious thing to use an email address for is to send it messages.  Email isn't going away anytime soon, no matter how much some of us wish it would.  Despite all its flaws, email is still the most convenient channel to send messages to any other person on the internet.
 
-This especially holds true for automated communication.  Anyone can setup `sendmail` and try their hand at email delivery[^email-delivery] -- the instructions for doing so are as old as most of the internet.  Push Notifications may be the new hip darling, but the overhead is much
-greater, it generally only works with the end-users' mobile devices, and
-even then isn't reliable.
+This especially holds true for automated communication.  Anyone can setup `sendmail` and try their hand at email delivery[^email-delivery] -- the instructions for doing so are as old as most of the internet.  Push Notifications may be the new hip darling, but the overhead is much greater, it generally only works with the end-users' mobile devices, and even then isn't reliable.
 
 If anything a service does involves sending a message, it's probably collecting an email address.
 
@@ -30,8 +28,7 @@ If anything a service does involves sending a message, it's probably collecting 
 
 Once a service collects an email address and associates it with an account, an obvious use of it is to uniquely identify that account for login purposes[^amazon].
 
-[^amazon]: I'm pretty sure Amazon is the only well-known service that
-allows [more than one account for the same email
+[^amazon]: I'm pretty sure Amazon is the only well-known service that allows [more than one account for the same email
 address](http://www.experimentgarden.com/2009/11/why-does-amazoncom-allows-multiple.html).
 
 To prevent abuse, a service will want to verify ownership of the email address, so they'll send it a secret token and ask the user to prove they received the email by clicking a link.  Password resets use a similar pattern.  The assumption: Only the account owner can read email sent to the address.  It's a flawed assumption.
@@ -58,7 +55,11 @@ Right?
 
 Finally, the flaw: nearly any service that uses email addresses as an identification mechanism is *also* using them as an authentication mechanism.  
 
-If I associate more than one email addresses with an account, I could use any of those email addresses to reset the password for that account -- and typically the service only sends the password reset email to the supplied email address.  A rogue administrator could send a password reset to my project-specific email address, get the necessary link, change my password on the service, delete the email, and I'd never know.
+If I associate more than one email addresses with an account, I could use any of those email addresses to reset the password for that account -- and typically the service only sends the password reset email to the supplied email address.  
+
+A rogue administrator could send a password reset to my project-specific
+email address, get the necessary link, change my password on the service,
+delete the email, and I'd never know, until I went to login again.
 
 Given the availability and use of multi-factor authentication, the rogue administrator is at least denied login access, but the password change is still allowed and the service disables any open sessions.
 
