@@ -33,6 +33,8 @@ deps = {
     typogr: '0.6.x'
 
     imagemin: '3.0.x'
+
+    'metalsmith-serve': '*'
   }
   bower: {
     bourbon: '3.2.x'

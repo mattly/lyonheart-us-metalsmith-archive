@@ -160,8 +160,9 @@ site =
       rss:
         href: '/index.xml'
 
-require('metalsmith')(__dirname)
+chain = require('metalsmith')(__dirname)
   .source('contents')
+  .destination('build')
   .use(metadataSidecar)
   .use(pandoc)
   .use(extractFootnotes)
@@ -192,8 +193,14 @@ require('metalsmith')(__dirname)
   .use(renderNunjucksTemplates)
   .use(smart)
   # .use(log)
-  .destination('build')
-  .build (err) ->
+
+if process.env.DEV
+  chain.use(require('metalsmith-serve')({
+    port: process.env.DEV
+    verbose: true
+  }))
+
+chain.build (err) ->
     fs.unlinkSync(path.join('tmp',f)) for f in fs.readdirSync('tmp')
     fs.rmdirSync('tmp')
     if err then throw err
