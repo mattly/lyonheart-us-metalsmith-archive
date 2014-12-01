@@ -51,35 +51,15 @@ html(lang="en")
           .footnote-number
           .footnote-content
       #push
-    footer#footer.main-footer
-      #about-links
-        #about.wide
-          h2 About Me
-          p.
-            I'm Matthew Lyon.
-            I live with my wife in Portland, Ore. where I build software, mostly web
-            apps. I enjoy photography, making encaustic paintings, building and playing
-            with synthesizers, and brewing beer.
-        nav#contact
-          h2 Contact
-          ul.footer-link-list
-            each thing, name in site.links.contacts
-              li
-                a(href=thing.href)
-                  .icon(class=["icon-"+thing.icon])
-                  = name
-        nav#streams
-          h2 Streams
-          ul.footer-link-list
-            each stream, name in site.links.streams
-              li
-                a(href=stream.href)
-                  .icon(class=["icon-"+name])
-                  = name
-      #copyright
-        div
+
+    footer#footer
+      .liner
+        #links
+          each link, icon in site.links
+            a(href=link)
+              .icon(class=["icon-"+icon])
+        #copyright
           p
             strong Copyright &copy; 2014
             |  &#x2022; Matthew Lyon
-
 

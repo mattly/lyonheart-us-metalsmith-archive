@@ -144,8 +144,8 @@ section.main-content {
   }
 }
 
-$footer-height-mob: 174px;
-$footer-height-tab: 133px;
+$footer-height-mob: 60px;
+$footer-height-tab: 40px;
 
 html,body {
   height: 100%;
@@ -173,106 +173,48 @@ html,body {
   }
 }
 
-footer.main-footer {
-  @include page-level;
-  @include section-padding;
-  background-color:   $blue-dark-mute;
-  color:              $grey-warm;
-  h2 {
-    display: none;
-    color: $grey-bright;
-    text-transform: uppercase;
-    @include display-type;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-  }
-  p {
-    @include text-size($text-size-small);
-    @include text-height-crowded;
-  }
-}
-#about-links {
-  @include page-width;
-  @include inset-center;
+footer#footer {
+  @include inset;
   @include clearfix;
-  .wide {
-    @include span-columns(4);
-    @include media($small) {
-      @include span-columns(6);
-    }
-  }
-  nav {
-    @include section-margin;
-    @include span-columns(1);
-    @include media($mobile) {
-      @include span-columns(3);
-    }
-  }
-}
-#copyright {
-  @include flush;
   background-color: $blacker;
   color: $grey-darker;
-  &> div {
+  &>div {
     @include page-width(2 * $page-inset);
     @include inset-center;
-    @include inset;
     @include region-padding(0.25);
   }
-  p {
-    @include text-size($text-size-tiny);
-  }
-  a {
-    color: $grey-lukewarm;
-    text-decoration: none;
-    font-weight: bold;
-  }
-}
-
-ul.footer-link-list {
-  list-style:           none;
-  clear:                both;
-  $icon-size: 16px;
-  $icon-offset: 21px;
-  &> li {
-    position: relative;
-    padding-left: $icon-offset;
-    @include media($small){
-      display: block;
-      height: 25px;
+  #copyright {
+    @include span-columns(2);
+    text-align: right;
+    @include media($mobile) {
+      @include span-columns(1 of 1);
+      text-align: left;
     }
-    @include text-size($text-size-smaller);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    @include display-type;
-    font-weight: 100;
+    p {
+      @include text-size($text-size-tiny);
+    }
   }
-  a {
-    color: $yellow-bold;
-    text-decoration: none;
-  }
-  $icon-top: 4px;
-  .icon {
-    height: $icon-size;
-    width: $icon-size;
-    background-size: contain;
-    background-position: center center;
-    position: absolute;
-    margin-left: -1 * $icon-offset;
-    top: $icon-top;
-  }
-  .icon-linkin {
-    top: $icon-top - 2;
-  }
-  .icon-rss {
-    height: $icon-size - 1;
-    width: $icon-size - 1;
-  }
-  .icon-soundcloud {
-    height: $icon-size * 1.25;
-    width: $icon-size * 1.25;
-    top: $icon-top - 2;
-    margin-left: -1.25 * $icon-offset;
+  #links {
+    @include span-columns(4);
+    @include media($mobile) {
+      @include span-columns(1 of 1);
+    }
+    $icon-size: 16px;
+    $icon-offset: 21px;
+    $icon-spacing: 4px;
+    a {
+      text-decoration: none;
+    }
+    .icon {
+      height: $icon-size;
+      width: $icon-size;
+      background-size: contain;
+      background-position: center center;
+      display: inline-block;
+      margin-top: $icon-spacing;
+      margin-bottom: $icon-spacing;
+      margin-left: 4px;
+    }
   }
 }
 

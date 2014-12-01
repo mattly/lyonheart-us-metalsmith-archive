@@ -191,23 +191,12 @@ site =
   description: "writings on engineering and art by Matthew Lyon"
   github_modifications_base: "https://github.com/mattly/lyonheart.us/commits/master/contents"
   links:
-    contacts:
-      email:
-        href: 'mailto:matthew@lyonheart.us'
-        icon: 'envelope'
-      twitter:
-        href: 'https://twitter.com/mattly'
-        icon: 'tweeter'
-      linkedin:
-        href: 'http://www.linkedin.com/pub/matthew-lyon/62/55b/200/'
-        icon: 'linkin'
-    streams:
-      github:
-        href: 'https://github.com/mattly'
-      soundcloud:
-        href: 'http://soundcloud.com/matthewlyonheart'
-      rss:
-        href: '/index.xml'
+    envelope: 'mailto:matthew@lyonheart.us'
+    rss: '/index.xml'
+    tweeter: 'https://twitter.com/mattly'
+    github: 'https://github.com/mattly'
+    soundcloud: 'http://soundcloud.com/matthewlyonheart'
+    linkin: 'http://www.linkedin.com/pub/matthew-lyon/62/55b/200/'
 
 generator = require('metalsmith')(__dirname)
   .source('contents')
