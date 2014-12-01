@@ -94,17 +94,44 @@ article.article-main {
       list-style-position: inside;
     }
 
+    $visited-link: darken($red-med, 10%);
+    $link-trans: 0.25s;
     a {
+      @include            transition(
+                            color $link-trans ease-in,
+                            background-color $link-trans ease-in
+                          );
+      @include            underline($red-med);
+      margin: -3px;
+      padding: 3px;
       color:              $red-med;
       &:visited {
-        color:            darken($red-med, 20%);
+        color:            $visited-link;
+        @include          underline-color($visited-link);
+      }
+    }
+
+    &#lead,
+    &.article-content {
+      a {
+        &:focus, &:hover {
+          background-color: $red-med;
+          border-radius: 3px;
+          color: $grey-bright;
+          outline: none;
+        }
       }
     }
     a[rel=footnote], a[rel=footnote]:visited,
     a[rev=footnote], a[rev=footnote]:visited {
+      @include            no-underline;
       color:              $grey-darker;
       text-decoration:    none;
       font-weight:        bold;
+      &:hover, &:focus {
+        background-color: inherit;
+        color: $grey-darker;
+      }
     }
   }
 
