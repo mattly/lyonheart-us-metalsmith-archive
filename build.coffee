@@ -46,7 +46,7 @@ extractFootnotes = (files, metalsmith, done) ->
     if footnotes.length > 0
       theFootnote = footnotes.find('li').first()
       while theFootnote.length > 0
-        theFootnote.find('a').last().attr('rev','footnote')
+        theFootnote.find('a').last().attr('rev','footnote').before("&nbsp;")
         theFootnote = theFootnote.next()
       data.sections or= {}
       data.sections.footnotes = { title: "Footnotes", content: "<ol>#{footnotes.find('ol').html()}</ol>" }
