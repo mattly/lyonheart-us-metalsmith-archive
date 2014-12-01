@@ -7,10 +7,7 @@
 ## Pandoc
 - Pandoc's Markdown: http://johnmacfarlane.net/pandoc/README.html#pandocs-markdown
 
-
-## Nunjucks 
-
-- reference http://jlongster.github.io/nunjucks/templating.html
-
 ## Asset Pipeline
 - something to turn ms.fingerprint data into sass variables, for css image fingerprinting?
+
+
