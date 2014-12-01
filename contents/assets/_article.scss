@@ -79,30 +79,33 @@ article.article-main {
     text-transform:     uppercase;
     color: $grey-darkish;
   }
-  p {
-    @include text-margin-flow;
-    @include text-height-normal;
-  }
-  blockquote p {
-    color:              $grey-darker;
-  }
-  blockquote footer {
-    @include            text-size($text-size-small);
-  }
-  ul, ol {
-    list-style-position: inside;
-  }
-
-  section a {
-    color:              $red-med;
-    &:visited {
-      color:            darken($red-med, 20%);
+  section {
+    p {
+      @include text-margin-flow;
+      @include text-height-normal;
     }
-  }
-  a[rel=footnote], a[rev=footnote] {
-    color:              $grey-darker;
-    text-decoration:    none;
-    font-weight:        bold;
+    blockquote p {
+      color:              $grey-darker;
+    }
+    blockquote footer {
+      @include            text-size($text-size-small);
+    }
+    ul, ol {
+      list-style-position: inside;
+    }
+
+    a {
+      color:              $red-med;
+      &:visited {
+        color:            darken($red-med, 20%);
+      }
+    }
+    a[rel=footnote], a[rel=footnote]:visited,
+    a[rev=footnote], a[rev=footnote]:visited {
+      color:              $grey-darker;
+      text-decoration:    none;
+      font-weight:        bold;
+    }
   }
 
   section.article-section-2col {
