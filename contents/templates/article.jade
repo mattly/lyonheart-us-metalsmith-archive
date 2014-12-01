@@ -1,0 +1,25 @@
+mixin section(name, wide, header)
+  if page.sections[name]
+    section(id=name class={ "article-section-2col": wide })
+      if header
+        h2= page.sections[name].title
+      div.section-content
+        != page.sections[name].content
+
+article.article-main
+  +section("lead")
+
+  header.article-header(
+    class={ "article-header-banner": siblings["_banner.jpg"] }
+    style={ "background-image": "url(/"+ siblings["_banner.jpg"].url +")" }
+  )
+    div.info(class=page.infoClass)
+      h1(style=page.headerStyle): a(href=page.url)= page.title
+      if page.subtitle
+        h2= page.subtitle
+
+  section.article-content!= content
+
+  footer.article-footer(class={'article-footer-wide': page.footerWide})
+    +section("further_reading", page.footerWide, true)
+    +section("footnotes", page.footerWide, true)

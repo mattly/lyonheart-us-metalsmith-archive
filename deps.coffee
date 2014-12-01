@@ -24,9 +24,7 @@ deps = {
     # for metadata-sidecar
     'js-yaml': '3.0.x'
 
-    # nunjucks
-    nunjucks: '1.0.x'
-    # nunjucks filters:
+    jade: '1.x.x'
     # - date_format
     moment: '2.x.x'
     # - smarty:
@@ -34,7 +32,9 @@ deps = {
 
     imagemin: '3.0.x'
 
+    # dev tools
     'metalsmith-serve': '*'
+    'metalsmith-watch': '*'
   }
   bower: {
     bourbon: '3.2.x'

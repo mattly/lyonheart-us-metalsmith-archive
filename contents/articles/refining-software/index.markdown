@@ -1,3 +1,30 @@
+---
+title:          Refining Software
+subtitle:       Include Quality in 'Minimum Viable'
+summary:        Either you ship a prototype or you ship something worthwhile.
+date:           2014-02-25 14:30 Z-0200
+author:         mattly
+category:       building software
+tags:           startups, minimum viable product, quality
+locations:
+  - Buenos Aires, Argentina
+  - Montevideo, Uruguay
+  - Punta del Diablo, Uruguay
+updated:        true
+template: "article.jade"
+infoClass: 'white-text'
+headerStyle:
+  font-size: 400%
+footerWide: true
+
+---
+
+~~~ Lead
+In [Making Time For Quality][mtfq], I argued for spending a bit more time in the refinement stage of the creative process, regardless of what's being created. It was borne from this piece on building software, when I realized it better stood alone. Consider reading it first -- it's short.
+
+[mtfq]: http://lyonheart.us/articles/making-time-for-quality.html
+
+~~~ Body
 I once worked with a project manager who loved to throw the famous Steve Jobs quote "Real Artists Ship" at me whenever I voiced objections about the software we were working on not being entirely ready to ship yet.  If what we had worked well enough for a functionality demo, it worked well enough to ship to our customers.  
 
 The project manager worked under a philosophy gaining popularity in our industry, the idea of **Minimum Viable Product**, but due to a lack of focus put more emphasis on minimal than viable.
@@ -58,4 +85,23 @@ Another lesser-paraded [Steve Jobs quote goes][steve-quote-2], "Details matter, 
 
 [behind-iphone]: http://www.nytimes.com/2013/10/06/magazine/and-then-steve-said-let-there-be-an-iphone.html?pagewanted=all
 [steve-quote-2]: https://twitter.com/tim_cook/status/437966914170540032
+
+~~~ Further Reading
+**[An Interview with Andy Budd][mvpizza]**.  A great read both for the **Minimum Viable Pizza** and a perspective on how the design process helps with prototyping and quality.
+
+[mvpizza]: http://insideintercom.io/an-interview-with-andy-budd/
+
+**[GitHub: Repository Next][gh-reponext]**.  GitHub occasionally does in-depth write-ups of new features on their blog, and this one by @[kneath][kyle] is particularly notable because at the end he mentions how long it took to finish: over a year.  From talking with friends who work at GitHub, I think this attention to detail is not uncommon.
+
+[gh-reponext]: https://github.com/blog/1529-repository-next
+[kyle]: http://warpspire.com/
+
+**[And Then Steve Said, 'Let There Be An iPhone'][behind-iphone]**.  Linked in the above body text, it's a fascinating story leading up to the announcement of the original iPhone in January, 2007.
+
+[behind-iphone]: http://www.nytimes.com/2013/10/06/magazine/and-then-steve-said-let-there-be-an-iphone.html?pagewanted=all
+
+**[Why It Took a Year to Make and Then Break Down an Amazing Puzzle Game][behind-threes]: Behind [threes][]**.  A cute puzzle game my wife and I both have a hard time putting down.
+
+[behind-threes]: http://www.polygon.com/2014/2/6/5386200/why-it-took-a-year-to-make-and-then-break-down-an-amazing-puzzle-game
+[threes]: http://asherv.com/threes/
 

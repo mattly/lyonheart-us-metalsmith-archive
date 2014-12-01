@@ -26,11 +26,12 @@ bannerScroller = (ele, scale=50) ->
     ele.css({ 'background-position-y': pos + '%' })
 
 $ ->
-  if $('body.article').length > 0
+  if $('article.article-main').length is 1
     $('article').on('click', 'a[rel="footnote"]', footnote)
     scroller = bannerScroller($('.article-header-banner'))
     scroller()
     $window.scroll(scroller)
+
   if $('body.home').length > 0
     scroller = bannerScroller($('.main-header'), 0)
     scroller()

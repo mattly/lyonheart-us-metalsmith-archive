@@ -5,10 +5,11 @@
 article.article-main {
   margin-bottom:      1em;
   @include inset;
-  section.lead {
+  section#lead {
     @include region-margin;
     font-size:        percentage(1 / $second);
   }
+
   header {
     position:         relative;
     @include region-margin;
@@ -59,6 +60,7 @@ article.article-main {
   &> section > blockquote,
   &> section > ul,
   &> section > pre,
+  &> section > .section-content,
   &> footer {
     @include inset-center;
     @include width-text(37);
@@ -102,6 +104,16 @@ article.article-main {
     text-decoration:    none;
     font-weight:        bold;
   }
+
+  section.article-section-2col {
+    .section-content {
+      @include text-columns(2, 20px);
+      p, li {
+        @include text-avoid-breaks;
+      }
+    }
+  }
+
   footer.article-footer {
     @include region-padding(0.5);
     border-top: 1px dotted $grey-lukewarm;
@@ -137,14 +149,6 @@ article.article-main {
     }
     &.article-footer-wide {
       @include page-width;
-      section.article-footer-section-wide {
-        .footer-section-content {
-          @include text-columns(2, 20px);
-        }
-        p, li {
-          @include text-avoid-breaks;
-        }
-      }
     }
   }
 

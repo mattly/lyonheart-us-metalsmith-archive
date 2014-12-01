@@ -94,7 +94,7 @@ li {
 }
 
 section.main-content {
-  @include width-text;
+  @include width-text($list-width);
   @include inset-center;
   @include inset;
   padding-bottom: 2em;
@@ -118,7 +118,11 @@ section.main-content {
   article {
     @include list-margin;
     .article-metadata {
+      float: right;
       @include text-size($text-size-tiny);
+    }
+    h1, h2 {
+      display: inline;
     }
     h1 {
       @include display-type;

@@ -9,6 +9,10 @@ $tablet: new-breakpoint(min-width ($mobile-width + 1) max-width $tablet-width);
 $small:  new-breakpoint(max-width $tablet-width);
 $medium: new-breakpoint(min-width ($tablet-width + 1) max-width $medium-width);
 $large:  new-breakpoint(min-width $medium-width + 1);
+
+$reading-width: 35;
+$list-width: 45;
+
 @import "neat";
 @import "type";
 

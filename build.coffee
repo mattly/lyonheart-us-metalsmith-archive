@@ -1,23 +1,39 @@
 fs = require('fs')
+path = require('path')
 try
   fs.mkdirSync('tmp')
 catch e
+  fs.unlinkSync(path.join('tmp', f)) for f in fs.readdirSync('tmp')
   fs.rmdirSync('tmp')
   fs.mkdirSync('tmp')
 
-path = require('path')
 
 yaml = require('js-yaml')
 
-# loads from "metadata.yml" onto "index.*"
-metadataSidecar = (files, ms, done) ->
-  for own fileName, data of files when path.basename(fileName).match(/^metadata\.yaml$/)
-    metadata = yaml.safeLoad(data.contents.toString())
-    dir = path.dirname(fileName)
-    for own name, record of files when path.dirname(name) is dir and path.basename(name).match(/^index\./)
-      for own key, value of metadata
-        record[key] = value
-    delete files[fileName]
+apiece = (arr, fn, cb) ->
+  next = (err) ->
+    if err then return cb(err)
+    if arr.length then fn(arr.shift(), next)
+    else cb()
+  process.nextTick(next)
+
+
+metadataSidecar = (files, metalsmith, done) ->
+  yamlfiles = (f for f, d of files when path.extname(f).match(/^\.yml$/))
+  for filepath, page of files when yamlfiles.indexOf("#{filepath}.yml") > -1
+    yamlpath = "#{filepath}.yml"
+    metadata = yaml.safeLoad( files[yamlpath].contents.toString() )
+    page[key] = value for key, value of metadata
+    delete files[yamlpath]
+    yamlfiles = (f for f in yamlfiles when f isnt yamlpath)
+  for filepath in yamlfiles
+    page = files[filepath]
+    metadata = yaml.safeLoad( page.contents.toString() )
+    if metadata.template
+      page[key] = value for key, value of metadata
+      delete files[filepath]
+      newPath = filepath.replace(/\.yml$/, '')
+      files[newPath] = page
   done()
 
 # takes <ol> from .footnotes, makes it page.footnotes, removes ol
@@ -32,9 +48,10 @@ extractFootnotes = (files, metalsmith, done) ->
       while theFootnote.length > 0
         theFootnote.find('a').last().attr('rev','footnote')
         theFootnote = theFootnote.next()
-      data.footnotes = "<ol>#{footnotes.find('ol').html()}</ol>"
+      data.sections or= {}
+      data.sections.footnotes = { title: "Footnotes", content: "<ol>#{footnotes.find('ol').html()}</ol>" }
       footnotes.remove()
-      doc('sup a.footnoteRef').attr('rel','footnote')
+      doc('a.footnoteRef').attr('rel','footnote')
       data.contents = new Buffer(doc.html())
   done()
 
@@ -42,29 +59,55 @@ log = (files, ms, done) ->
   console.log(name, Object.keys(file), file.mode, file.contents.length) for name, file of files
   done()
 
-nunjucks = require('nunjucks')
-env = nunjucks.configure('templates')
-
 moment = require('moment')
-env.addFilter 'date_format', (date, format) -> moment(date).format(format)
-env.addFilter 'date_rfc822', (date) -> moment(date).format("ddd, DD MMM YYYY HH:mm:ss ZZ")
 
 # converts .(md|markdown) to html via pandoc
 {exec} = require('child_process')
+convertMarkdown = (input, cb) ->
+  cp = exec "pandoc -t html5 --smart --ascii", (err, stdout, stderr) -> cb(err, stdout)
+  cp.stdin.write(input)
+  cp.stdin.end()
+
 pandoc = (files, ms, done) ->
   converts = (f for own f, p of files when path.extname(f).match(/^\.(md|markdown)$/))
-  convert = (filePath, cb) ->
-    htmlPath = filePath.replace(/\.(md|markdown)$/, '.html')
-    exec "pandoc -t html5 --smart --ascii contents/#{filePath}", (err, stdout, stderr) ->
-      if err then throw err
-      files[htmlPath] = files[filePath]
-      files[htmlPath].contents = new Buffer(stdout)
+  convertFile = (filePath, cb) ->
+    file = files[filePath]
+    body = file.contents.toString()
+    file.sections or= {}
+    if body.match(/\n~~~ ([\w\s]+)/)
+      sections = body.split(/\n(~~~\s*[\w\s]+)\n/)
+      hasBody = false
+      while sections.length
+        section = sections.shift()
+        if match = section.match(/^~~~\s*([\w\s]+)$/)
+          name = match[1].toLowerCase().replace(/\s+/,'_')
+          if name is "body"
+            body = section
+            hasBody = true
+          else
+            file.sections[name] = {
+              id: name
+              title: match[1]
+              content: sections.shift()
+              footer: hasBody }
+        else
+          body = section
+          hasBody = true
+
+    convertMarkdown body, (err, html) ->
+      if err then cb(err)
+      htmlPath = filePath.replace(/\.(md|markdown)$/, '.html')
+      files[htmlPath] = file
+      file.contents = new Buffer(html)
       delete files[filePath]
-      cb()
-  next = ->
-    if converts.length then convert(converts.shift(), next)
-    else done()
-  next()
+      sections = ({name, info} for name, info of file.sections)
+      handleSection = ({name, info}, c) ->
+        convertMarkdown info.content, (err, html) ->
+          if err then c(err)
+          file.sections[name].content = html
+          c()
+      apiece(sections, handleSection, cb)
+  apiece(converts, convertFile, done)
 
 typogr = require('typogr')
 smart = (files, ms, done) ->
@@ -78,41 +121,12 @@ setUrl = (files, ms, done) ->
     page.full_url = "#{site.url}/#{page.url}"
   done()
 
-renderNunjucksTemplates = (files, ms, done) ->
-  { collections, fingerprint } = ms.metadata()
-  toRender = (f for f, p of files when f.match(/\.(html|xml)$/))
-  segmentComparator = (one, two) ->
-    oneLength = one.split('/').length
-    twoLength = two.split('/').length
-    if oneLength > twoLength then return -1
-    if oneLength is twoLength then return 0
-    return 1
-  toRender.sort(segmentComparator)
-  for filePath in toRender
-    page = files[filePath]
-    vars = { page, site, collections, fingerprint }
-    output = if page.template then nunjucks.render(page.template, vars)
-    else nunjucks.renderString(page.contents.toString(), vars)
-    page.contents = new Buffer(output)
-  done()
-
 siblings = (files, ms, done) ->
   for own filePath, page of files
     dir = path.dirname(filePath)
     page.siblings = {}
     for sibling in Object.keys(files) when sibling.match(///^#{dir}\/[^\/]+$///)
       page.siblings[path.basename(sibling)] = files[sibling]
-  done()
-
-includeSiblings = (files, ms, done) ->
-  for own filePath, page of files
-    dir = path.dirname(filePath)
-    if dir.match(/^articles\//) and path.basename(filePath).match(/^index\.html/)
-      for own otherFile, data of files when path.dirname(otherFile) is dir and otherFile isnt filePath and path.extname(otherFile) is '.html'
-        key = path.basename(otherFile, path.extname(otherFile))
-        page[key] = data.contents.toString()
-        if key is 'body' then page.footnotes = data.footnotes
-        delete files[otherFile]
   done()
 
 Imagemin = require('imagemin')
@@ -135,6 +149,41 @@ base64Icons = (files, ms, done) ->
           fs.writeFileSync('tmp/_icons.scss', icons.join("\n"))
           done()
 
+jade = require('jade')
+templates = {}
+
+renderTemplate = (files, ms, done) ->
+  { collections, fingerprint } = ms.metadata()
+  for filepath, page of files when page.template
+    console.log(page)
+    locals = {
+      page, site, collections, fingerprint,
+      siblings: page.siblings, content: page.contents.toString(),
+      formatDate: (date, format) -> moment(date).format(format)
+    }
+    if page.template.match(/^.\//)
+      templatePath = path.join("contents", path.dirname(filepath), page.template)
+      render = jade.renderFile(templatePath, locals)
+    else
+      if not templates[page.template]
+        templates[page.template] = jade.compileFile("./contents/templates/#{page.template}")
+      render = templates[page.template](locals)
+    page.contents = page.pageContents = new Buffer(render)
+  done()
+
+renderLayout = (files, ms, done) ->
+  try
+    layout = jade.compileFile("./contents/templates/layout.jade", { pretty: true, compileDebug: true })
+  catch e
+    console.log(e)
+    process.exit(1)
+  for filepath, page of files when filepath.match(/\.html/) and page.pageContents
+    { collections, fingerprint } = ms.metadata()
+    page.contents = layout({
+      page, site, collections, fingerprint, content: page.pageContents.toString()
+    })
+  done()
+
 site =
   url: 'http://lyonheart.us'
   name: "lyonheart.us"
@@ -142,7 +191,7 @@ site =
   description: "writings on engineering and art by Matthew Lyon"
   github_modifications_base: "https://github.com/mattly/lyonheart.us/commits/master/contents"
   links:
-    contact:
+    contacts:
       email:
         href: 'mailto:matthew@lyonheart.us'
         icon: 'envelope'
@@ -160,48 +209,62 @@ site =
       rss:
         href: '/index.xml'
 
-chain = require('metalsmith')(__dirname)
+generator = require('metalsmith')(__dirname)
   .source('contents')
   .destination('build')
-  .use(metadataSidecar)
-  .use(pandoc)
-  .use(extractFootnotes)
-  .use(includeSiblings)
-  .use(siblings)
-  .use(setUrl)
-  .use(require('metalsmith-collections')({
+
+ignore = require('metalsmith-ignore')
+chain = [
+  metadataSidecar
+  pandoc
+  extractFootnotes
+  require('metalsmith-collections')({
     articles: {
       pattern: 'articles/*/index.html'
       sortBy: 'date'
       reverse: true
     }
-  }))
-  .use(require('metalsmith-coffee')())
-  .use(base64Icons)
-  .use(require('metalsmith-sass')({
+  })
+  siblings
+  setUrl
+
+  # javascripts
+  require('metalsmith-coffee')()
+
+  # css
+  base64Icons
+  require('metalsmith-sass')({
     includePaths: [
       'bower_components/bourbon/dist'
       'bower_components/neat/app/assets/stylesheets'
       'tmp'
     ],
     outputStyle: 'expanded'
-  }))
-  .use(require('metalsmith-fingerprint')({pattern:'assets/*'}))
-  .use(require('metalsmith-ignore')([
+  })
+  require('metalsmith-fingerprint')({pattern:'assets/*'})
+  ignore([
     'assets/icons/*.svg'
-  ]))
-  .use(renderNunjucksTemplates)
-  .use(smart)
-  # .use(log)
+    'templates/*'
+  ])
+
+  # render
+  renderTemplate
+  renderLayout
+  smart
+]
 
 if process.env.DEV
-  chain.use(require('metalsmith-serve')({
-    port: process.env.DEV
-    verbose: true
-  }))
+  chain.push(
+    require('metalsmith-serve')({
+      port: process.env.DEV
+      verbose: true
+    })
+  )
 
-chain.build (err) ->
-    fs.unlinkSync(path.join('tmp',f)) for f in fs.readdirSync('tmp')
-    fs.rmdirSync('tmp')
-    if err then throw err
+chain.forEach((fn) -> generator.use(fn))
+
+generator.build (err) ->
+  fs.unlinkSync(path.join('tmp',f)) for f in fs.readdirSync('tmp')
+  fs.rmdirSync('tmp')
+  if err then throw err
 

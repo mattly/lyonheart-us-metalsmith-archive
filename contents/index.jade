@@ -1,0 +1,18 @@
+.page-home
+  header.main-header
+    hgroup.name
+      p.lead Hi, I'm
+      h1
+        span.first Matthew
+        span.last Lyon
+  section.main-content.archive-list
+    each article in collections.articles
+      article
+        header
+          div.article-metadata
+            time(pubdate=true datetime=formatDate(article.date, "YYYY-MM-DDTHH:mm:SSZ"))
+              = formatDate(article.date, "MMMM YYYY")
+          h1: a(href=article.url)= article.title
+          if article.subtitle
+            | &nbsp;
+            h2= article.subtitle
