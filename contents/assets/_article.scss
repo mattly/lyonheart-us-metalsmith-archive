@@ -90,7 +90,7 @@ article.article-main {
     @include            text-size($text-size-small);
   }
   ul, ol {
-    margin-left: 1.5em;
+    list-style-position: inside;
   }
 
   section a {
