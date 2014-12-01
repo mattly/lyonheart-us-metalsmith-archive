@@ -155,9 +155,9 @@ html,body {
   height: auto !important;
   margin: 0 auto;
 
-  margin-bottom: -1 * ($footer-height-tab + $text-base);
+  margin-bottom: -1 * ($footer-height-tab);
   @include media($mobile) {
-    margin-bottom: -1 * ($footer-height-mob + $text-base);
+    margin-bottom: -1 * ($footer-height-mob);
   }
   #push {
     height: $footer-height-tab;
