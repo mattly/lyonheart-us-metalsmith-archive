@@ -102,9 +102,9 @@ article.article-main {
                             background-color $link-trans ease-in
                           );
       @include            underline($red-med);
+      color:              $red-med;
       margin: -3px;
       padding: 3px;
-      color:              $red-med;
       &:visited {
         color:            $visited-link;
         @include          underline-color($visited-link);
@@ -115,9 +115,9 @@ article.article-main {
     &.article-content {
       a {
         &:focus, &:hover {
-          background-color: $red-med;
+          background-color: $grey-warm;
           border-radius: 3px;
-          color: $grey-bright;
+          // color: $grey-bright;
           outline: none;
         }
       }
