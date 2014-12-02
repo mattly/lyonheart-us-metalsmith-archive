@@ -35,6 +35,10 @@ article.article-main {
       &.white-text {
         color:        $grey-bright;
       }
+      &.top-30 {
+        bottom: none;
+        top: 30%;
+      };
     }
     h1 {
       font-size:        percentage($fifth);

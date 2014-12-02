@@ -9,10 +9,10 @@ mixin section(name, wide, header)
 article.article-main
   +section("lead")
 
-  header.article-header(
-    class={ "article-header-banner": siblings["_banner.jpg"] }
-    style={ "background-image": "url(/"+ siblings["_banner.jpg"].url +")" }
-  )
+  if siblings['_banner.jpg']
+    - var headerClass = 'article-header-banner'
+    - var headerStyle = { 'background-image': 'url(/'+siblings['_banner.jpg'].url+')' }
+  header.article-header(class=headerClass style=headerStyle)
     div.info(class=page.infoClass)
       h1(style=page.headerStyle): a(href=page.url)= page.title
       if page.subtitle

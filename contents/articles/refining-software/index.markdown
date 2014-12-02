@@ -5,7 +5,6 @@ summary:        Either you ship a prototype or you ship something worthwhile.
 date:           2014-02-25 14:30 Z-0200
 author:         mattly
 category:       building software
-tags:           startups, minimum viable product, quality
 locations:
   - Buenos Aires, Argentina
   - Montevideo, Uruguay
