@@ -32,7 +32,3 @@ $ ->
     scroller()
     $window.scroll(scroller)
 
-  if $('body.home').length > 0
-    scroller = bannerScroller($('.main-header'), 0)
-    scroller()
-    $window.scroll(scroller)
