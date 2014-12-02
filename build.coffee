@@ -152,6 +152,9 @@ base64Icons = (files, ms, done) ->
 jade = require('jade')
 templates = {}
 
+dateFormat = (date, format) -> moment(date).format(format)
+dateRFC822 = (date) -> dateFormat(date, "ddd, DD MMM YYYY HH:mm:ss ZZ")
+
 renderTemplate = (files, ms, done) ->
   { collections, fingerprint } = ms.metadata()
   for filepath, page of files when page.template
@@ -159,7 +162,7 @@ renderTemplate = (files, ms, done) ->
     locals = {
       page, site, collections, fingerprint,
       siblings: page.siblings, content: page.contents.toString(),
-      formatDate: (date, format) -> moment(date).format(format)
+      formatDate: dateFormat
     }
     if page.template.match(/^.\//)
       templatePath = path.join("contents", path.dirname(filepath), page.template)
@@ -182,6 +185,29 @@ renderLayout = (files, ms, done) ->
     page.contents = layout({
       page, site, collections, fingerprint, content: page.pageContents.toString()
     })
+  done()
+
+RSS = require('rss')
+addFeed = (files, ms, done) ->
+  { collections } = ms.metadata()
+  feed = new RSS({
+    title: "#{site.owner} | #{site.name}"
+    description: site.description
+    feed_url: site.url + '/index.xml'
+    site_url: site.url
+    pubDate: dateRFC822(collections.articles[0].date)
+    language: "en"
+  })
+  for item, index in collections.articles when index < 11 and moment(item.date).isAfter(moment().subtract({years: 1}))
+    feed.item({
+      title: item.title
+      description: item.pageContents.toString()
+      url:  item.full_url
+      guid: item.full_url
+      author: item.author
+      date: dateRFC822(item.date)
+    })
+  files['index.xml'].contents = new Buffer(feed.xml('  '))
   done()
 
 site =
@@ -240,6 +266,7 @@ chain = [
   renderTemplate
   renderLayout
   smart
+  addFeed
 ]
 
 if process.env.DEV

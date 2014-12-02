@@ -31,6 +31,7 @@ deps = {
     typogr: '0.6.x'
 
     imagemin: '3.0.x'
+    rss: '1.0.x'
 
     # dev tools
     'metalsmith-serve': '*'
