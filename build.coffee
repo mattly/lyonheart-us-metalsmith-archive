@@ -210,19 +210,23 @@ addFeed = (files, ms, done) ->
   files['index.xml'].contents = new Buffer(feed.xml('  '))
   done()
 
+class Link
+  constructor: (@icon, @href, @title) ->
+
 site =
   url: 'http://lyonheart.us'
   name: "lyonheart.us"
   owner: "Matthew Lyon"
   description: "writings on engineering and art by Matthew Lyon"
   github_modifications_base: "https://github.com/mattly/lyonheart.us/commits/master/contents"
-  links:
-    envelope: 'mailto:matthew@lyonheart.us'
-    rss: '/index.xml'
-    tweeter: 'https://twitter.com/mattly'
-    github: 'https://github.com/mattly'
-    soundcloud: 'http://soundcloud.com/matthewlyonheart'
-    linkin: 'http://www.linkedin.com/pub/matthew-lyon/62/55b/200/'
+  links: [
+    new Link('envelope', 'mailto:matthew@lyonheart.us', 'Email')
+    new Link('rss', '/index.xml', 'RSS Feed')
+    new Link('tweeter', 'https://twitter.com/mattly', 'Twitter')
+    new Link('github', 'https://github.com/mattly', 'GitHub')
+    new Link('soundcloud', 'http://soundcloud.com/matthewlyonheart', 'SoundCloud')
+    new Link('linkin', 'http://www.linkedin.com/pub/matthew-lyon/62/55b/200/', 'LinkedIn')
+  ]
 
 generator = require('metalsmith')(__dirname)
   .source('contents')

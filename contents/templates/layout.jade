@@ -55,9 +55,9 @@ html(lang="en")
     footer#footer
       .liner
         #links
-          each link, icon in site.links
-            a(href=link)
-              .icon(class=["icon-"+icon])
+          each link in site.links
+            a(href=link.href title=link.title)
+              .icon(class=["icon-"+link.icon])
         #copyright
           p
             strong Copyright &copy; 2014
