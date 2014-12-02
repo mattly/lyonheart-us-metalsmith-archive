@@ -3,7 +3,6 @@
 @import "layout";
 
 article.article-main {
-  margin-bottom:      1em;
   @include inset;
   section#lead {
     @include region-margin;
@@ -184,7 +183,33 @@ article.article-main {
       @include text-size($text-size-tiny);
     }
   }
-
+}
+nav#article-relative-nav {
+  margin-bottom: 1em;
+  @include inset-center;
+  @include page-width;
+  @include clearfix;
+  position: relative;
+  a {
+    @include text-size($text-size-smaller);
+    color: $grey-darker;
+    margin: -1em;
+    padding: 1em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .later {
+    @include span-columns(2);
+    text-align: left;
+  }
+  .home {
+    @include span-columns(2);
+    text-align: center;
+  }
+  .earlier {
+    @include span-columns(2);
+    text-align: right;
+  }
 }
 
 #footnoter {

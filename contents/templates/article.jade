@@ -41,3 +41,15 @@ article.article-main
           wish to reproduce any of this content in a commercial context,
           explicit permission is required.  Please contact me directly.
 
+nav#article-relative-nav
+  .later
+    if page.previous
+      a(rel="next" href="/"+page.previous.url) &laquo; #{page.previous.title}
+    | &nbsp;
+  .home
+    a(rel="up" href=site.url) home
+  .earlier
+    | &nbsp;
+    if page.next
+      a(rel="prev" href="/"+page.next.url) #{page.next.title} &raquo;
+
