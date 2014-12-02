@@ -34,12 +34,11 @@ body.home {
       @include inset-center;
       @include width-text($list-width);
 
-      color: $yellow-bold;
+      // color: $yellow-bold;
+      color: $grey-warm;
 
-      p.lead {
+      p {
         line-height: 1em;
-        font-weight: 700;
-        @include display-type;
       }
       h1 {
         line-height: 1em;

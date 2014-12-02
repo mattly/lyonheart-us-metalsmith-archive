@@ -5,14 +5,17 @@
       h1
         span.first Matthew
         span.last Lyon
-  section.main-content.archive-list
-    each article in collections.articles
-      article
-        header
-          div.article-metadata
-            time(pubdate=true datetime=formatDate(article.date, "YYYY-MM-DDTHH:mm:SSZ"))
-              = formatDate(article.date, "MMMM YYYY")
-          h1: a(href=article.url)= article.title
-          if article.subtitle
-            | &nbsp;
-            h2= article.subtitle
+      p Hacker, Photographer, Encaustic Painter, Synth Builder/Tweaker, Homebrewer.
+  section.main-content
+    .archive-list
+      each article in collections.articles
+        article
+          header
+            a(href=article.url)
+              div.article-metadata
+                time(pubdate=true datetime=formatDate(article.date, "YYYY-MM-DDTHH:mm:SSZ"))
+                  = formatDate(article.date, "MMMM YYYY")
+              h1= article.title
+              if article.subtitle
+                |  
+                h2= article.subtitle

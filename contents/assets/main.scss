@@ -121,6 +121,17 @@ section.main-content {
       float: right;
       @include text-size($text-size-tiny);
     }
+    a {
+      text-decoration:  none;
+      h1 {
+        color:            $yellow-bold;
+      }
+      &:visited {
+        h1 {
+          color:          desaturate($yellow-bold, 40%);
+        }
+      }
+    }
     h1, h2 {
       display: inline;
     }
@@ -129,13 +140,6 @@ section.main-content {
       font-weight:        700;
       @include            text-size($third);
       line-height:        1;
-      a {
-        color:            $yellow-bold;
-        text-decoration:  none;
-      }
-      a:visited {
-        color:            desaturate($yellow-bold, 40%);
-      }
     }
     h2 {
       font-weight:        300;

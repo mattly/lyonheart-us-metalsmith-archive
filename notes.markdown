@@ -12,5 +12,3 @@
 
 ## todo
 
-- about text somewhere
-- turn homepage article links into "link blocks"
