@@ -3,7 +3,7 @@ mixin section(name, wide, header)
     section(id=name class={ "article-section-2col": wide })
       if header
         h2= page.sections[name].title
-      div.section-content
+      .section-content
         != page.sections[name].content
 
 article.article-main
@@ -23,3 +23,21 @@ article.article-main
   footer.article-footer(class={'article-footer-wide': page.footerWide})
     +section("further_reading", page.footerWide, true)
     +section("footnotes", page.footerWide, true)
+    hr
+    section#colophon
+      h2 Colophon
+      .section-content
+        p
+          a(href=page.full_url)
+            i= page.title
+          |  was first published to 
+          a(href=site.url) #{site.name} by #{site.owner}
+          |  on #{formatDate(page.date, 'Do MMM YYYY')}.
+          |  All images (where applicable, unless otherwise noted) and text &copy; Matthew Lyon
+          |  #{formatDate(page.date, 'YYYY')}.
+        :markdown
+          It is distributed under the [Creative Commons Attribution-Noncommercial-Share
+          Alike 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/). If you 
+          wish to reproduce any of this content in a commercial context,
+          explicit permission is required.  Please contact me directly.
+

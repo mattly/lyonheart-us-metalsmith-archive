@@ -180,6 +180,9 @@ article.article-main {
     &.article-footer-wide {
       @include page-width;
     }
+    #colophon {
+      @include text-size($text-size-tiny);
+    }
   }
 
 }

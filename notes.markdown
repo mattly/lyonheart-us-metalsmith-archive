@@ -10,4 +10,8 @@
 ## Asset Pipeline
 - something to turn ms.fingerprint data into sass variables, for css image fingerprinting?
 
+## todo
 
+- about text somewhere
+- navigation links on articles
+- turn homepage article links into "link blocks"
