@@ -54,7 +54,7 @@ Technical people generally understand that protecting access to their email is c
 
 It's bad enough that we send sensitive information like account verification tokens in plain-text over the open internet where anyone in the middle can read them.  Even ignoring the possibility of a _man-in-the-middle_ snooper, there's another problem: A rogue administrator can still read their users' email and gain access to those tokens.
 
-Maybe the [Bastard Operator From Hell][bofh] is just a collection of stories based on stereotypes and myths.  I'm personally comfortable trusting my email to Google, but when I'm assigned a new address for work reasons I'm also trusting the people who administrate that email address not to read my email.  In many cases, being a _sysop_ or having technical skill isn't even necessary: Google Apps for Domains lets domain adminstrators read their users email.
+Maybe the [Bastard Operator From Hell][bofh] is just a collection of stories based on stereotypes and myths.  I'm personally comfortable trusting my email to Google, but when I'm assigned a new address for work reasons I'm also trusting the people who administrate that email address not to read my email.  In many cases, being a _sysop_ or having technical skill isn't even necessary: Google Apps for Domains lets domain adminstrators read their users' email.
 
 I've worked at companies in the past where I wouldn't put it past the domain administrator to read my email, but who cares?  It's all company business, right?  
 
@@ -112,7 +112,7 @@ In some cases, despite [stated policies][lp-acct-link] or just as a [matter or p
 
 [^dropbox]: I know one agency manager who laments telling his clients to invite something like `necrowizard56351@hotmail.com` to their shared Dropbox folders.
 
-[^lastpass]: Lastpass is the only service I have abandonned entirely.  Many friends and acquaintances reported the compromise of their personal LastPass account as a result of associating them with an organization's LastPass Enterprise account, as recently as mid-2013, despite LastPass's [stated policy on account ownership][lp-acct-link].  Perhaps LastPass's policies have changed since, but I no longer trust cloud-synced password managers at this point anyway.
+[^lastpass]: Account ownership re-assignment happened to a few friends during a migration from using personal accounts on LastPass to LastPass Enterprise in mid-2013.  Lastpass's [stated policy on account linking][lp-acct-link] says this shouldn't happen.
 
 ## A Straightforward Solution
 
