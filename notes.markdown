@@ -12,3 +12,4 @@
 
 ## todo
 
+- footnote link colors
