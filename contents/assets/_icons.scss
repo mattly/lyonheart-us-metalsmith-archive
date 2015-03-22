@@ -1,0 +1,6 @@
+@each $icon in envelope, github, linkin, rss, soundcloud, tweeter {
+  .icon-#{$icon} {
+    background-image: url('icons/#{$icon}.svg');
+    background-repeat: no-repeat;
+  }
+}
