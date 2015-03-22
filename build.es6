@@ -65,31 +65,36 @@ const docChain = [
   })
 ];
 
-var gen = require('metalsmith')(__dirname)
-  .source('contents')
-  .destination('build')
+var metadata = {
+  site: {
+    url: 'http://lyonheart.us',
+    name: "lyonheart.us",
+    owner: "Matthew Lyon",
+    description: "writings on engineering and art by Matthew Lyon",
+    github_modifications_base: "https://github.com/mattly/lyonheart.us/commits/master/contents",
+    links: [
+      {icon: 'envelope', href: 'mailto: matthew@lyonheart.us', title: 'Email'},
+      {icon: 'rss', href: '/index.xml', title: 'RSS Feed'},
+      {icon: 'tweeter', href: 'https://twitter.com/mattly', title: 'Twitter'},
+      {icon: 'github', href: 'https://github.com/mattly', title: 'GitHub'},
+      {icon: 'soundcloud', href: 'https://soundclould.com/matthewlyonheart', title: 'SoundCloud'},
+      {icon: 'linkin', href: 'https://www.linkedin.com/in/mattly', title: 'LinkedIn'}
+    ]
+  }
+}
 
-gen.metadata({site: {
-  url: 'http://lyonheart.us',
-  name: "lyonheart.us",
-  owner: "Matthew Lyon",
-  description: "writings on engineering and art by Matthew Lyon",
-  github_modifications_base: "https://github.com/mattly/lyonheart.us/commits/master/contents",
-  links: [
-    {icon: 'envelope', href: 'mailto: matthew@lyonheart.us', title: 'Email'},
-    {icon: 'rss', href: '/index.xml', title: 'RSS Feed'},
-    {icon: 'tweeter', href: 'https://twitter.com/mattly', title: 'Twitter'},
-    {icon: 'github', href: 'https://github.com/mattly', title: 'GitHub'},
-    {icon: 'soundcloud', href: 'https://soundclould.com/matthewlyonheart', title: 'SoundCloud'},
-    {icon: 'linkin', href: 'https://www.linkedin.com/in/mattly', title: 'LinkedIn'}
-  ]
-}})
+const metalsmith = require('metalsmith')
+var build = (cb) => {
+  var gen = metalsmith(__dirname)
+    .source('contents')
+    .destination('build')
+    .metadata(metadata)
+  assetChain
+    .concat(docChain)
+    .forEach(plugin => gen.use(plugin))
+  gen.build(cb);
+}
 
-assetChain
-  .concat(docChain)
-  .forEach(plugin => gen.use(plugin))
-
-var build = (cb) => gen.build(cb);
 if (process.env.DEV) {
 
   const nStatic = require('node-static');
