@@ -77,8 +77,10 @@ var metadata = {
       {icon: 'rss', href: '/index.xml', title: 'RSS Feed'},
       {icon: 'tweeter', href: 'https://twitter.com/mattly', title: 'Twitter'},
       {icon: 'github', href: 'https://github.com/mattly', title: 'GitHub'},
+      {icon: 'camera', href: 'https://500px.com/lyonheart', title: '500px (photos)'},
       {icon: 'soundcloud', href: 'https://soundclould.com/matthewlyonheart', title: 'SoundCloud'},
-      {icon: 'linkin', href: 'https://www.linkedin.com/in/mattly', title: 'LinkedIn'}
+      {icon: 'linkin', href: 'https://www.linkedin.com/in/mattly', title: 'LinkedIn'},
+      {icon: 'slides', href: 'https://speakerdeck.com/mattly', title: 'SpeakerDeck'}
     ]
   }
 }

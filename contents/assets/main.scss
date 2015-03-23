@@ -204,10 +204,18 @@ footer#footer {
       @include span-columns(1 of 1);
     }
     $icon-size: 16px;
-    $icon-offset: 21px;
     $icon-spacing: 4px;
     a {
+      display: inline-block;
+      height: 24px;
+      width: 26px;
+      padding: 3px 5px 4px;
+      margin-right: 3px;
+      border-radius: 3px;
       text-decoration: none;
+      &:hover {
+        background-color: $grey-bright;
+      }
     }
     .icon {
       height: $icon-size;
@@ -215,9 +223,6 @@ footer#footer {
       background-size: contain;
       background-position: center center;
       display: inline-block;
-      margin-top: $icon-spacing;
-      margin-bottom: $icon-spacing;
-      margin-left: 4px;
     }
   }
 }

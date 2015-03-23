@@ -1,4 +1,4 @@
-@each $icon in envelope, github, linkin, rss, soundcloud, tweeter {
+@each $icon in envelope, github, linkin, rss, soundcloud, tweeter, camera, slides {
   .icon-#{$icon} {
     background-image: url('icons/#{$icon}.svg');
     background-repeat: no-repeat;
