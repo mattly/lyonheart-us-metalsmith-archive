@@ -20,7 +20,7 @@ var templateHelpers = {
 }
 const docChain = [
   ignore(['**/.DS_Store']),
-  require('./support/yamlstubs.es6')(),
+  require('metalsmith-placeholder')(),
   require('./support/parseMarkdownSections')(),
   require('metalsmith-multimarkdown')(),
   require('./support/footnotes')(),
