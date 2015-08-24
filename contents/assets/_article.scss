@@ -101,13 +101,13 @@ article.article-main {
     $link-trans: 0.25s;
     a {
       @include            transition(
-                            color $link-trans ease-in,
-                            background-color $link-trans ease-in
+                            color $link-trans ease-in
+                            /* background-color $link-trans ease-in */
                           );
       @include            underline($red-med);
       color:              $red-med;
-      margin: -3px;
-      padding: 3px;
+      margin: -3px -1px;
+      padding: 3px 1px;
       &:visited {
         color:            $visited-link;
         @include          underline-color($visited-link);
@@ -118,10 +118,10 @@ article.article-main {
     &.article-content {
       a {
         &:focus, &:hover {
-          background-color: $grey-warm;
-          border-radius: 3px;
+          /* background-color: $grey-warm; */
+          /* border-radius: 3px; */
           // color: $grey-bright;
-          outline: none;
+          /* outline: none; */
         }
       }
     }
@@ -241,5 +241,20 @@ nav#article-relative-nav {
     @include          text-size($text-size-small);
     @include          text-height-crowded;
     margin-left:      2em;
+    a {
+      $link-trans: 0.25s;
+      @include transition(
+        color $link-trans ease-in
+      );
+      @include underline($red-med);
+      color: $red-med;
+      margin: -3px;
+      padding: 3px;
+      $visited-link: darken($red-med, 10%);
+      &:visited {
+        color: $visited-link;
+        @include underline-color($visited-link);
+      }
+    }
   }
 }
