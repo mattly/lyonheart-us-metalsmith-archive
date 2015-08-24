@@ -6,19 +6,26 @@ html(lang="en")
 
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
 
-    title= page.title + " | lyonheart.us"
-    meta(property="og:title" content=page.title)
-
-    meta(name="twitter:card" content="article")
+    meta(name="twitter:summary_large" content="article")
     meta(property="og:type" content="article")
 
-    meta(name="author" content="Matthew Lyon")
+    title= page.title + " | lyonheart.us"
+    meta(property="og:title" content=page.title)
+    meta(property="twitter:title" content=page.title)
+
     meta(name="twitter:site" content="@mattly")
+    meta(property="og:site_name" content=site.name)
+
+    meta(name="author" content="Matthew Lyon")
     meta(name="twitter:creator" content="@mattly")
 
     if page.summary
       meta(name="description" content=page.summary)
       meta(property="og:description" content=page.summary)
+      meta(property="twitter:description" content=page.summary)
+  
+    if page.siblings['_banner.jpg']
+      meta(property="og:image" content=page.siblings['_banner.jpg'].full_url)
 
     meta(property="og:url" content=page.full_url)
 
