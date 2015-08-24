@@ -1,5 +1,5 @@
 export default function setUrl(config={}) {
-  var getUrl = config.getUrl || (meta) => meta.site.url
+    var getUrl = config.getUrl || ((meta) => { meta.site.url })
   return function(files, metalsmith, done) {
     var md = metalsmith.metadata();
     var siteUrl = getUrl(md);
