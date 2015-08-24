@@ -24,10 +24,11 @@
     "moment": "^2.9.0",
     "node-bourbon": "^4.2.1-beta1",
     "node-neat": "^1.7.1-beta1",
+    "node-sass": "git://github.com/sass/node-sass",
     "node-static": "^0.7.6",
     "ramda": "^0.12.0",
     "rss": "^1.0.1",
-    "sass-loader": "^0.4.0",
+    "sass-loader": "^2.0.1",
     "typogr": "^0.6.5"
   },
   "devDependencies": {},
