@@ -21,7 +21,7 @@ export default function(config) {
         }
         footnotes.remove()
 
-        var fnLinks = doc('a.footnote').attr('rel', 'footnote');
+        var fnLinks = doc('a.footnoteRef').attr('rel', 'footnote');
         theFn = fnLinks.first();
         var idx = 0;
         while (idx < fnLinks.length) {
