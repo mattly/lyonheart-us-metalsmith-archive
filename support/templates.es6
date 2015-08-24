@@ -1,9 +1,10 @@
 import fs from "fs";
 import path from "path";
 import jade from "jade";
-import mmd from "mmd";
+// import mmd from "mmd";
+var pandoc = require("./pandoc");
 
-jade.filters.markdown = (str) => mmd.convert(str)
+// jade.filters.markdown = (str) => pandoc.convert(str)
 
 function defaultLocalContext(page, context) {
   context.page = page;
