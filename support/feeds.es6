@@ -1,6 +1,6 @@
 const RSS = require('rss');
 const moment = require('moment');
-const rfc822 = (date) => moment(date).format("ddd, DD MMM YYYY HH:mm:ss ZZ");
+const rfc822 = (date) => moment(new Date(date)).format("ddd, DD MMM YYYY HH:mm:ss ZZ");
 
 export default function rss(config={}) {
 

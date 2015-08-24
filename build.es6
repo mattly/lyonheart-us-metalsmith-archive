@@ -16,13 +16,15 @@ const ignore = require('metalsmith-ignore');
 
 const template = require('./support/templates');
 var templateHelpers = {
-  formatDate: (date, format) => { require('moment')(date).format(format); }
+    formatDate: (date, format) => {
+        require('moment')(new Date(date)).format(format); }
 }
 const docChain = [
   ignore(['**/.DS_Store']),
   require('metalsmith-placeholder')(),
   require('./support/parseMarkdownSections')(),
-  require('metalsmith-multimarkdown')(),
+  // require('metalsmith-multimarkdown')(),
+    require('./support/pandoc').pandoc(),
   require('./support/footnotes')(),
   ignore(['**/__markdown__sections__/**']),
   require('metalsmith-collections')({
