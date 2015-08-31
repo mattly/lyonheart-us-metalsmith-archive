@@ -34,8 +34,14 @@ html(lang="en")
       try{Typekit.load();}catch(e){}
 
     script(type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js")
+    if page.scripts
+      each script in page.scripts
+        script(type="text/javascript" src=script)
     script(type="text/javascript" src="/" + fingerprint["assets/articles.js"])
     link(href="/" + fingerprint["assets/main.css"] rel="stylesheet")
+    if page.styles
+      each style in page.styles
+        link(href=style rel="stylesheet")
 
     link(rel="canonical" href=page.full_url)
     link(rel="alternate" type="application/rss+xml" title="RSS - All Posts" href=site.url + "/index.xml")

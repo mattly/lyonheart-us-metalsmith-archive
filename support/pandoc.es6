@@ -1,6 +1,7 @@
 import child_process from 'child_process';
 import path from 'path';
 
+
 function apiece(arr, fn, cb) {
     var next = (err) => {
         if (err) { return cb(err); }
@@ -10,10 +11,24 @@ function apiece(arr, fn, cb) {
     process.nextTick(next);
 };
 
+const cheerio = require('cheerio');
+const katex = require('katex');
+
 export function convert(input, cb) {
     var cp = child_process.exec("pandoc -t html5 --smart --ascii",
                                 function(err, stdout, stderr){
-                                    cb(err, stdout);
+                                    if (err) { return cb(err); }
+                                    var doc = cheerio.load(stdout);
+                                    var maths = doc('.math')
+                                    var idx = 0;
+                                    while (idx < maths.length) {
+                                        var theMath = maths.eq(idx);
+                                        idx += 1;
+                                        var text = theMath.text();
+                                        var rendered = katex.renderToString(text);
+                                        theMath.html(rendered);
+                                    }
+                                    cb(null, doc.html())
                                 });
     cp.stdin.write(input);
     cp.stdin.end();
