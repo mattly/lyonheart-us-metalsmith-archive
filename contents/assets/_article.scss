@@ -70,12 +70,19 @@ article.article-main {
       font-weight:    400;
     }
   }
+
+  hr {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
   &> header .info,
   &> section > h2,
   &> section > p,
   &> section > blockquote,
   &> section > ul,
   &> section > pre,
+  &> section > hr,
   &> section > .section-content,
   &> footer {
     @include inset-center;
