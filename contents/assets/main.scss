@@ -98,38 +98,51 @@ section.main-content {
   @include width-text($list-width);
   @include inset-center;
   @include inset;
+  padding-top: 2em;
   padding-bottom: 2em;
+
+  h3 {
+    font-family: $display-family;
+    color: $red-med;
+    text-transform: uppercase;
+    font-weight: 700;
+    @include text-size($text-size-smaller);
+  }
 }
 
 .article-metadata {
   @include            text-size($text-size-small);
-  text-transform:     uppercase;
-  letter-spacing:     0.05em;
-  @include display-type;
-  font-weight:        100;
-  color:              $grey-lukewarm;
-  .category {
-    font-weight:      700;
-    &:before {
-      content:        "\2022\00a0";  // &bull;&nbsp;
+  color:              $grey-darker;
+  line-height: 1;
+  time {
+    @include display-type;
+    font-weight:        700;
+    text-transform:     uppercase;
+    letter-spacing:     0.05em;
+    .ord {
+      text-transform: none;
     }
+    &:after {
+      content: "\2009\2009";
+      font-weight: 100;
+    }
+  }
+  h2 {
+    font-family: $main-family;
   }
 }
 .archive-list {
   article {
     @include list-margin;
-    .article-metadata {
-      float: right;
-      @include text-size($text-size-tiny);
-    }
     a {
       text-decoration:  none;
       h1 {
-        color:            $yellow-bold;
+        color:            $red-med;
+        font-weight: 100;
       }
       &:visited {
         h1 {
-          color:          desaturate($yellow-bold, 40%);
+          color: darken($red-med, 20%);
         }
       }
     }
@@ -144,7 +157,7 @@ section.main-content {
     }
     h2 {
       font-weight:        300;
-      color:              $grey-warm;
+      color:              $grey-darkish;
     }
   }
 }

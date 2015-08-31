@@ -1,7 +1,7 @@
 ---
 title:      Mistrusting Email Addresses
 subtitle:   How to Take Over Your Employees' Personal Accounts
-summary:    Stop Confusing the Role of Email Addresses in Communication, Identification and Authentication
+summary:    Stop confusing the role of email addresses in communication, identification, and authentication
 date:       2014-12-02 12:00 -0800
 author:     mattly
 category:   software architecture

@@ -1,6 +1,6 @@
 ---
 title:          Making Time For Quality
-subtitle:       The happy medium between a first draft and perfection
+subtitle:       The Happy Medium Between A First Draft and Perfection
 summary:        A case for taking a bit more time to polish your work
 date:           2014-02-17 12:00 Z-0200
 author:         mattly

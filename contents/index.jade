@@ -5,17 +5,17 @@
       h1
         span.first Matthew
         span.last Lyon
-      p Hacker, Photographer, Encaustic Painter, Synthesizer Enthusiast, Homebrewer.
+      p I help humans and computers communicate.  I make code, photographs, encaustic paintings, synth bloops and beer.
   section.main-content
     .archive-list
+      h3 Essays
       each article in collections.articles
         article
           header
             a(href=article.url)
+              h1= article.title
               div.article-metadata
                 time(pubdate=true datetime=formatDate(article.date, "YYYY-MM-DDTHH:mm:SSZ"))
-                  = formatDate(article.date, "MMMM YYYY")
-              h1= article.title
-              if article.subtitle
-                |  
-                h2= article.subtitle
+                  = formatDate(article.date, "MMMM Do YYYY")
+                if article.subtitle
+                  h2= article.subtitle

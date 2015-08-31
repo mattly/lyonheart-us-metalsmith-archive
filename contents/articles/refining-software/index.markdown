@@ -1,7 +1,7 @@
 ---
 title:          Refining Software
 subtitle:       Include Quality in 'Minimum Viable'
-summary:        Either you ship a prototype or you ship something worthwhile.
+summary:        Either you ship a prototype or you ship something worthwhile
 date:           2014-02-25 14:30 Z-0200
 author:         mattly
 category:       building software

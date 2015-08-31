@@ -1,9 +1,6 @@
 @import "layout";
 @import "colors";
 
-body.home {
-  background-color: $blue-darker;
-}
 .page-home {
   header.main-header {
     @include page-level;
@@ -39,9 +36,10 @@ body.home {
 
       p {
         line-height: 1em;
+        max-width: 30em;
       }
       h1 {
-        line-height: 1em;
+        line-height: 1.25em;
         margin-left: -3px;
         @include display-type;
       }
@@ -51,21 +49,6 @@ body.home {
       h1 .last {
         font-weight: 700;
       }
-    }
-    &:after {
-      content: " ";
-      display: block;
-      margin-top: -162px;
-      @include media($mobile) {
-        margin-top: -143px;
-      }
-      height: 500px;
-      @include flush;
-
-      $start: rgba($blue-darker, 0);
-      $middle: rgba($blue-darker, 0.9);
-
-      @include linear-gradient($start 80%, $middle 95%, $blue-darker 99%);
     }
   }
 }
