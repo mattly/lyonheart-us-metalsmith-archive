@@ -16,7 +16,6 @@ infoClass:
   - top-30
   - mobile-top-10
   - black-shadow
-footerWide: true
 
 ---
 

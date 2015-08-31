@@ -41,13 +41,13 @@ Prototypes are great for software.  Software begins as an abstract idea, often a
 
 Creating a software prototype can be an expensive gamble of time, so hopefully you've gauged the demand for what you're building before you even start.  Consider your target audience: How savvy are they?  How will they to respond to ambiguity?  These considerations hold regardless of the type of software you're building -- libraries have many of the same concerns, even if the audience is other developers.
 
-Your prototype might be adequate to someone who is a domain expert and thoroughly familiar with your software, but mainstream users are probably neither.[^early-adopters]  A closed group of savvy, trusted colleagues can be far more valuable with their feedback than random strangers from the internet.
+Your prototype might be adequate to someone who is a domain expert and thoroughly familiar with your software, but mainstream users are probably neither[^early-adopters].  A closed group of savvy, trusted colleagues can be far more valuable with their feedback than random strangers from the internet.
 
 Before embarking on a new software project, it's worth asking and writing down: What will this idea do better than incumbent solutions?  Keep the answer short -- a sentence at most -- and you'll have a basis for evaluating your "Minimum Viable", and how you will approach the two main problems of building software:
 
 One half of building software is primarily technical, and is in the realm we call *programming*: Answering **"how can I help people save time and/or money through automation?"**  When you set out to create new software, the answer to this question is how you will sell people on what you're building.
 
-The other half of the building software is more humanitarian, and given lesser importance by many engineers:[^nerds] **"how can I delight people through automation?"**  When building software, how you approach this question is the difference between a product people hate but use because they have to[^user-customers] and a product so great people will recommend to their friends and colleagues.
+The other half of the building software is more humanitarian, and given lesser importance by many engineers[^nerds]: **"how can I delight people through automation?"**  When building software, how you approach this question is the difference between a product people hate but use because they have to[^user-customers] and a product so great people will recommend to their friends and colleagues.
 
 The latter question is often harder; it's where a lot of the *art* in building software comes into play.  There's a line to be drawn between unacceptably raw and impossibly perfect -- and if you value **minimum** over **viable** you'll end up shipping a prototype.
 
@@ -67,7 +67,7 @@ Knowing when to say something is done is difficult.  Trouble is found chasing pe
 
 This is the real value of a "minimum viable": it helps you figure out when something is *viable enough to ship*.  This is why it's important to define what is *viable* for your product -- it guides how much refining is needed to get to *minimal*.  If too much value is put on producing something minimal, then what is created might not be viable enough.
 
-Careful project management can get away with lowering the bar towards minimal for a brief beta period among early-adopters, but if the bar isn't raised when the product grows it will gain a reputation for rough edges and poor quality.  Such a reputation takes years to overcome -- think of Twitter's Failwhale or Apple Maps.[^apple-maps]
+Careful project management can get away with lowering the bar towards minimal for a brief beta period among early-adopters, but if the bar isn't raised when the product grows it will gain a reputation for rough edges and poor quality.  Such a reputation takes years to overcome -- think of Twitter's Failwhale or Apple Maps[^apple-maps].
 
 A poor reputation among your customers is one thing, but a poor reputation internally is worse.  A lack of time for quality will cause code problems to grow exponentially, talent will stop caring and find a new job or burn out, and hiring standards will drop when the team's enthusiasm wanes.  This is death to software.
 

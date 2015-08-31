@@ -255,11 +255,12 @@ nav#article-relative-nav {
     color: $grey-darker;
     text-decoration: none;
     text-transform: uppercase;
-    padding: 0 1em;
+    display: block;
+    padding: 0 1.2em;
     .rel {
       font-weight: bold;
       display: block;
-      padding: 0 -1em;
+      margin: 0 -1.2em;
     }
   }
   .later {
