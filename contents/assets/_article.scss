@@ -161,17 +161,21 @@ article.article-main {
         font-size: inherit;
       }
     }
-    a[rev=footnote], a[rev=footnote]:visited {
-                       @include no-underline;
-                       text-decoration: none;
-                       color: $grey-lukewarm;
-                       font-size: 1.2em;
-                       line-height: 0;
-                       position: relative;
-                       display: inline-block;
-                       line-height: 0;
-                       top: 4px;
-                     }
+    a[rev=footnote],
+    a[rev=footnote]:visited {
+      @include no-underline;
+      text-decoration: none;
+      color: $grey-lukewarm;
+      font-size: 1.2em;
+      line-height: 0;
+      position: relative;
+      display: inline-block;
+      line-height: 0;
+      top: 4px;
+      @include media($mobile) {
+        top: -4px;
+      }
+    }
 
     .math {
     }
