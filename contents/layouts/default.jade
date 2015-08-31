@@ -57,19 +57,17 @@ html(lang="en")
       ga('send', 'pageview');
 
   body(class=page.bodyClass + " " + page.slug)
-    div#not-footer
-      div#meta(style="display:none")
-        dl
-          each val, key in page
-            dt= key
-            dd= val
-        
-      #page-content!= content
-      #footnoter
-        .footnote-liner
-          .footnote-number
-          .footnote-content
-      #push
+    div#meta(style="display:none")
+      dl
+        each val, key in page
+          dt= key
+          dd= val
+
+    #page-content!= content
+    #footnoter
+      .footnote-liner
+        .footnote-number
+        .footnote-content
 
     footer#footer
       .liner
@@ -79,6 +77,6 @@ html(lang="en")
               .icon(class=["icon-"+link.icon])
         #copyright
           p
-            strong Copyright &copy; 2015
-            |  &#x2022; Matthew Lyon
+            span.notice Copyright &copy; 2015
+            span.name  &#x2022; Matthew Lyon
 

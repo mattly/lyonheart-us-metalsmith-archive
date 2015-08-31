@@ -28,11 +28,16 @@ const docChain = [
   require('./support/footnotes')(),
   ignore(['**/__markdown__sections__/**']),
   require('metalsmith-collections')({
-    articles: {
-      pattern: 'articles/*/index.html',
-      sortBy: 'date',
-      reverse: true
-    }
+      articles: {
+          pattern: 'articles/*/index.html',
+          sortBy: 'date',
+          reverse: true
+      },
+      talks: {
+          pattern: 'talks/*/index.html',
+          sortBy: 'date',
+          reverse: true
+      }
   }),
   require('./support/siblings')(),
   require('./support/set_url')(),
@@ -60,9 +65,9 @@ const docChain = [
   ignore(['templates/**', 'layouts/**']),
   require('./support/feeds')({
     collections: {
-      articles: {
-        path: 'index.xml'
-      }
+        articles: {
+            path: 'index.xml'
+        }
     }
   })
 ];

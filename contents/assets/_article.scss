@@ -25,7 +25,6 @@ article.article-main {
         }
       }
       .info {
-        padding: 0;
         @include media($mobile) {
           @include inset;
         }
@@ -36,11 +35,8 @@ article.article-main {
       }
     }
     .info {
-      @include inset;
       &.white-text {
         color:        $grey-superbright;
-      }
-      &.black-shadow {
         text-shadow:  2px 2px 4px $grey-darkish;
       }
       &.top-30 {
@@ -139,17 +135,6 @@ article.article-main {
       }
     }
 
-    &#lead,
-    &.article-content {
-      a {
-        &:focus, &:hover {
-          /* background-color: $grey-warm; */
-          /* border-radius: 3px; */
-          // color: $grey-bright;
-          /* outline: none; */
-        }
-      }
-    }
     a[rel=footnote], a[rel=footnote]:visited, {
       @include            no-underline;
       text-decoration:    none;
@@ -343,4 +328,11 @@ body.mistrusting-email {
   header h1 {
     font-size: 291%;
   }
+}
+.talk-video {
+  background-color: $grey-warmer;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 2em;
 }

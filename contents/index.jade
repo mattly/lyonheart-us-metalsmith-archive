@@ -19,3 +19,14 @@
                   = formatDate(article.date, "MMMM Do YYYY")
                 if article.subtitle
                   h2= article.subtitle
+      h3 Talks
+      each talk in collections.talks
+        article
+          header
+            a(href=talk.url)
+              h1= talk.title
+              div.article-metadata
+                time(pubdate=true datetime=formatDate(talk.date, "YYYY-MM-DDTHH:mm:SSZ"))
+                  = formatDate(talk.date, "MMMM Do YYYY")
+                if talk.summary
+                  h2= talk.summary

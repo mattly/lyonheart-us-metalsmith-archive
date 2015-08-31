@@ -192,45 +192,44 @@ html,body {
 }
 
 footer#footer {
-  @include inset;
   @include clearfix;
-  background-color: $blacker;
-  color: $grey-darker;
+  @include width-text($list-width);
+  @include inset-center;
+  @include inset;
+  /* color: $grey-darker; */
   &>div {
-    @include page-width;
-    @include inset-center;
-    @include region-padding(0.25);
+    /* @include page-width; */
+    /* @include inset-center; */
+    /* @include region-padding(0.25); */
   }
   #copyright {
-    @include span-columns(2);
+    float: right;
     text-align: right;
     font-family: $display-family;
     @include media($mobile) {
-      @include span-columns(1 of 1);
       text-align: left;
+      float: left;
     }
     p {
       @include text-size($text-size-tiny);
     }
+    .notice {
+      color: $grey-darkish;
+    }
+    .name {
+      color: $grey-lukewarm;
+    }
   }
   #links {
-    @include span-columns(4);
-    @include media($mobile) {
-      @include span-columns(1 of 1);
-    }
-    $icon-size: 16px;
-    $icon-spacing: 4px;
+    float: left;
+    $icon-size: 21px;
+    $icon-spacing: 8px;
     a {
       display: inline-block;
-      height: 24px;
-      width: 26px;
       padding: 3px 5px 4px;
-      margin-right: 3px;
+      margin-right: 5px;
       border-radius: 3px;
       text-decoration: none;
-      &:hover {
-        background-color: $grey-bright;
-      }
     }
     .icon {
       height: $icon-size;

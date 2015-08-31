@@ -49,11 +49,15 @@ nav#article-relative-nav
       a(rel="next" href="/"+page.previous.url)
         span.rel &larr; next
         | #{page.previous.title}
+     else
+       | &nbsp;
   .home
-    a(rel="up" href=site.url) home
+    a(rel="up" href="/") home
   .earlier
     if page.next
       a(rel="prev" href="/"+page.next.url)
         span.rel previous &rarr; 
         | #{page.next.title}
+    else
+      | &nbsp;
 
