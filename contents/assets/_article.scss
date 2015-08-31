@@ -106,8 +106,13 @@ article.article-main {
       @include text-margin-flow;
       @include text-height-normal;
     }
-    blockquote p {
-      color:              $grey-darker;
+    blockquote {
+      color: $grey-darkish;
+      border-left: 10px solid $grey-lukewarm;
+      padding: 0.5em 1em;
+      p:last-child {
+        margin-bottom: 0;
+      }
     }
     blockquote footer {
       @include            text-size($text-size-small);
