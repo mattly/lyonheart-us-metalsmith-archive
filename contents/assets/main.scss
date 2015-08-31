@@ -191,6 +191,7 @@ footer#footer {
   #copyright {
     @include span-columns(2);
     text-align: right;
+    font-family: $display-family;
     @include media($mobile) {
       @include span-columns(1 of 1);
       text-align: left;
