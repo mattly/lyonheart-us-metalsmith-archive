@@ -17,7 +17,7 @@ const ignore = require('metalsmith-ignore');
 const template = require('./support/templates');
 var templateHelpers = {
     formatDate: (date, format) => {
-        require('moment')(new Date(date)).format(format); }
+        return require('moment')(new Date(date)).format(format); }
 }
 const docChain = [
   ignore(['**/.DS_Store']),
