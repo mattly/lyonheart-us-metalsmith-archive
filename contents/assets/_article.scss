@@ -113,8 +113,9 @@ article.article-main {
     $link-trans: 0.25s;
     a {
       @include            transition(
-                            color $link-trans ease-in
-                            /* background-color $link-trans ease-in */
+                            color $link-trans ease-in,
+                            background-color $link-trans ease-in,
+                            border-color $link-trans ease-in
                           );
       @include            underline($red-med);
       color:              $red-med;
@@ -137,16 +138,42 @@ article.article-main {
         }
       }
     }
-    a[rel=footnote], a[rel=footnote]:visited,
-    a[rev=footnote], a[rev=footnote]:visited {
+    a[rel=footnote], a[rel=footnote]:visited, {
       @include            no-underline;
-      color:              $grey-darker;
       text-decoration:    none;
-      font-weight:        bold;
+      color: $grey-lukewarm;
+      border: 1px solid $grey-lukewarm;
+      font-family: $display-family;
       &:hover, &:focus {
-        background-color: inherit;
-        color: $grey-darker;
+                 color: $grey-bright;
+                 background-color: $grey-darker;
+                 border-color: $grey-darker;
       }
+      position: relative;
+      margin: 0 3px;
+      padding: 2px 4px 2px 5px;
+      border-radius: 10px;
+      min-width: 15px;
+      font-weight:        bold;
+      line-height: 0;
+      sup {
+        vertical-align: inherit;
+        font-size: inherit;
+      }
+    }
+    a[rev=footnote], a[rev=footnote]:visited {
+                       @include no-underline;
+                       text-decoration: none;
+                       color: $grey-lukewarm;
+                       font-size: 1.2em;
+                       line-height: 0;
+                       position: relative;
+                       display: inline-block;
+                       line-height: 0;
+                       top: 4px;
+                     }
+
+    .math {
     }
   }
 
