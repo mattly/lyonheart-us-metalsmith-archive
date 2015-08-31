@@ -73,11 +73,12 @@ pre {
 code {
   font-family:      $mono-family;
   font-size:        percentage(1 / $second);
-  color:            $red-med;
-  background-color: $grey-superbright;
+  /* color:            $red-med; */
+  /* color:            $grey-darker; */
+  background-color: transparentize($grey-superbright, 0.2);
 
   border-radius:    4px;
-  padding:          2px 4px;
+  padding:          1px 4px;
 }
 
 ol {
