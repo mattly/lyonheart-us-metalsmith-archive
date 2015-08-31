@@ -14,7 +14,6 @@ template: "article.jade"
 infoClass: 'white-text'
 headerStyle:
   font-size: 400%
-footerWide: true
 
 ---
 
@@ -26,7 +25,9 @@ In [Making Time For Quality][mtfq], I argued for spending a bit more time in the
 ~~~ Body
 I once worked with a project manager who loved to throw the famous Steve Jobs quote "Real Artists Ship" at me whenever I voiced objections about the software we were working on not being entirely ready to ship yet.  If what we had worked well enough for a functionality demo, it worked well enough to ship to our customers.  
 
-The project manager worked under a philosophy gaining popularity in our industry, the idea of **Minimum Viable Product**, but due to a lack of focus put more emphasis on minimal than viable.
+The project manager worked under a philosophy gaining popularity in our industry, the idea of **[Minimum Viable Product][mvp]**, but due to a lack of focus put more emphasis on minimal than viable.
+
+[mvp]: https://en.wikipedia.org/wiki/Minimum_viable_product
 
 Whatever the development team found lacking, the excuse was *"We'll iterate on it later, right now we just want to see if it resonates"*.  Later often never came.
 
