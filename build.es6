@@ -114,11 +114,13 @@ if (process.env.DEV) {
   }).listen(process.env.DEV);
 
   const builder = function(){
+    console.log(chalk.green("rebuilding!"))
     build(function(e){
       if (e) {
         console.log(e);
         console.log(Object.keys(e));
       }
+    else { console.log("built!") }
     });
   }
   var ready = false;
@@ -130,7 +132,6 @@ if (process.env.DEV) {
     .on('all', function(event, filepath){
       if (ready) {
         console.log(`${event}: ${chalk.cyan(filepath)}`);
-        console.log(chalk.green("rebuilding!"))
         builder();
       }
     })

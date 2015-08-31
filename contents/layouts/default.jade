@@ -49,8 +49,14 @@ html(lang="en")
       ga('create', 'UA-854173-4', 'auto');
       ga('send', 'pageview');
 
-  body(class=page.bodyClass)
+  body(class=page.bodyClass + " " + page.slug)
     div#not-footer
+      div#meta(style="display:none")
+        dl
+          each val, key in page
+            dt= key
+            dd= val
+        
       #page-content!= content
       #footnoter
         .footnote-liner
