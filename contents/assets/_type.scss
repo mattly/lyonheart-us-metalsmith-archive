@@ -1,10 +1,5 @@
-// $main-family:       "source-sans-pro", "Avenir", "Roboto", "Helvetica", "Arial", sans-serif;
-$source-sans: "source-sans-pro", sans-serif;
-$ratio: "ratio", sans-serif;
-$ratio-display: "ratio-display", sans-serif;
-
-$main-family:       $ratio;
-$display-family:    $ratio-display;
+$main-family: "ff-tisa-web-pro", serif;
+$display-family: "effra", sans-serif;
 $mono-family:       "source-code-pro", "Menlo", "Consolas", "Courier New", monospace;
 @mixin display-type {
   font-family: $display-family;
@@ -18,11 +13,11 @@ $sixth:   5/3;
 $octave:  2/1;
 
 b, strong  {
-  font-weight: 500;
+  font-weight: 600;
 }
 
-$text-base:               17px;
-$text-base-mob:           $text-base / $fourth;
+$text-base:               18px;
+$text-base-mob:           $text-base / $third;
 $text-size-small:         1/$second;
 $text-size-smaller:       1/$third;
 $text-size-tiny:          1/$fourth;
@@ -46,7 +41,7 @@ $text-height-double:      percentage(2);
 
 @mixin text-margin-heading {
   margin-top: $text-base * $fifth;
-  margin-bottom: 0;
+  margin-bottom: $text-base * 1/$fifth;
 }
 @mixin text-margin-flow {
   margin-bottom: $text-base * 1/$fourth;

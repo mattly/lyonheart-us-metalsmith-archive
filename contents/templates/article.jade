@@ -10,8 +10,10 @@ article.article-main
   +section("lead")
 
   if page.siblings['_banner.jpg']
-    - var headerClass = 'article-header-banner'
+    - var headerClass = page.headerClass + ' article-header-banner'
     - var headerStyle = { 'background-image': 'url(/'+page.siblings['_banner.jpg'].url+')' }
+  else
+    - var headerClass = page.headerClass
   header.article-header(class=headerClass style=headerStyle)
     div.info(class=page.infoClass)
       h1(style=page.headerStyle): a(href=page.url)= page.title
@@ -44,12 +46,14 @@ article.article-main
 nav#article-relative-nav
   .later
     if page.previous
-      a(rel="next" href="/"+page.previous.url) &laquo; #{page.previous.title}
-    | &nbsp;
+      a(rel="next" href="/"+page.previous.url)
+        span.rel &larr; next
+        | #{page.previous.title}
   .home
     a(rel="up" href=site.url) home
   .earlier
-    | &nbsp;
     if page.next
-      a(rel="prev" href="/"+page.next.url) #{page.next.title} &raquo;
+      a(rel="prev" href="/"+page.next.url)
+        span.rel previous &rarr; 
+        | #{page.next.title}
 

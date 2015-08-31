@@ -1,6 +1,6 @@
 ---
 title:      Mistrusting Email Addresses
-subtitle:   or, How to Take Over Your Employees' $service Accounts
+subtitle:   How to Take Over Your Employees' Personal Accounts
 summary:    Stop Confusing the Role of Email Addresses in Communication, Identification and Authentication
 date:       2014-12-02 12:00 -0800
 author:     mattly
@@ -10,11 +10,12 @@ locations:
   - Portland, Oregon
   - Yakima, Washington
 template: article.jade
+headerClass: mobile-banner-left-30
 infoClass:
   - white-text
   - top-30
-headerStyle:
-  font-size: 300%
+  - mobile-top-10
+  - black-shadow
 footerWide: true
 
 ---
@@ -22,7 +23,7 @@ footerWide: true
 ~~~ Lead
 This article describes a type of account takeover attack against many online services which allow a user to associate more than one email addresses with a single account.  
 
-**Disclosure Notice** When I became aware of this attack vector, I inventoried all services I use for vulnerability, with a 95% hit rate.  I sent vulnerability reports to each, and received responses ranging from "who cares?" to lukewarm concern.  None objected to an article on the topic.
+<span class="disclosure-notice">Disclosure Notice</span> When I became aware of this attack vector, I inventoried all services I use for vulnerability, with a 95% hit rate.  I sent vulnerability reports to each, and received responses ranging from "who cares?" to lukewarm concern.  None objected to an article on the topic.
 
 ~~~ Body
 Some projects I've worked on demand observing security procedures where **all** email communication for the project happen through a project-specific email account belonging to the company's operations.  Naturally, *all* email includes notifications from web services used by the project -- source control, project management, time tracking, et cetera.  It's a reasonable requirement.
