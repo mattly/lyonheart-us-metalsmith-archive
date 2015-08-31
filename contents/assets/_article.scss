@@ -222,8 +222,8 @@ article.article-main {
     p {
       @include text-height-crowded;
       @include text-margin-flow;
+      @include width-text(33);
     }
-
     img.image-left {
       margin-top: 5px;
       margin-right: 10px;
@@ -238,6 +238,18 @@ article.article-main {
     &.article-footer-wide {
       @include page-width;
     }
+
+    #footnotes {
+      ol {
+        list-style-position: outside;
+      }
+      li {
+        margin-left: 1em;
+      }
+      p {
+      }
+    }
+
     #colophon {
       @include text-size($text-size-tiny);
     }
