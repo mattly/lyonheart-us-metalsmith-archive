@@ -86,7 +86,7 @@ Every day this number went up, and every day I thought to myself, *There is only
 
 [not-today]: https://youtu.be/ZcjQ4rQQ8H8?t=88
 
-It's a classic form of [sunk cost fallacy][scf], but knowing that doesn't help. The lie is that only the last day is work $p$, and every day before that is only worth $m / 30$[^day-value].
+It's a classic form of [sunk cost fallacy][scf], but knowing that doesn't help. The lie is that only the last day is worth $p$, and every day before that is only worth $m / 30$[^day-value].
 
 [scf]: https://en.wikipedia.org/wiki/Escalation_of_commitment
 
