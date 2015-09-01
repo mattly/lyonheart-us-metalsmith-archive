@@ -19,6 +19,7 @@
                 time(pubdate=true datetime=formatDate(article.date, "YYYY-MM-DDTHH:mm:SSZ"))
                   = formatDate(article.date, "MMMM Do YYYY")
                 if article.subtitle
+                  | &nbsp;
                   h2= article.subtitle
       h3 Talks
       each talk in collections.talks
@@ -30,4 +31,5 @@
                 time(pubdate=true datetime=formatDate(talk.date, "YYYY-MM-DDTHH:mm:SSZ"))
                   = formatDate(talk.date, "MMMM Do YYYY")
                 if talk.summary
+                  | &nbsp;
                   h2= talk.summary
