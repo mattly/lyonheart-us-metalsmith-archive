@@ -1,11 +1,12 @@
 ---
 title:         Regretting the Golden Handcuffs
+subtitle:      Beware the Cost of Burnout
 summary:       My story of the long tail of startup success
 date:          2015-08-26 09:15 Z-0800
 author:        mattly
 category:      startups
 template:      "article.jade"
-infoClass:     white-text black-shadow
+infoClass:     white-text black-shadow top-30
 headerStyle:
   font-size:   400%
 styles:
@@ -130,7 +131,7 @@ I've heard similar stories from friends and acquaintances about the lasting effe
 
 [nyt-amazon]: http://www.nytimes.com/2015/08/16/technology/inside-amazon-wrestling-big-ideas-in-a-bruising-workplace.html
 
-I'm not the only person to notice, [people are talking][work-hard] about [finding balance][finding-balance] and [telling their stories][amazon-baby-cancer]. The sad thing about the metrics-driven performance culture described by the _Times_ at Amazon is that [studies show][pstudy-1] that [overworked people perform worse][pstudy-2]. The intensity of these environments and scope of the projects help people feel like they're part of something big, something worth making sacrifices for. We call that feeling _passion_. It's addicting and it clouds judgement, but it doesn't have to be all-consuming, and it shouldn't push people towards harm. Be careful with passion and with people who would use it against you.
+I'm not the only person to notice, [people are talking][work-hard] about [finding balance][finding-balance] and [telling their stories][amazon-baby-cancer]. The sad thing about the metrics-driven performance culture described by the _Times_ at Amazon is that [studies show][pstudy-1] that [overworked people perform worse][pstudy-2]. The intensity of these environments and scope of the projects help people feel like they're part of something big, something worth making sacrifices for. We call that feeling _passion_. It's addicting and it clouds judgement, but it doesn't have to be all-consuming, and it shouldn't push people towards harm. Be careful with passion and those who would use it against you.
 
 [work-hard]: https://medium.com/life-learning/work-hard-live-well-ead679cb506d
 [finding-balance]: https://medium.com/@aq/finding-balance-7388ce748051
@@ -139,4 +140,47 @@ I'm not the only person to notice, [people are talking][work-hard] about [findin
 [pstudy-2]: https://hbr.org/2015/08/the-research-is-clear-long-hours-backfire-for-people-and-for-companies
 
 ~~~ Further Reading
-Some selected links from the article text:
+There are a lot of links in the text above.  Here are the best follow-ups:
+
+**[The Ethics of Unpaid Labor and the OSS Community][contrib]**
+
+> The idea of a meritocracy presumes that everyone starts off and continues
+> through with the same level of access to opportunity, time, and money, which
+> is unfortunately not the case.
+
+[contrib]: http://www.ashedryden.com/blog/the-ethics-of-unpaid-labor-and-the-oss-community
+
+**[Steve Jobs destroyed the 'follow your passion' myth just before he died][passion]**
+
+> You've got to put something back into the flow of history that's going to help
+> your community, help other people … so that 20, 30, 40 years from now ...
+> people will say, this person didn't just have a passion, he cared about making
+> something that other people could benefit from.
+
+[passion]: http://www.businessinsider.com/steve-jobs-destroyed-the-follow-your-passion-myth-2015-3?op=1
+
+**[Do Not Disclose Your Salary To Recruiters](http://jacquesmattheij.com/do-not-disclose-your-salary-to-recruiters)**
+
+> Salary negotiations are an information game and presenting such valuable
+> information for no return at all is a fools strategy.
+
+**[What You Need To Know Before Signing A Non-Compete Agreement](http://www.fastcompany.com/3031956/the-future-of-work/what-you-need-to-know-before-signing-a-noncompete-agreement)**
+
+> But when the company was purchased in 2009, Contipelli left and had to comply
+> with the terms of the noncompete agreement. As a result, she was locked out of
+> her industry.
+
+**[Work Hard, Live Well][work-hard]**
+
+> these companies are both destroying the personal lives of their employees and getting nothing in return
+
+[work-hard]: https://medium.com/life-learning/work-hard-live-well-ead679cb506d
+
+**[The Research Is Clear: Long Hours Backfire for People and for Companies][pstudy-2]**
+
+> we log too many hours because of a mix of inner drivers, like ambition,
+> machismo, greed, anxiety, guilt, enjoyment, pride, the pull of short-term
+> rewards, a desire to prove we’re important, or an overdeveloped sense of duty
+
+[pstudy-2]: https://hbr.org/2015/08/the-research-is-clear-long-hours-backfire-for-people-and-for-companies
+
