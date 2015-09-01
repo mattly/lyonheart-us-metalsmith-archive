@@ -6,12 +6,13 @@ $tablet-width: 768px;
 $medium-width: 1199px;
 $mobile: new-breakpoint(max-width $mobile-width);
 $tablet: new-breakpoint(min-width ($mobile-width + 1) max-width $tablet-width);
+$tablet-up: new-breakpoint(min-width ($mobile-width + 1));
 $small:  new-breakpoint(max-width $tablet-width);
 $medium: new-breakpoint(min-width ($tablet-width + 1) max-width $medium-width);
 $large:  new-breakpoint(min-width $medium-width + 1);
 
 $reading-width: 35;
-$list-width: 45;
+$list-width: 50;
 
 @import "neat";
 @import "type";

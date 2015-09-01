@@ -73,12 +73,12 @@ pre {
 code {
   font-family:      $mono-family;
   font-size:        percentage(1 / $second);
-  /* color:            $red-med; */
-  /* color:            $grey-darker; */
-  background-color: transparentize($grey-superbright, 0.2);
+  /* background-color: transparentize($grey-superbright, 0.2); */
 
   border-radius:    4px;
-  padding:          1px 4px;
+  padding:          1px 2px;
+  margin: -1px -2px;
+  line-height: 0;
 }
 
 ol {
@@ -189,7 +189,7 @@ html,body {
 
 footer#footer {
   @include clearfix;
-  @include width-text($list-width);
+  @include width-text($list-width + 2);
   @include inset-center;
   @include inset;
   /* color: $grey-darker; */

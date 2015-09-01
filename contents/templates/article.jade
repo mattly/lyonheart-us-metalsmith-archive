@@ -24,8 +24,7 @@ article.article-main
 
   footer.article-footer(class={'article-footer-wide': page.footerWide})
     +section("further_reading", page.footerWide, true)
-    +section("footnotes", page.footerWide, true)
-    hr
+    //- +section("footnotes", page.footerWide, true)
     section#colophon
       h2 Colophon
       .section-content
@@ -48,7 +47,7 @@ nav#article-relative-nav
     if page.previous
       a(rel="next" href="/"+page.previous.url)
         span.rel &larr; next
-        | #{page.previous.title}
+        span.title #{page.previous.title}
      else
        | &nbsp;
   .home
@@ -57,7 +56,7 @@ nav#article-relative-nav
     if page.next
       a(rel="prev" href="/"+page.next.url)
         span.rel previous &rarr; 
-        | #{page.next.title}
+        span.title #{page.next.title}
     else
       | &nbsp;
 

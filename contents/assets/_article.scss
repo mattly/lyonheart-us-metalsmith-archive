@@ -82,7 +82,10 @@ article.article-main {
   &> section > .section-content,
   &> footer {
     @include inset-center;
-    @include width-text(37);
+    @include width-text(50);
+    @include media($tablet-up) {
+      padding-right: 15 * $text-base;
+    }
   }
   &> section > pre {
     @include width-text(40);
@@ -190,6 +193,7 @@ article.article-main {
   footer.article-footer {
     @include region-padding(0.5);
     border-top: 1px dotted $grey-lukewarm;
+    padding-right: 0;
     section {
       @include            text-size($text-size-smaller);
       @include            text-height-crowded;
@@ -207,7 +211,7 @@ article.article-main {
     p {
       @include text-height-crowded;
       @include text-margin-flow;
-      @include width-text(33);
+      @include width-text(35);
     }
     img.image-left {
       margin-top: 5px;
@@ -237,13 +241,14 @@ article.article-main {
 
     #colophon {
       @include text-size($text-size-tiny);
+      color: $grey-darker;
     }
   }
 }
 nav#article-relative-nav {
   @include inset-center;
   @include clearfix;
-  @include width-text(37);
+  @include width-text(50);
   margin-bottom: 1em;
   font-family: $display-family;
   line-height: 1em;
@@ -260,6 +265,9 @@ nav#article-relative-nav {
       display: block;
       margin: 0 -1.2em;
     }
+    .title {
+      color: $blackish;
+    }
   }
   .later {
     @include span-columns(2);
@@ -275,6 +283,63 @@ nav#article-relative-nav {
     text-align: right;
   }
 }
+
+.sidenote-container {
+  position: relative;
+  padding-right: 0.2em;
+}
+.sidenote-number {
+  position: relative;
+  vertical-align: baseline;
+  color: $red-med;
+}
+
+input.sidenote-toggle {
+  display: none;
+}
+
+label.sidenote-number {
+  @include text-size($text-size-small);
+  top: -0.5rem;
+  left: 0;
+  position: absolute;
+}
+.sidenote {
+  float: right;
+  clear: right;
+  margin-right: -15 * $text-base;
+  width: 11.5 * $text-base;
+  margin-top: 0;
+  margin-bottom: 2em;
+  @include text-size($text-size-tiny);
+  line-height: $text-height-crowded;
+  vertical-align: baseline;
+  position: relative;
+  color: $grey-darkish;
+
+  @include media($mobile) {
+    display: none;
+  }
+
+  .sidenote-number {
+    position: absolute;
+    /* transform: translateX(-100%) translateX(-0.25rem); */
+    /* -webkit-transform: translateX(-100%) translteX(-0.25rem); */
+    left: -1em;
+    &:after {
+      content: ". ";
+    }
+  }
+}
+
+.sidenote-toggle:checked + .sidenote {
+  display: block;
+  float: left;
+  clear: both;
+  width: 95%;
+  margin: 1rem 5%;
+}
+
 
 #footnoter {
   position:           fixed;
