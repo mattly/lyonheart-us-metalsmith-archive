@@ -241,8 +241,9 @@ article.article-main {
   }
 }
 nav#article-relative-nav {
-  @include inset;
+  @include inset-center;
   @include clearfix;
+  @include width-text(37);
   margin-bottom: 1em;
   font-family: $display-family;
   line-height: 1em;
