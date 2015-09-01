@@ -4,44 +4,45 @@
 .page-home {
   header.main-header {
     @include page-level;
-    height: 500px;
+    height: 350px;
+    border-bottom: 1px solid $grey-darkish;
 
-    background-image: url(/assets/images/nadir_abajo_sm.jpg);
+    /* background-image: url(/assets/images/nadir_abajo_sm.jpg); */
+    background-image: url('/assets/images/stygian_sm.jpg');
+    background-color: hsl(138, 14%, 86%);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50%;
 
-    @media  (min-width: 1024px){
-      background-image: url('/assets/images/nadir_abajo_lg.jpg')
-    }
-    @media (min-width: 500px) and (min--moz-device-pixel-ratio: 1.5),
-          (min-width: 500px) and (-o-min-device-pixel-ratio: 3/2),
-          (min-width: 500px) and (-webkit-min-device-pixel-ratio: 1.5),
-          (min-width: 500px) and (min-device-pixel-ratio: 1.5),
-          (min-width: 500px) and (min-resolution: 144dpi),
-          (min-width: 500px) and (min-resolution: 1.5dppx)
-    {
-      background-image: url('/assets/images/nadir_abajo_lg.jpg')
-    }
+    @media (min-width: 1024px),
+    (min-width: 500px) and (min--moz-device-pixel-ratio: 1.5),
+    (min-width: 500px) and (-o-min-device-pixel-ratio: 3/2),
+    (min-width: 500px) and (-webkit-min-device-pixel-ratio: 1.5),
+    (min-width: 500px) and (min-device-pixel-ratio: 1.5),
+    (min-width: 500px) and (min-resolution: 144dpi),
+    (min-width: 500px) and (min-resolution: 1.5dppx)
+                       {
+                         background-image: url('/assets/images/stygian_lg.jpg');
+                         /* background-image: url('/assets/images/nadir_abajo_lg.jpg') */
+                       }
 
     hgroup {
-      height: 162px;
-      padding-top: 90px;
+      padding-top: 262px;
       @include inset;
       @include inset-center;
       @include width-text($list-width);
 
-      // color: $yellow-bold;
-      color: $grey-warm;
+      color: $grey-darkish;
 
       p {
         line-height: 1em;
         max-width: 30em;
       }
       h1 {
-        line-height: 1.25em;
-        margin-left: -3px;
+        line-height: 1em;
+        margin-left: -6px;
         @include display-type;
+        font-size: 72px;
       }
       h1 .first {
         font-weight: 100;
@@ -50,6 +51,13 @@
         font-weight: 700;
       }
     }
+  }
+
+  p.bio {
+    @include width-text(30);
+    line-height: 1em;
+    margin-bottom: 2em;
+    color: $grey-darkish;
   }
 }
 

@@ -118,7 +118,7 @@ section.main-content {
     @include display-type;
     font-weight:        700;
     text-transform:     uppercase;
-    letter-spacing:     0.05em;
+    @include text-size(1/$third);
     .ord {
       text-transform: none;
     }
