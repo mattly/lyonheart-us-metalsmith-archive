@@ -237,6 +237,12 @@ footer#footer {
   }
 }
 
+span.widont {
+  @include media($mobile) {
+    display: inline-block;
+  }
+}
+
 @import "icons";
 @import "home";
 @import "article";
