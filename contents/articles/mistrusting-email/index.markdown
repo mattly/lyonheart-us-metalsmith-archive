@@ -104,7 +104,7 @@ In some cases, despite [stated policies][lp-acct-link] or just as a [matter or p
 
 [^ssh-key]: Debian's ssh-keygen had a [flawed random number generator that led to identical key pairs](https://lists.debian.org/debian-security-announce/2008/msg00152.html), and having a large [database of SSH public keys](https://github.com/blog/63-ssh-keys-generated-on-debian-ubuntu-compromised) helps in finding such problems.
 
-[^ssh-user]: For example, most Git-hosting services use `git+ssh://git@hostname.com:reponame.git` as the pattern for end-users accessing repositories.  The service managing access to the repositories runs as the `git` system user.  If the service created a separate system user for each end-user, accounts could share ssh keys, but the overhead involved in maintaining such a setup (both in programming and documentation effort) isn't worth the paltry number of use-cases for this.
+[^ssh-user]: For example, most Git-hosting services use `git://git@host.com:repo.git` as the pattern for end-users accessing repositories.  The service managing access to the repositories runs as the `git` system user.  If the service created a separate system user for each end-user, accounts could share ssh keys, but the overhead involved in maintaining such a setup (both in programming and documentation effort) isn't worth the paltry number of use-cases for this.
 
 [^ssh-config]: One could make the argument that if a project has such a tight security controls that this poses a problem, perhaps the project should be using privately-hosted source control, and it's a valid argument that I've seen repeatedly lose against real-world constraints.  I'm more interested in helping protect users from their project managers.
 

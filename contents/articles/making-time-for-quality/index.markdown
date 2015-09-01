@@ -59,7 +59,9 @@ Don't chase perfection; there's a line to be drawn between impossibly perfect an
 Maybe it took less time to create *Empire* than it does to watch it, but the film fits Warhol's themes of mass production and the banality of modern life perfectly.
 
 ~~~ Further Reading
-**[Pull Back][pullback]**.  Wherein Craig describes same process with more poetry.
+**[Pull Back][pullback]**.  Wherein Craig describes same process with more poetry:
+
+> But first you have to stop. If just for a moment.
 
 [pullback]: http://craigmod.com/sputnik/pull_back/
 
