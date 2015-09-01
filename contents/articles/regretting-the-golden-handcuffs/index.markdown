@@ -2,7 +2,7 @@
 title:         Regretting the Golden Handcuffs
 subtitle:      Beware the Cost of Burnout
 summary:       My story of the long tail of startup success
-date:          2015-08-26 09:15 Z-0800
+date:          2015-08-31 22:12 Z-0800
 author:        mattly
 category:      startups
 template:      "article.jade"
