@@ -6,28 +6,41 @@ html(lang="en")
 
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
 
-    meta(name="twitter:summary_large" content="article")
-    meta(property="og:type" content="article")
-
     title= page.title + " | lyonheart.us"
-    meta(property="og:title" content=page.title)
-    meta(property="twitter:title" content=page.title)
-
-    meta(name="twitter:site" content="@mattly")
-    meta(property="og:site_name" content=site.name)
-
-    meta(name="author" content="Matthew Lyon")
-    meta(name="twitter:creator" content="@mattly")
-
     if page.summary
       meta(name="description" content=page.summary)
-      meta(property="og:description" content=page.summary)
-      meta(property="twitter:description" content=page.summary)
   
     if page.siblings['_banner.jpg']
-      meta(property="og:image" content=page.siblings['_banner.jpg'].full_url)
+      - var pageImage = page.siblings['_banner.jpg'].full_url
+    else
+      - var pageImage = null
 
+    // opengraph
+    meta(property="og:type" content="article")
+    meta(property="og:title" content=page.title)
+    meta(property="og:site_name" content=site.name)
     meta(property="og:url" content=page.full_url)
+    meta(property="og:locale" content="en_US")
+    if pageImage
+      meta(property="og:image" content=pageImage)
+    if page.summary
+      meta(property="og:description" content=page.summary)
+    if page.collection
+      meta(property="og:type" content="article")
+      meta(property="article:author" content="Matthew Lyon")
+      meta(property="article:published_time" content=isoDate(page.date))
+  
+    // twitter
+    if pageImage
+      meta(name="twitter:card" content="summary_large_image")
+      meta(name="twitter:image" content=pageImage)
+    else
+      meta(name="twitter:card" content="summary")
+    meta(name="twitter:site" content="@mattly")
+    meta(name="twitter:creator" content="@mattly")
+    meta(name="twitter:title" content=page.title)
+    if page.summary
+      meta(property="twitter:description" content=page.summary)
 
     script(type="text/javascript" src="//use.typekit.net/qat0pnp.js")
 
