@@ -119,7 +119,7 @@ So I learned Spanish. I dug deeper into the process of making photographs. I hac
 [mvd]: https://www.youtube.com/watch?v=bEZcodengwk
 [bork]: https://github.com/mattly/bork
 
-After we got back home, I had a bit of a relapse from the culture shock of both returning to the US and of talking to people in the tech world and doing code-on-whiteboard interviews. The stress put a strain on my relationship with my wife, and I am forever grateful to her for allowing me the space to heal. I spent some time thinking about what I wanted out of a job, realized I no longer wanted to work with the tech stacks with which I had professional experience.
+After we got back home, I had a bit of a relapse from the culture shock of both returning to the US and of talking to people in the tech world and doing code-on-whiteboard interviews. The stress put a strain on my relationship with my wife, and I am forever grateful to her for allowing me the space to heal. I spent some time thinking about what I wanted out of a job, realized I no longer wanted to work with the tech stacks with which I had professional experience, and I wanted to work on something meaningful.
 
 I'm not entirely sure when exactly I stopped feeling the effects of burnout. About fifteen months after the start of this story, I picked up some contracting work in a project that I was actually excited about. I no longer felt the emptiness, the bitterness, and I knew I was better. 
 
@@ -131,7 +131,7 @@ I've heard similar stories from friends and acquaintances about the lasting effe
 
 [nyt-amazon]: http://www.nytimes.com/2015/08/16/technology/inside-amazon-wrestling-big-ideas-in-a-bruising-workplace.html
 
-I'm not the only person to notice, [people are talking][work-hard] about [finding balance][finding-balance] and [telling their stories][amazon-baby-cancer]. The sad thing about the metrics-driven performance culture described by the _Times_ at Amazon is that [studies show][pstudy-1] that [overworked people perform worse][pstudy-2]. The intensity of these environments and scope of the projects help people feel like they're part of something big, something worth making sacrifices for. We call that feeling _passion_. It's addicting and it clouds judgement, but it doesn't have to be all-consuming, and it shouldn't push people towards harm. Be careful with passion and those who would use it against you.
+I'm not the only person to notice. [People are talking][work-hard] about [finding balance][finding-balance], and [telling their stories][amazon-baby-cancer]. The sad thing about the metrics-driven performance culture the _Times_ describes at Amazon is [studies][pstudy-1] show [overworked people perform worse][pstudy-2]. The intensity of these environments and scope of the projects help people feel like they're part of something big, something worth making sacrifices for. We call that feeling _passion_. It's addicting and it clouds judgement, but it doesn't have to be all-consuming, and it shouldn't push people towards harm. Be careful with passion and those who would use it against you.
 
 [work-hard]: https://medium.com/life-learning/work-hard-live-well-ead679cb506d
 [finding-balance]: https://medium.com/@aq/finding-balance-7388ce748051
