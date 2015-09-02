@@ -49,12 +49,6 @@ html(lang="en")
 
 
   body(class=page.bodyClass + " " + page.slug)
-    div#meta(style="display:none")
-      dl
-        each val, key in page
-          dt= key
-          dd= val
-
     #page-content!= content
     #footnoter
       .footnote-liner
