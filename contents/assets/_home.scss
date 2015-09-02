@@ -28,6 +28,10 @@
 
     hgroup {
       padding-top: 262px;
+      @include media($mobile) {
+        padding-top: 217px;
+      }
+
       @include inset;
       @include inset-center;
       @include width-text($list-width);
@@ -39,7 +43,7 @@
         max-width: 30em;
       }
       h1 {
-        line-height: 1em;
+        line-height: 0.8;
         margin-left: -6px;
         @include display-type;
         font-size: 72px;
