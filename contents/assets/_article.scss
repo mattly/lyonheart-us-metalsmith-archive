@@ -78,7 +78,7 @@ article.article-main {
   &> section > blockquote,
   &> section > ul,
   &> section > pre,
-  &> section > hr,
+  &> section > .hr-wrapper,
   &> section > .section-content,
   &> footer {
     @include inset-center;
@@ -316,6 +316,7 @@ label.sidenote-number {
   vertical-align: baseline;
   position: relative;
   color: $grey-darkish;
+  white-space: normal;
 
   @include media($mobile) {
     display: none;
@@ -401,4 +402,20 @@ body.mistrusting-email {
   padding: 20px;
   text-align: center;
   margin-bottom: 2em;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.katex {
+  line-height: 0 !important;
+}
+.newthought {
+  font-size: 90%;
+  line-height: inherit;
+  font-family: $display-family;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
