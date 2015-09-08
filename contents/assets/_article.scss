@@ -132,63 +132,12 @@ article.article-main {
                             border-color $link-trans ease-in
                           );
       @include            underline($red-med);
-      color:              $red-med;
+      color: inherit;
       margin: -3px -1px;
       padding: 3px 1px;
       &:visited {
-        color:            $visited-link;
-        @include          underline-color($visited-link);
-      }
-    }
-
-    a[rel=footnote], a[rel=footnote]:visited, {
-      @include            no-underline;
-      text-decoration:    none;
-      color: $grey-lukewarm;
-      border: 1px solid $grey-lukewarm;
-      font-family: $display-family;
-      &:hover, &:focus {
-                 color: $grey-bright;
-                 background-color: $grey-darker;
-                 border-color: $grey-darker;
-      }
-      position: relative;
-      margin: 0 3px;
-      padding: 2px 4px 2px 5px;
-      border-radius: 10px;
-      min-width: 15px;
-      font-weight:        bold;
-      line-height: 0;
-      sup {
-        vertical-align: inherit;
-        font-size: inherit;
-      }
-    }
-    a[rev=footnote],
-    a[rev=footnote]:visited {
-      @include no-underline;
-      text-decoration: none;
-      color: $grey-lukewarm;
-      font-size: 1.2em;
-      line-height: 0;
-      position: relative;
-      display: inline-block;
-      line-height: 0;
-      top: 4px;
-      @include media($mobile) {
-        top: -4px;
-      }
-    }
-
-    .math {
-    }
-  }
-
-  section.article-section-2col {
-    .section-content {
-      @include text-columns(2, 20px);
-      p, li {
-        @include text-avoid-breaks;
+        color: inherit;
+        @include          underline-color($red-med);
       }
     }
   }
@@ -223,7 +172,6 @@ article.article-main {
       margin-bottom: 5px;
       float: left;
     }
-    d
     .article-footer-section-small {
       p {
         @include text-size($text-size-smaller);
@@ -332,50 +280,6 @@ label.sidenote-number {
 }
 
 
-#footnoter {
-  position:           fixed;
-  bottom:             0;
-  left:               0;
-  right:              0;
-  background:         $grey-bright;
-  border-top: 2px solid $grey-warm;
-  opacity:            0;
-  transition:         opacity, transform;
-  transition-duration: 0.25s;
-  .footnote-liner {
-    @include inset-center;
-    @include region-margin(0.5);
-    max-width:        666px;
-  }
-  .footnote-number {
-    float: left;
-    margin-right: 10px;
-    margin-top: -5px;
-    font-size: 1.5em;
-    opacity: 0.25;
-  }
-  .footnote-content {
-    @include          text-size($text-size-small);
-    @include          text-height-crowded;
-    margin-left:      2em;
-    a {
-      $link-trans: 0.25s;
-      @include transition(
-        color $link-trans ease-in
-      );
-      @include underline($red-med);
-      color: $red-med;
-      margin: -3px;
-      padding: 3px;
-      $visited-link: darken($red-med, 10%);
-      &:visited {
-        color: $visited-link;
-        @include underline-color($visited-link);
-      }
-    }
-  }
-}
-
 .disclosure-notice {
   font-weight: bold;
   color: $red-med;
@@ -399,7 +303,9 @@ body.mistrusting-email {
 }
 
 .katex {
-  line-height: 0 !important;
+  @include media($desktop) {
+    line-height: 0 !important;
+  }
 }
 .newthought {
   font-size: 90%;
