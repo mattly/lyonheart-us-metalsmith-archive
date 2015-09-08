@@ -28,6 +28,9 @@ article.article-main {
         @include media($mobile) {
           @include inset;
         }
+        @include media($small) {
+          @include inset;
+        }
         position:     absolute;
         right:        0;
         left:         0;
@@ -211,34 +214,21 @@ article.article-main {
     p {
       @include text-height-crowded;
       @include text-margin-flow;
-      @include width-text(35);
+      @include width-text(32);
     }
+    d
     img.image-left {
       margin-top: 5px;
       margin-right: 10px;
       margin-bottom: 5px;
       float: left;
     }
+    d
     .article-footer-section-small {
       p {
         @include text-size($text-size-smaller);
       }
     }
-    &.article-footer-wide {
-      @include page-width;
-    }
-
-    #footnotes {
-      ol {
-        list-style-position: outside;
-      }
-      li {
-        margin-left: 1em;
-      }
-      p {
-      }
-    }
-
     #colophon {
       @include text-size($text-size-tiny);
       color: $grey-darker;
