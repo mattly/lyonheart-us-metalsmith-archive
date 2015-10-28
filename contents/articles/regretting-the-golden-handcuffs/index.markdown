@@ -20,7 +20,7 @@ This isn't a tale of a popular tech startup having a well-publicized exit.  Whil
 [cm-ps]: http://www.boundary.com/blog/2013/05/i-took-the-300k/
 [long-tail]: https://en.wikipedia.org/wiki/Long_tail
 
-<span class="newthought">The job had been exhilarating.</span> It was my first real experience working solely on a product instead of as a consultant, the first time I had skin in the game. It provided a space where I didn't feel overshadowed, and gave me a new perspective about what I was capable of: I rose to a number of technical challenges, took a large hand in shaping the product design, and helped build a great team of people. I was _passionate_ about my work.
+<span class="newthought">The job had been</span> exhilarating. It was my first real experience working solely on a product instead of as a consultant, the first time I had skin in the game. It provided a space where I didn't feel overshadowed, and gave me a new perspective about what I was capable of: I rose to a number of technical challenges, took a large hand in shaping the product design, and helped build a great team of people. I was _passionate_ about my work.
 
 In hindsight, the problems were obvious. We built a product with a vendor's bleeding-edge technology in hopes of platform _synergy_, lured in early adopters and gave them too much for free. The vendor abandoned their technology, and our generous free services attracted people who proved hard to convert to paying customers. The engineering team spent most of our time battling abuse of services, and as the product vision faltered, people left for other companies. I wasn't surprised when the Founder announced we were looking for a buyer in order to continue operations.
 
