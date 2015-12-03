@@ -10,8 +10,9 @@ html(lang="en")
     if page.summary
       meta(name="description" content=page.summary)
   
-    if page.siblings['_banner.jpg']
-      - var pageImage = page.siblings['_banner.jpg'].full_url
+    - var banner = siblings(pages, page)['_banner.jpg']
+    if banner
+      - var pageImage = banner.full_url
     else
       - var pageImage = null
 
@@ -52,7 +53,7 @@ html(lang="en")
     if page.scripts
       each script in page.scripts
         script(type="text/javascript" src=script)
-    script(type="text/javascript" src="/" + fingerprint["assets/articles.js"])
+    script(type="text/javascript" src="/assets/articles.js")
     // link(href="/" + fingerprint["assets/main.css"] rel="stylesheet")
     link(href="/assets/main.css" rel="stylesheet")
     if page.styles

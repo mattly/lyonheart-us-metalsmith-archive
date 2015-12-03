@@ -115,6 +115,9 @@ article.article-main {
       p:last-child {
         margin-bottom: 0;
       }
+      &.normal {
+        border-left-width: 0;
+      }
     }
     blockquote footer {
       @include            text-size($text-size-small);
@@ -133,8 +136,14 @@ article.article-main {
                           );
       @include            underline($red-med);
       color: inherit;
-      margin: -3px -1px;
-      padding: 3px 1px;
+      text-shadow:
+      $grey-bright 1px 0px 0px,
+      $grey-bright -1px 0px 0px,
+      $grey-bright 2px 0px 0px,
+      $grey-bright -2px 0px 0px,
+      $grey-bright 3px 0px 0px,
+      $grey-bright -3px 0px 0px
+      ;
       &:visited {
         color: inherit;
         @include          underline-color($red-med);
@@ -298,6 +307,14 @@ body.mistrusting-email {
   margin-bottom: 2em;
 }
 
+.newthought {
+  font-size: 90%;
+  line-height: inherit;
+  font-family: $display-family;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
 .nowrap {
   white-space: nowrap;
 }
@@ -306,12 +323,4 @@ body.mistrusting-email {
   @include media($desktop) {
     line-height: 0 !important;
   }
-}
-.newthought {
-  font-size: 90%;
-  line-height: inherit;
-  font-family: $display-family;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
 }

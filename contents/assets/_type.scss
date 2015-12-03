@@ -1,4 +1,6 @@
-$main-family: "ff-tisa-web-pro", serif;
+/* $main-family: "ff-tisa-web-pro", serif; */
+@import "charter";
+$main-family: charter, serif;
 $display-family: "effra", sans-serif;
 $mono-family:       "source-code-pro", "Menlo", "Consolas", "Courier New", monospace;
 @mixin display-type {
@@ -77,7 +79,7 @@ $text-height-double:      percentage(2);
   text-decoration: none;
   background-size: 2px 2px;
   background-repeat: repeat-x;
-  background-position: 0 80%;
+  background-position: 0 83%;
   @include underline-color($color);
 }
 @mixin underline-color($color) {

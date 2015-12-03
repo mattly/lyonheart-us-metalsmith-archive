@@ -24,27 +24,33 @@ var templateHelpers = {
     }
 }
 const docChain = [
-  ignore(['**/.DS_Store']),
-  require('metalsmith-placeholder')(),
-  require('./support/parseMarkdownSections')(),
-  // require('metalsmith-multimarkdown')(),
+    ignore(['**/.DS_Store']),
+    require('./support/drafts')(),
+    require('metalsmith-placeholder')(),
+    require('./support/parseMarkdownSections')(),
+    // require('metalsmith-multimarkdown')(),
     require('./support/pandoc').pandoc(),
-  require('./support/footnotes')(),
-  ignore(['**/__markdown__sections__/**']),
-  require('metalsmith-collections')({
-      articles: {
-          pattern: 'articles/*/index.html',
-          sortBy: 'date',
-          reverse: true
-      },
-      talks: {
-          pattern: 'talks/*/index.html',
-          sortBy: 'date',
-          reverse: true
-      }
-  }),
-  require('./support/siblings')(),
-  require('./support/set_url')(),
+    require('./support/footnotes')(),
+    ignore(['**/__markdown__sections__/**']),
+    require('metalsmith-collections')({
+        articles: {
+            pattern: 'articles/*/index.html',
+            sortBy: 'date',
+            reverse: true
+        },
+        talks: {
+            pattern: 'talks/*/index.html',
+            sortBy: 'date',
+            reverse: true
+        },
+        drafts: {
+            pattern: 'drafts/*/index.html',
+            sortBy: 'date',
+            reverse: true
+        }
+    }),
+    require('./support/siblings')(),
+    require('./support/set_url')(),
 
   template({
     helpers: templateHelpers,

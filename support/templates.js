@@ -1,10 +1,10 @@
 import fs from "fs";
 import path from "path";
 import jade from "jade";
-// import mmd from "mmd";
-var pandoc = require("./pandoc");
+const Remarkable = require('remarkable');
+const md = new Remarkable()
 
-// jade.filters.markdown = (str) => pandoc.convert(str)
+jade.filters.markdown = (str) => md.render(str);
 
 function defaultLocalContext(page, context) {
   context.page = page;
@@ -26,7 +26,9 @@ export default function template(config={}) {
 
   return function(files, metalsmith, done) {
     var globalContext = config.globalContext(metalsmith.metadata(), config);
-    Object.keys(config.helpers).forEach(helper => { globalContext[helper] = config.helpers[helper]; })
+    globalContext.pages = files
+    Object.keys(config.helpers)
+          .forEach(helper => { globalContext[helper] = config.helpers[helper]; })
     var contentsDir = path.resolve(metalsmith._directory, metalsmith._source);
     var templateDir = path.resolve(contentsDir, config.directory);
     var templateCache = {};

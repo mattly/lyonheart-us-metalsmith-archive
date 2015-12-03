@@ -1,0 +1,27 @@
+url:    http://lyonheart.us
+name:   lyonheart.us
+owner:  Matthew Lyon
+
+github_modifications_base: https://github.com/mattly/lyonheart.us/commits/master/contents
+
+links:
+  - icon: envelope
+    href: mailto:matthew@lyonheart.us
+    title: Email
+  - icon: rss
+
+collections:
+  articles:
+    pattern:        articles/*/index.html
+    sort:           newest
+    feed:
+      path:         index.xml
+      description:  writings by Matthew Lyon
+
+assets:
+  compilers:
+    - coffee
+    - sass:
+        includePaths:
+          => require('node-bourbon').includePaths.concat(require('node-neat').includePaths)
+
