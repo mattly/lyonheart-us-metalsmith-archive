@@ -192,7 +192,13 @@ const docChain = [
                                        }
                                    });
                                }
-                               })
+                               }),
+                atblocks.inline('def',
+                               {onCapture: function(t, env){
+                                   if (!env.vars) { env.vars = {}; }
+                                   env.vars[t.meta.id] = t.content}}),
+                atblocks.inline('var',
+                                {render: (t, env) => env.vars[t.meta.id] })
             ]
         }),
   require('metalsmith-collections')({

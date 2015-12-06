@@ -1,10 +1,10 @@
 import fs from "fs";
 import path from "path";
 import jade from "jade";
-const Remarkable = require('remarkable');
-const md = new Remarkable()
+// const Remarkable = require('remarkable');
+// const md = new Remarkable()
 
-jade.filters.markdown = (str) => md.render(str);
+// jade.filters.markdown = (str) => md.render(str);
 
 function defaultLocalContext(page, context) {
   context.page = page;

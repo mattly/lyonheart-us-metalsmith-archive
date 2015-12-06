@@ -45,7 +45,7 @@ export default function atblocks(md, plugOptions){
 function renderer(tag){
     return function render(tokens, id, options, env, self) {
         let token = tokens[id]
-        return tag.render(token, env.lozTags)
+        return tag.render(token, env[envKey])
     }
 }
 
@@ -57,7 +57,7 @@ function reconcileTag(tag){
     }
 }
 
-const lozTagMatch = /^[-\w]+(?:#([-\w]+))?(?:\[([^\]]+)\])?(?:{([^}]+)})?/;
+const lozTagMatch = /^[-\w]+(?:#([-\w]+))?(?:\[([^\]]+)\])?(?:{([^}]+)})?(?:(\:))?/;
 
 function parseInline(tag){
     let markerStr = `◊${tag.name}`;
@@ -100,7 +100,7 @@ function parseInline(tag){
         if (! silent) {
             let token = state.push(tag.type, '', 0),
                 innards = state.src.slice(start, pos),
-                [match, id, attrs, content] = innards.match(lozTagMatch)
+                [match, id, attrs, content, _cont] = innards.match(lozTagMatch)
             ;
             token.markup = `◊${tag.name}`
             token.meta = {tag: tag.name, id: id, attrs: attrs};
@@ -122,46 +122,50 @@ function parseBlock(tag){
     return function(state, startLine, endLine, silent){
         let start = state.bMarks[startLine] + state.tShift[startLine],
             max = state.eMarks[startLine];
-        // let p = startLine;
-        // console.log('¶')
-        // while (p < endLine) {
-        //     let s = state.bMarks[p] + state.tShift[p], m = state.eMarks[p];
-        //     console.log('¬', state.src.slice(s, m))
-        //     p++;
-        // }
         if (start + 1 > max) { return false; } // ◊x
         if (markerChar !== state.src.charCodeAt(start)) { return false; }
         if (markerStr !== state.src.slice(start, start + markerStr.length)) { return false; }
         let nextLine = startLine,
-            closed = false;
-        for(;;) {
-            nextLine++;
-            if (nextLine >= endLine) { break; }
-            if (state.sCount[nextLine] > state.sCount[startLine]) { continue; }
-            let start = state.bMarks[nextLine] + state.tShift[nextLine],
-                firstChar = state.src.charCodeAt(start),
-                isMarker = firstChar === markerChar;
-            if (isMarker) {
-                closed = true;
-                break;
+            line = state.src.slice(start, max);
+        let [match, id, attrs, content, continues] = line.slice(1).match(lozTagMatch)
+        if (continues) {
+            for(;;) {
+                nextLine++;
+                if (nextLine >= endLine) { break; }
+
+                if (state.sCount[nextLine] > state.sCount[startLine]) { continue; }
+                else {break; }
             }
         }
-        if (!closed) { return false; }
+
         if (silent) { return true; }
 
         if (! state.env[envKey]) { state.env[envKey] = {}; }
-        let line = state.src.slice(start, max),
-            oldParent = state.parentType,
+        let oldParent = state.parentType,
             oldLineMax = state.lineMax;
         state.parentType = 'container';
         state.lineMax = nextLine;
         let token = state.push(tag.type, '', 1);
         token.markup = line;
-        let [match, id, attrs, content] = line.slice(1).match(lozTagMatch)
         token.meta = {tag: tag, id: id, attrs: attrs}
         token.block = true;
         token.map = [startLine, nextLine];
-        state.md.block.tokenize(state, startLine+1, nextLine);
+
+        let tokenCount = state.tokens.length
+        if (content) {
+            state.push('paragraph_open', 'p', 1)
+            let i = state.push('inline', '', 0)
+            i.children = [];
+            i.content = content;
+            state.push('paragraph_close', 'p', -1)
+        } else if (continues) {
+            state.blkIndent += 4;
+            let oldParent = state.parentType;
+            state.parentType = 'lozTag'
+            state.md.block.tokenize(state, startLine+1, nextLine);
+            state.blkIndent -= 4;
+            state.parentType = oldParent;
+        }
 
         let closeToken = state.push(`${tag.type}-close`, '', -1);
         closeToken.block = true;

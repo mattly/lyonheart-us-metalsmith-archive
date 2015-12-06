@@ -94,15 +94,17 @@ marker in the body text and will appear in the sidebar. On mobile, sidenote
 are hidden by default,◊note-marker#mobile and a red &bigoplus; marker will be
 available to show them.
 
-◊note-content#sidenote-example
-This is the sidenote's content. If we add a few more words it will be multiple lines, and maybe even dip into the next paragraph.
-◊
+◊note-content#sidenote-example:
+    This is the sidenote's content. If we add a few *more* words it will be
+    multiple lines, and maybe even dip into the next paragraph.
 
-◊note-content#mobile: Lets face it, they have to be.
-◊
+◊note-content#mobile{Lets face it, they kinda *have* to be.}
 
 ◊def#foo{Bar}
-◊var#foo
+
+You can define variables with `◊def#varname{value}` and then render them inline with
+`◊var#varname`. For example, earlier we defined `◊def#foo{Bar}` and here you can see that
+it is indeed ◊var#foo .
 
 ◊newthought{Lorem ipsum dolor sit} amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore [magna aliqua](#). Ut enim ad minim veniam, quis

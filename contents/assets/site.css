@@ -21,14 +21,15 @@
 
 :root {
   /* --gray8: hsl(355, 20%, 98%); */
-  --gray7: hsl( 15, 15%, 95%);
-  --gray6: hsl( 30, 12%, 92%);
-  /* --gray5: */
-  --gray4: hsl( 45,  5%, 74%);
-  /* --gray3: */
-  --gray2: hsl(205, 10%, 32%);
-  --gray1: hsl(220, 15%, 18%);
-  /* --gray0:  */
+    --gray8a: hsl(0, 0%, 97%);
+    --gray7: hsl( 15, 15%, 95%);
+    --gray6: hsl( 30, 12%, 92%);
+    /* --gray5: */
+    --gray4: hsl( 45,  5%, 74%);
+    /* --gray3: */
+    --gray2: hsl(205, 10%, 32%);
+    --gray1: hsl(220, 15%, 18%);
+    /* --gray0:  */
 
   --red-md: hsl(354, 100%, 39%);
   --mag-md: hsl(329, 53%, 45%);
@@ -178,8 +179,10 @@ article {
             }
         }
         pre {
-            margin-left: 1rem;
+            background-color: var(--gray8a);
+            padding: 0.5rem 1rem;
             line-height: calc(1 * var(--third));
+            border-radius: 0.25rem;
         }
         a {
             color: inherit;
@@ -194,6 +197,12 @@ article {
         }
 
         code {
+            background-color: var(--gray8a);
+            border-radius: 0.25rem;
+            color: var(--gray2);
+            display: inline-block;
+            padding: 1px;
+            margin: -1px;
             font-family: "Fira Mono", monospace;
             font-size: calc(1rem * 1 / var(--second));
         }
