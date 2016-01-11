@@ -1,0 +1,38 @@
+extends ./default.jade
+  
+mixin list-item(item)
+  article
+    header
+      a(href=item.url)
+        h1= item.title
+        time(pubdate=true datetime=formatDate(item.date, "YYYY-MM-DDTHH:mm:SSZ"))
+          = formatDate(item.date, "MMMM Do YYYY")
+        if item.subtitle
+          | &nbsp;
+          h2= item.subtitle
+
+
+block content
+  .page-home
+    header.main-header
+      hgroup.name
+        p.lead Hi, I'm
+        h1
+          span.first Matthew
+          | 
+          span.last Lyon
+    section.main-content
+      p.bio 
+        | I help humans and computers communicate.
+        | I make code, photographs, encaustic paintings, synth bloops and beer.
+      .archive-list
+        if env.dev
+          h3 Drafts
+          each article in collections.drafts
+            +list-item(article)
+        h3 Posts
+        each article in collections.articles
+          +list-item(article)
+        h3 Talks
+        each talk in collections.talks
+          +list-item(talk)

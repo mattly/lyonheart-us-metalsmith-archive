@@ -1,0 +1,14 @@
+extends ./default.jade
+
+block content
+  article.article-main
+
+    != content
+
+    nav#article-relative-nav
+      .later
+        | &nbsp;
+      .home
+        a(rel="up" href="/") home
+      .earlier
+        | &nbsp;

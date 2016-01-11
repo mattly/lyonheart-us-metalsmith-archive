@@ -14,6 +14,10 @@ html(lang="en")
       article.article!= content
   
     footer#site-footer
+      #links
+        each link in site.links
+          a(href=link.href title=link.title)
+            .icon(class=["icon-"+link.icon])
       #copyright
         p
           span.notice Copyright &copy; 2015

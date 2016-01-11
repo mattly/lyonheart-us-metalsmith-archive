@@ -35,9 +35,8 @@ function parse(state, startLine, endLine, silent){
 
       if (! isMarker && ! isTag) { continue; }
       if (isMarker) {break;}
-      if (isTag && ! ['sectio', 'header', 'footer'].includes(state.src.slice(start+1, start+7))) {
-          break;
-      }
+      if (isTag && ! ['sectio', 'header', 'footer'].includes(state.src.slice(start+1, start+7))) continue
+      else if (isTag) break
       autoClosed = true;
       break;
   }

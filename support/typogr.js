@@ -6,8 +6,10 @@ export default function smart(config={}) {
         Object.keys(files)
             .filter(filepath => path.extname(filepath) === '.html')
             .forEach(filepath => {
-                var page = files[filepath];
-                page.contents = new Buffer(typogr.typogrify(page.contents.toString().replace(/&quot;/g,'"')));
+                let page = files[filepath],
+                    contents = page.contents.toString().replace(/&quot;/g,'"'), // workaround for markdownit
+                    result = typogr(contents).chain().amp().smartypants().initQuotes().caps().ord().value()
+                page.contents = new Buffer(result);
             });
         done();
     }

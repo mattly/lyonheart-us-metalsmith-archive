@@ -10,9 +10,10 @@ export default function drafts(config={}) {
                 var pathname = path.dirname(filepath);
                 var filename = path.basename(filepath);
                 var hash = crypto
-                    .createHash('md5')
-                    .update(pathname)
-                    .digest('base64');
+                        .createHash('md5')
+                        .update(pathname)
+                        .digest('base64')
+                        .replace(/==$/,'');
                 files[`drafts/${hash}/${filename}`] = page;
             }
         });

@@ -1,44 +1,29 @@
-const buildDir = 'build';
-const sourceDir = 'contents';
+const buildDir = 'build'
+const sourceDir = 'contents'
 
-const fs = require('mz/fs');
-const path = require('path');
-
-var invokings = 0;
+import fs from 'mz/fs'
+import path from 'path'
 
 const promisify = function(fn, context) {
   return function(...args) {
-    invokings += 1;
-    let ident = invokings;
     return new Promise(function(resolve, reject){
       fn.apply(context, args.concat(function(err, ...result) {
-        if (err) {
-          reject(err);
-        }
-        else if (result.length === 1) {
-          resolve(result[0]);
-        }
-        else {
-          resolve(result);
-        }
-      }));
-    });
-  };
-};
+        if (err) reject(err)
+        else if (result.length === 1) resolve(result[0])
+        else resolve(result)
+      }))
+    })
+  }
+}
+
 const rm = promisify(require('rimraf'))
 const chalk = require('chalk');
 
 const metalsmith = require('metalsmith');
-const ignore = require('metalsmith-ignore');
 
 const moment = require('moment');
-// const template = require('./support/templates');
-import template from './support/templates';
-import sections from './support/sections';
-import section from './support/markdown-section';
-import newthought from './support/markdown-newthought';
-import atblocks from './support/at-blocks';
-import typogr from './support/typogr';
+const objectPath = require('object-path');
+
 
 var templateHelpers = {
   formatDate: (date, format) => {
@@ -59,207 +44,293 @@ var templateHelpers = {
 
 function clone(obj) {
   return Object.keys(obj).reduce(function(prev, key){
-    prev[key] = obj.key;
+      if (typeof obj[key] === "object") {
+          prev[key] = clone(obj[key]);
+      } else {
+          prev[key] = obj[key];
+      }
     return prev;
   }, {});
 }
 
-const docChain = [
-  ignore(['**/.DS_Store']),
-    ignore(['articles/**', 'talks/**']),
+function envGet (env, p, fallback) { return objectPath.get(env, p.replace(/\//g, '.', fallback))}
+function envSet (env, p, value) { return objectPath.set(env, p.replace(/\//g, '.', value))}
 
-  function(files, ms, done){
-    let processor = require('postcss')([
-        require('postcss-import')({
-            resolve: function(f, info){
-                if (/^node_modules\//.test(f)) {return f;}
-                let delta = path.relative(process.cwd(), info.basedir);
-                return path.join(process.cwd(), sourceDir, delta, f);
-            }}),
-        require('postcss-assets')({
-            loadPaths: ['contents/assets/fonts/']
-        }),
-        require('autoprefixer'),
-        require('postcss-nested'),
-        require('postcss-nested-props'),
-        require('cssnext')({import: false}),
-        require('precss')()
-    ]);
-    let results = [];
-    Object.keys(files)
-      .filter(f => /\.css$/.test(f))
-      .forEach(css => {
-        let dirname = path.dirname(css),
-            basename = path.basename(css, '.css'),
-            source = path.join(dirname, `${basename}_source.css`),
-            dest = css,
-            file = files[css],
-            newFile = clone(file),
-            pResult = processor.process(file.contents, { from: source, to: dest })
-              .then(r => {
-                newFile.contents = new Buffer(r.css);
-                files[css] = newFile;
-                // let map = clone(file)
-                // map.contents = new Buffer(r.map.toString());
-                // files[`${css}.map`] = map;
-              });
+const args = process.argv.slice(2)
 
-        files[source] = file;
-        results.push(pResult);
-      });
-    Promise.all(results).then(() => done()).catch(done);
-  },
+let prod = args.indexOf('prod') > -1
+let useServer = args.indexOf('server') > -1
+console.log('isProd', prod)
+console.log('useServer', useServer)
 
-  require('metalsmith-placeholder')(),
-    require('metalsmith-markdownit')('commonmark', {
-        typographer: true
+
+const chain = []
+
+import ignore from 'metalsmith-ignore'
+chain.push(ignore(['**/.*']))
+
+import drafts from './support/drafts'
+chain.push(drafts())
+
+chain.push(function(files, ms, done){
+    let lastDate = new Date(1970,1,1)
+    Object.keys(files).forEach(function (file) {
+        let page = files[file]
+        if (page.date && page.date > lastDate) lastDate = page.date
     })
-        .enable('strikethrough')
-        .enable('table')
-        .use(require('markdown-it-math'), {
-            inlineRenderer: require('katex').renderToString
-        })
-        .use(section)
-        .use(atblocks, {
-            tags: [
-                atblocks.inline('newthought',
-                                {render: (t) => `<span class="newthought">${t.content}</span>`}),
-                atblocks.inline('note-marker'),
-                atblocks.block('note-content',
-                               {onReconcile: function (state, tag){
-                                   let notes = {},
-                                       insideNote = false,
-                                       current, currentId;
-                                   state.tokens = state.tokens.filter((tok) => {
-                                       if (tok.type === tag.type) {
-                                           insideNote = true;
-                                           currentId = tok.meta.id;
-                                           current = [];
-                                           return false;
-                                       }
-                                       else if (tok.type === `${tag.type}-close`) {
-                                           insideNote = false;
-                                           notes[currentId] = current;
-                                           return false;
-                                       }
-                                       else if (insideNote) {
-                                           current.push(tok);
-                                           return false;
-                                       }
-                                       else { return true; }
-                                   });
-                                   Object.keys(notes).forEach((noteId) => {
-                                       state.tokens
-                                           .filter((t) => t.type === 'inline' )
-                                           .forEach((inline) => {
-                                               let thisIndex = inline.children.findIndex(
-                                                   (t) => t.type === '◊note-marker' && t.meta.id === noteId)
-                                               if (thisIndex < 0) { return; }
-                                               let marker = inline.children[thisIndex],
-                                                   newTokens = [], token;
-                                               token = new state.Token('label-open', 'label', 1)
-                                               token.content = marker.content;
-                                               token.attrs = [['for', `note-${noteId}`],
-                                                              ['class', 'note__marker']]
-                                               if (!token.content || token.content.length > 0) {
-                                                   token.attrs[1][1] += ' note__marker--empty'
-                                               }
-                                               newTokens.push(token);
-                                               newTokens.push(new state.Token('label-close', 'label', -1))
-                                               token = new state.Token('input', 'input', 0)
-                                               token.attrs = [['type', 'checkbox'],
-                                                              ['id', `note-${noteId}`], ['class', 'note__toggle']]
-                                               newTokens.push(token);
-                                               token = new state.Token('note_content_open', 'span', 1);
-                                               token.attrs = [['class', 'note__content']];
-                                               token.block = true;
-                                               newTokens.push(token);
+    ms.metadata().site.lastPublished = lastDate
+    done()
+})
 
-                                               token = new state.Token('inline', '', 0);
-                                               token.children = notes[noteId];
-                                               token.content = '';
-                                               notes[noteId].filter((t) => t.type === 'inline')
-                                                   .forEach((t) => newTokens = newTokens.concat(t.children))
+chain.push(require('metalsmith-placeholder')())
 
-                                               token = new state.Token('note_content_close', 'span', -1);
-                                               token.block = true;
-                                               newTokens.push(token)
+import loze from './support/loze'
+const lozer = loze()
+          .define('newthought', (tag) => `<span class="newthought">${tag.content}</span>`)
+          .define('def', function lozedef (tag, env) {
+              envSet(env, tag.id, tag.content)
+          })
+          .define('val', function lozeval (tag, env) { return envGet(env, tag.id) })
+          .define('with-aside', (tag) => `<div class='aside-container'>\n\n${tag.content}\n\n</div>`)
+          .define('aside', function lozeAside (tag, env) {
+              return `<aside>\n\n${tag.content}\n\n</aside>`
+          })
+          .define('math', function lozeMath (tag, env) {
+              return require('katex').renderToString(tag.content)
+          })
+          .define('date', function lozeDate (tag, env) {
+              return `<time>${moment(envGet(env, tag.id)).format(tag.attr)}</time>`
+          })
+          .define('include', function lozeInclude (tag, env) {
+              let givenPath = tag.attr,
+                  includePath, contents
+              if (givenPath.match(/^\./)) includePath = path.resolve(sourceDir, env.dirname, givenPath)
+              else if (givenPath.match(/^\//)) includePath = path.resolve(sourceDir, givenPath)
+              else includePath = path.resolve(sourceDir, '_includes', givenPath)
 
-                                               inline.children.splice.apply(inline.children, [thisIndex, 0].concat(newTokens))
-                                           });
+              try {
+                  contents = fs.readFileSync(includePath).toString()
+              } catch (e) {
+                  console.error(`◊include ${tag.attr} not found at ${includePath}`)
+                  contents = ''
+              }
+              return contents
+          })
+          .define('quote', function (tag) {
+              let quote = tag.content.trim().split("\n").map(line => `> ${line}`).join("\n")
+              return `<div class="epigraph">\n\n${quote}\n\n</div>`
+          })
+          .define('quote-source', (tag) => `<span class="quote-source">${tag.content}</span>`)
+          .define('banner-header', function(tag) {
+              let classes = ['article-header', 'article-header-banner'].join(' '),
+                  styles = [`background-image: url('${tag.attr.image || 'banner.jpg'}')`,
+                            (tag.attr.imageStyle || '')].join(';')
+              return [`<header class="${classes}" style="${styles}">`,
+                      `<div class="info ${tag.attr.textClass || ''}">`,
+                      '', tag.content, '',
+                      '</div>', '</header>'].join('\n')
+          })
+          .define('highlight', function(tag){
+              let klass = ['highlight', tag.attr.color, tag.attr.fg ? 'fg' : 'bg'].join('-')
+              return `<span class="${klass}">${tag.content}</span>`
+          })
+          .define('video', function(tag){
+              return `<iframe width=${tag.attr.width} height=${tag.attr.height} src="https://www.youtube.com/embed/${tag.attr.youtube}" frameborder=0 allowfullscreen></iframe>`
+          })
+          .define('wide-container',
+            (tag) => `<div class="column-container full-width">${tag.content}</div>`)
+          .define('column', (tag) => `<div class="column-1">${tag.content}</div>`)
 
-                                       if (false) {
-                                       }
-                                   });
-                               }
-                               }),
-                atblocks.inline('def',
-                               {onCapture: function(t, env){
-                                   if (!env.vars) { env.vars = {}; }
-                                   env.vars[t.meta.id] = t.content}}),
-                atblocks.inline('var',
-                                {render: (t, env) => env.vars[t.meta.id] })
-            ]
-        }),
-  require('metalsmith-collections')({
+
+chain.push(
+    function(files, ms, done){
+        Object.keys(files)
+            .filter((file) => path.extname(file).match(/\.(md|markdown|html|css)/))
+            .forEach(function (file) {
+                let page = files[file],
+                    thisPage = {site: clone(ms.metadata().site)}
+                thisPage.page = page
+                let result = lozer.render(page.contents.toString(), thisPage)
+                page.contents = new Buffer(result)
+            })
+        done()
+    })
+
+import md from 'metalsmith-markdownit'
+import section from './support/markdown-section'
+
+chain.push(md('commonmark', { typographer: true })
+           .enable('strikethrough')
+           .enable('table')
+           .use(section))
+
+chain.push(require('metalsmith-collections')({
     articles: {
-      pattern: 'articles/*/index.html',
-      sortBy: 'date',
-      reverse: true
+        pattern: 'articles/*/index.html',
+        sortBy: 'date',
+        reverse: true
+    },
+    talks: {
+        pattern: 'talks/*/index.html',
+        sortBy: 'date',
+        reverse: true
+    },
+    drafts: {
+        pattern: 'drafts/*/index.html',
+        sortBy: 'date',
+        reverse: true
     }
-  }),
+}))
 
-    typogr(),
-  // set page variables
-  function(files, ms, done){
+chain.push(
+    function(files, ms, done){
+        let processor = require('postcss')([
+            require('postcss-import')({
+                resolve: function(f, info){
+                    if (/^node_modules\//.test(f)) {return f;}
+                    let delta = path.relative(process.cwd(), info.basedir);
+                    return path.join(process.cwd(), sourceDir, delta, f);
+                }}),
+            require('precss')(),
+            require('postcss-assets')({
+                loadPaths: ['contents/assets/fonts/',
+                            'contents/assets/']
+            }),
+            require('autoprefixer'),
+            require('postcss-nested'),
+            require('postcss-nested-props'),
+            require('cssnext')({import: false})
+        ]);
+        let results = [];
+        Object.keys(files)
+            .filter(f => /\.css$/.test(f))
+            .forEach(css => {
+                let dirname = path.dirname(css),
+                    basename = path.basename(css, '.css'),
+                    source = path.join(dirname, `${basename}_source.css`),
+                    dest = css,
+                    file = files[css],
+                    newFile = clone(file),
+                    pResult = processor.process(file.contents, { from: source, to: dest })
+                        .then(r => {
+                            newFile.contents = new Buffer(r.css);
+                            files[css] = newFile;
+                        });
+                results.push(pResult);
+            });
+        Promise.all(results).then(() => done()).catch(done);
+    }
+)
+
+import * as babel from 'babel-core'
+// let babel = require('babel-core')
+chain.push(function(files, ms, done){
     Object.keys(files)
-      .forEach(file => {
-        files[file].path = file;
-      })
+        .filter((f) => f.match(/^assets.+\.js$/))
+        .forEach(function(file) {
+            let { code, map, ast } = babel.transform(files[file].contents.toString(),
+                                                     { presets: ['stage-0', 'es2015']})
+            files[file].contents = new Buffer(code)
+        })
+    done()
+})
+
+
+chain.push(function(files, ms, done){
+    let md = ms.metadata()
+    Object.keys(files)
+        .forEach(file => {
+            let page = files[file]
+            page.url = file.replace(/index\.html$/, '')
+            page.slug = path.basename(page.url)
+            page.full_url = `${md.site.url}/${page.url}`
+        })
     done();
-  },
-  // migrate templates outside of contents dir?
-  template({
-    directory: 'layouts',
+})
+
+import rss from './support/rss'
+chain.push(rss({
+    sources: ['articles'],
+    output: 'index.xml'
+}))
+
+import template from './support/templates'
+// migrate templates outside of contents dir?
+chain.push(template({
     helpers: templateHelpers,
-    key: (p => p.layout || "default"),
+    key: (p => p.template || "default"),
     filter: (([f,p]) => f.match(/\.html$/))
-  }),
-  // feeds
-  require('metalsmith-browser-sync')({
-    server: buildDir,
-    files: ['contents/**'],
-    open: false
-  })
-];
+}))
 
-const chain = docChain;
+import typogr from './support/typogr'
+chain.push(typogr())
 
-const build = async function () {
-  console.log(`${chalk.yellow('building')}`);
-  let gen = metalsmith(__dirname)
-        .source(sourceDir)
-        .destination(buildDir)
-        .metadata({site: {links: []}})
-        .clean(false);
-  chain.forEach(plugin => gen.use(plugin));
-  return await promisify(gen.build, gen)();
+
+chain.push(ignore(['_*/**', '**/_*']))
+
+let metadata = {
+    site: {
+        owner: 'Matthew Lyon',
+        name: 'lyonheart.us',
+        url: 'http://lyonheart.us',
+        description: '',
+        github_modifications_base: "https://github.com/mattly/lyonheart.us/commits/master/contents",
+        links: [
+            {icon: 'envelope', href: 'mailto:matthew@lyonheart.us', title: 'Email'},
+            {icon: 'rss', href: '/index.xml', title: 'RSS Feed'},
+            {icon: 'tweeter', href: 'https://twitter.com/mattly', title: 'Twitter'},
+            {icon: 'github', href: 'https://github.com/mattly', title: 'GitHub'},
+            {icon: 'camera', href: 'https://500px.com/lyonheart', title: '500px (photos)'},
+            {icon: 'igram', href: 'https://www.instagram.com/matthewlyonheart/', title: 'Instagram'},
+            {icon: 'music', href: 'https://soundclould.com/matthewlyonheart', title: 'SoundCloud'},
+            {icon: 'pins', href: 'https://pinterest.com/mattly', title: 'Pinterest'},
+            {icon: 'linkin', href: 'https://www.linkedin.com/in/mattly', title: 'LinkedIn'},
+            {icon: 'slides', href: 'https://speakerdeck.com/mattly', title: 'SpeakerDeck'}
+        ]
+    },
+    env: { dev: ! prod, prod: prod }
 }
 
-const args = process.argv.slice(2);
+console.log(Object.keys(metadata))
+
+chain.unshift(function(files, ms, done){
+    ms.metadata(metadata)
+    done()
+})
+
+if (useServer) {
+    chain.push(require('metalsmith-browser-sync')({
+        server: buildDir,
+        files: ['contents/**', 'templates/**'],
+        open: false
+    }))
+}
+
+const build = async function () {
+  console.log(`${chalk.yellow('building')}`)
+  let gen = metalsmith(__dirname)
+          .source(sourceDir)
+          .destination(buildDir)
+          .metadata(metadata)
+          .ignore(['**/.*'])
+          .clean(false);
+  chain.forEach(plugin => gen.use(plugin))
+  return await promisify(gen.build, gen)()
+}
+
 
 async function clean () {
-  console.log(`${chalk.red('cleaning build dir')}: ${buildDir}`);
-  return await rm(buildDir);
+  console.log(`${chalk.red('cleaning build dir')}: ${buildDir}`)
+  return await rm(buildDir)
 }
 
 (async function () {
   try {
-    await clean();
-    await build();
-    console.log(`${chalk.green('done')}`);
+    await clean()
+    await build()
+    console.log(`${chalk.green('done')}`)
   } catch (err) {
     console.error(`${chalk.red('error:')} ${err}`)
     console.error(err.stack)
   }
-}());
+}())
