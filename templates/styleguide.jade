@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Styleguide
+    link(href="/assets/site.css" rel="stylesheet")
+    if page.styles
+      each style in page.styles
+        link(href=style rel="stylesheet")
+  
+  body
+    #page-content
+      article.article!= content
+  
+    footer#site-footer
+      #links
+        each link in site.links
+          a(href=link.href title=link.title)
+            .icon(class=["icon-"+link.icon])
+      #copyright
+        p
+          span.notice Copyright &copy; 2015
+          span.name   &#x2022; Matthew Lyon
+

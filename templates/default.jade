@@ -10,8 +10,9 @@ html(lang="en")
     if page.summary
       meta(name="description" content=page.summary)
   
-    if page.siblings['_banner.jpg']
-      - var pageImage = page.siblings['_banner.jpg'].full_url
+    - var banner = siblings(pages, page)['_banner.jpg']
+    if banner
+      - var pageImage = banner.full_url
     else
       - var pageImage = null
 
@@ -43,18 +44,12 @@ html(lang="en")
     if page.summary
       meta(name="twitter:description" content=page.summary)
 
-    script(type="text/javascript" src="//use.typekit.net/qat0pnp.js")
-
-    script(type="text/javascript").
-      try{Typekit.load();}catch(e){}
-
     script(type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js")
     if page.scripts
       each script in page.scripts
         script(type="text/javascript" src=script)
-    script(type="text/javascript" src="/" + fingerprint["assets/articles.js"])
-    // link(href="/" + fingerprint["assets/main.css"] rel="stylesheet")
-    link(href="/assets/main.css" rel="stylesheet")
+    script(type="text/javascript" src="/assets/article.js")
+    link(href="/assets/site.css" rel="stylesheet")
     if page.styles
       each style in page.styles
         link(href=style rel="stylesheet")
@@ -64,18 +59,19 @@ html(lang="en")
 
 
   body(class=page.bodyClass + " " + page.slug)
-    #page-content!= content
+    #page-content
+      block content
+        != content
 
-    footer#footer
-      .liner
-        #links
-          each link in site.links
-            a(href=link.href title=link.title)
-              .icon(class=["icon-"+link.icon])
-        #copyright
-          p
-            span.notice Copyright &copy; 2015
-            span.name  &#x2022; Matthew Lyon
+    footer#site-footer
+      #links
+        each link in site.links
+          a(href=link.href title=link.title)
+            .icon(class=["icon-"+link.icon])
+      #copyright
+        p
+          span.notice Copyright &copy; 2015
+          span.name  &#x2022; Matthew Lyon
 
     script(type="text/javascript").
       (function(i,s,o,g,r,a,m){i['googleanalyticsobject']=r;i[r]=i[r]||function(){
@@ -86,16 +82,3 @@ html(lang="en")
       ga('create', 'UA-854173-4', 'auto');
       ga('send', 'pageview');
 
-    script(type="text/javascript").
-      var _gauges = _gauges || [];
-      (function() {
-        var t   = document.createElement('script');
-        t.type  = 'text/javascript';
-        t.async = true;
-        t.id    = 'gauges-tracker';
-        t.setAttribute('data-site-id', '55e5003bde2e262ca4012c99');
-        t.setAttribute('data-track-path', 'https://track.gaug.es/track.gif');
-        t.src = 'https://track.gaug.es/track.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(t, s);
-      })();

@@ -1,0 +1,19 @@
+extends ./default.jade
+
+block content
+  article.article-main(id=page.slug)!= content
+
+    nav#article-relative-nav
+      .later
+        if page.previous
+          a(rel="next" href="/"+page.previous.url)
+            span.rel &larr; next
+            span.title= page.previous.title
+      .home
+        a(rel="up" href="/")
+          span.rel home
+      .earlier
+        if page.next
+          a(rel="prev" href="/"+page.next.url)
+            span.rel previous &rarr;
+            span.title= page.next.title
