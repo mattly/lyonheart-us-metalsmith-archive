@@ -134,6 +134,9 @@ const lozer = loze()
               let klass = ['highlight', tag.attr.color, tag.attr.fg ? 'fg' : 'bg'].join('-')
               return `<span class="${klass}">${tag.content}</span>`
           })
+          .define('meta', function(tag){
+              return `<span class="meta">${tag.content}</span>`
+          })
           .define('video', function(tag){
               return `<iframe width=${tag.attr.width} height=${tag.attr.height} src="https://www.youtube.com/embed/${tag.attr.youtube}" frameborder=0 allowfullscreen></iframe>`
           })

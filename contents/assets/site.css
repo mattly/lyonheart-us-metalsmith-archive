@@ -276,6 +276,10 @@ article.article-main {
                 }
             }
         }
+        .meta {
+            font-family: var(--header-font);
+            font-size: calc(1rem * 1 / var(--third));
+        }
 
         h1 {
             font-size: calc(2rem * var(--fifth));
