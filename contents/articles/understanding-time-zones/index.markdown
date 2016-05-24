@@ -4,8 +4,15 @@ subtitle:
 draft:      true
 date:       2015-10-30 12:00 -0800
 author:     mattly
-template:   article.jade
+template:   article
 ---
+
+◊banner-header{
+# ◊val#page/title
+# ◊val#page/subtitle
+}
+
+§ Main
 
 It's that time of the year again -- for programmers around the world to complain about Daylight Saving Time. Twice a year, every year, our clocks change and we hear the same tired bellyaching about not just daylight time, but against time zones in general. _The world should standardize on a single clock time_, I hear quite frequently from my colleagues. Not long ago, I was among them:
 
@@ -22,7 +29,12 @@ While most programmers generally are aware of the [Time Zone Database][], in my 
 
 The first thing you must understand about time zones is that they are a legal solution to solving the problem of coordination in a distributed system. Like most legal solutions, they are an imperfect compromise reflecting the history and nature of the self-interested people they govern. Like most legal solutions, they stem from political ideology, and fortunately it's comparatively begnign.
 
-Before distance was collapsed by the locomotive and the telegraph, _clock time_ was measured by the sun: wherever you were, when a sundial said the sun was directly overhead, it was noon. The next town over might be a few minutes different, but getting there took a while, so it didn't matter. Every town kept their own time. Thanks to axial tilt and the Earth's elliptical orbit, the [time of solar noon will vary throughout the year][equation-of-time]. You think time zones are bad? Imagine programming for that world[^sales-tax].
+◊with-aside{
+Before distance was collapsed by the locomotive and the telegraph, _clock time_ was measured by the sun: wherever you were, when a sundial said the sun was directly overhead, it was noon. The next town over might be a few minutes different, but getting there took a while, so it didn't matter. Every town kept their own time. Thanks to axial tilt and the Earth's elliptical orbit, the [time of solar noon will vary throughout the year][equation-of-time]. You think time zones are bad? Imagine programming for that world.
+
+◊aside{
+If you lack imagination, then try programatically figuring out how to collect the appropriate sales tax for any given municipality in the United States. It's not dissimilar.
+}}
 
 Disruptive technologists came along and laid train tracks and telegraph wires, and all of a sudden travel got faster and communication got _much_ faster. Distance collapsed. Trains were the first to use a coordinated clock time that was disconnected from an exact solar time. They had a schedule to keep, and it was easier to measure against an arbitrary standard, initially called _[raleway time][tz-history]_. 
 
@@ -46,16 +58,16 @@ The second thing you must understand about time zones is that they aren't going 
 
 My dystopian story may be hyperbolic, but I want to illustrate that any proposal to abandon local clock time is ludicrously complex and will create greater problems than the one it fixes to solve. This is why when otherwise reasonable people say things like _local time is arbitrary, people can just have different schedules based on where they are in the world_ or _abolishing time zones would make our lives so much easier_, I say they act entitled. Especially if these self-same connoisseurs of simplicity then celebrate [baroque object and class hierarchies][oop], [tag soup template systems][tag soup], and [concurrency models][callbacks] that even [HP Lovecraft][lovecraft] would recoil from in horror.
 
-If you work in software and think the world serves to make your life easier, consider a different career. The world and the people who pay you will remind you time and again that you serve to make _other peoples lives_ easier, not the other way around. You're treating a human problem like a math problem, and by doing so, creating subtle bugs in your work that will at best[^at-best] frustrate your users. If they're not so lucky, you'll kill them[^at-worst], and then complain that _people_ are the problem, not your inept understanding. It's no wonder people fear us and use us as [scapegoats][].
+◊with-aside{
+If you work in software and think the world serves to make your life easier, consider a different career. The world and the people who pay you will remind you time and again that you serve to make _other peoples lives_ easier, not the other way around. You're treating a human problem like a math problem, and by doing so, creating subtle bugs in your work that will at best frustrate your users. If they're not so lucky, you'll kill them, and then complain that _people_ are the problem, not your inept understanding. It's no wonder people fear us and use us as [scapegoats][].
 
-_But what about daylight saving time, surely we don't need to change our clocks twice a year?_ 
-Move to Arizona. Or Iceland. Or Argentina, China, India, Russia, Northern Brazil, South Africa, or any of a number of places on earth that don't observe it. Hawaii is nice. Your stress levels will thank you.
+◊aside{
+Some time ago I organized a party on Facebook, scheduled immediately after a daylight time transition. Every time I edited the event it shifted the start time in the direction of the transition by an hour, and people ended up thinking it started at 4 in the morning.
 
-_But, daylight saving time doesn't even [conserve energy like it was supposed][dst-energy] to._ 
-We no longer a society of farmers who wake before sunrise -- we are a society on schedules. I think daylight saving time is a is a quality of life issue for people not privileged enough to set their own schedule: clock punchers, students, and anyone who can't just kick off to go work in a cafe in the middle of the afternoon. I live just north of the 45th parallel; in the summer, we get over 16 hours of sunlight and less than 8 in the winter, and the changing clocks help people who don't have the privilege to set their own schedule make the most out of their sunlight.
+I've heard hushed stories about time zone related bugs resulting in the loss of life. It's sad, it's horrifying, and it's entirely preventable.
+}}
 
-_But, but, what about --_
-Believe what you want to, but personally I think there are greater problems in the world that need attention, that worrying about things you cannot change is the root cause of unhappiness, and that if you understand the domain of local clock time well and program defensively, you'll get daylight saving time handling almost for free.
+If it's your thing, campaign to repeal daylight savings time. Personally, I believe there are greater problems in the world deserving of attention. If you understand the domain of local clock time well and program defensively, you'll get daylight saving time handling almost for free.
 
 [Time Zone Database]: https://www.iana.org/time-zones
 [leap-second]: https://en.wikipedia.org/wiki/Leap_second
@@ -75,11 +87,7 @@ Believe what you want to, but personally I think there are greater problems in t
 [energy crisis]: http://www.wired.com/2011/06/mf_qagates/
 [equation-of-time]: http://www.timeanddate.com/astronomy/equation-of-time.html
 
-[^sales-tax]: If you lack imagination, then try programatically figuring out how to collect the appropriate sales tax for any given municipality in the United States. It's not dissimilar.
 
-[^at-best]: Some time ago I organized a party on Facebook, scheduled immediately after a daylight time transition. Every time I edited the event it shifted the start time in the direction of the transition by an hour, and people ended up thinking it started at 4 in the morning.
-
-[^at-worst]: I've heard hushed stories about time zone related bugs resulting in the loss of life. It's sad, it's horrifying, and it's entirely preventable.
 
 ---
 The third thing you need to know about time zones is they are fundamentally a locale problem. In North America we write the date `10/30/2015` where most of the rest of the world would write `30/10/2015`. Some countries use a [12 hour clock][] while others use [24 hours][], while some start counting at midnight, others [start counting at dawn][Ethiopia], and a few indicate times [past 24 hours][]. Time zones are a locale-dependent method for setting clock time.
